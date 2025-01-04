@@ -1,0 +1,193 @@
+using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+
+public class Worm : MonoBehaviour
+{
+    public Transform player;
+    public float speed = 5f;
+    public float burrowDuration = 3f;
+    public float unburrowDuration = 5f;
+    public float circleRadius = 3f;
+    public float dipFrequency = 1f;
+    public float dipAmplitude = 0.5f;
+    public int segmentCount = 5;
+
+    public Sprite headSprite;
+    public Sprite bodySprite;
+    public Sprite tailSprite;
+
+    private List<Segment> segments = new List<Segment>();
+    private float burrowTimer = 0f;
+    private bool isBurrowed = false;
+
+    private Health health;
+
+    [System.Serializable]
+    public enum WormMovementType
+    {
+        StraightToPlayer,
+        CirclePlayer,
+        DipInAndOut
+    }
+
+    public WormMovementType movementType = WormMovementType.StraightToPlayer;
+
+    private void Start()
+    {
+        health = GetComponent<Health>();
+        health.OnHealthZero += Die;
+
+        // Create the worm segments
+        CreateSegments();
+
+        StartCoroutine(BurrowCycle());
+    }
+
+    private void Update()
+    {
+        if (GlobalGameData.isPaused)
+        {
+            foreach (var segment in segments)
+            {
+                segment.Rb.velocity = Vector2.zero;
+            }
+            return;
+        }
+
+        if (!isBurrowed)
+        {
+            MoveWorm();
+            UpdateSegmentPositions();
+        }
+    }
+
+    private void CreateSegments()
+    {
+        // Create head
+        GameObject head = new GameObject("WormHead");
+        head.transform.position = transform.position;
+        head.transform.parent = transform;
+        SpriteRenderer headRenderer = head.AddComponent<SpriteRenderer>();
+        headRenderer.sprite = headSprite;
+        Rigidbody2D headRb = head.AddComponent<Rigidbody2D>();
+        Collider2D headCollider = head.AddComponent<CircleCollider2D>();
+
+        segments.Add(new Segment(head.transform, headRb, headRenderer, headCollider));
+
+        // Create body segments
+        for (int i = 0; i < segmentCount - 2; i++)
+        {
+            GameObject body = new GameObject($"WormBody_{i}");
+            body.transform.position = transform.position;
+            body.transform.parent = transform;
+            SpriteRenderer bodyRenderer = body.AddComponent<SpriteRenderer>();
+            bodyRenderer.sprite = bodySprite;
+            Rigidbody2D bodyRb = body.AddComponent<Rigidbody2D>();
+            Collider2D bodyCollider = body.AddComponent<CircleCollider2D>();
+
+            segments.Add(new Segment(body.transform, bodyRb, bodyRenderer, bodyCollider));
+        }
+
+        // Create tail
+        GameObject tail = new GameObject("WormTail");
+        tail.transform.position = transform.position;
+        tail.transform.parent = transform;
+        SpriteRenderer tailRenderer = tail.AddComponent<SpriteRenderer>();
+        tailRenderer.sprite = tailSprite;
+        Rigidbody2D tailRb = tail.AddComponent<Rigidbody2D>();
+        Collider2D tailCollider = tail.AddComponent<CircleCollider2D>();
+
+        segments.Add(new Segment(tail.transform, tailRb, tailRenderer, tailCollider));
+    }
+
+    private void MoveWorm()
+    {
+        Vector2 direction = Vector2.zero;
+
+        switch (movementType)
+        {
+            case WormMovementType.StraightToPlayer:
+                if (player != null)
+                {
+                    direction = (player.position - segments[0].Transform.position).normalized;
+                }
+                break;
+            case WormMovementType.CirclePlayer:
+                if (player != null)
+                {
+                    Vector2 toPlayer = player.position - segments[0].Transform.position;
+                    direction = Vector2.Perpendicular(toPlayer).normalized;
+                    float circleSpeed = Mathf.Sin(Time.time * speed) * circleRadius;
+                    direction *= circleSpeed;
+                }
+                break;
+            case WormMovementType.DipInAndOut:
+                if (player != null)
+                {
+                    direction = (player.position - segments[0].Transform.position).normalized;
+                    float dipOffset = Mathf.Sin(Time.time * dipFrequency) * dipAmplitude;
+                    direction.y += dipOffset;
+                }
+                break;
+        }
+
+        segments[0].Rb.velocity = direction * speed;
+    }
+
+    private void UpdateSegmentPositions()
+    {
+        for (int i = 1; i < segments.Count; i++)
+        {
+            Vector3 previousSegmentPosition = segments[i - 1].Transform.position;
+            segments[i].Transform.position = Vector3.Lerp(segments[i].Transform.position, previousSegmentPosition, Time.deltaTime * speed);
+        }
+    }
+
+    private IEnumerator BurrowCycle()
+    {
+        while (true)
+        {
+            // Burrow phase
+            SetBurrowedState(true);
+            yield return new WaitForSeconds(burrowDuration);
+
+            // Unburrow phase
+            SetBurrowedState(false);
+            yield return new WaitForSeconds(unburrowDuration);
+        }
+    }
+
+    private void SetBurrowedState(bool burrowed)
+    {
+        isBurrowed = burrowed;
+
+        foreach (var segment in segments)
+        {
+            segment.Renderer.enabled = !burrowed;
+            segment.Collider.enabled = !burrowed;
+        }
+    }
+
+    private void Die()
+    {
+        // Handle death logic here (e.g., spawn particles, drop loot)
+        Destroy(gameObject);
+    }
+
+    private class Segment
+    {
+        public Transform Transform { get; }
+        public Rigidbody2D Rb { get; }
+        public SpriteRenderer Renderer { get; }
+        public Collider2D Collider { get; }
+
+        public Segment(Transform transform, Rigidbody2D rb, SpriteRenderer renderer, Collider2D collider)
+        {
+            Transform = transform;
+            Rb = rb;
+            Renderer = renderer;
+            Collider = collider;
+        }
+    }
+}
