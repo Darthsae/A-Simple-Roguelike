@@ -16,4 +16,4 @@ MonoBehaviour:
   - hand
   - sword
   description: A longsword.
-  sprite: {fileID: 21300000, guid: 27f65819355929a4cbad58c441dbf47b, type: 3}
+  sprite: {fileID: 21300000, guid: 1d467f5516605c647945733f8660c981, type: 3}

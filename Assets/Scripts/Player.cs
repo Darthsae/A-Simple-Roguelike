@@ -14,6 +14,8 @@ namespace ASimpleRoguelike {
         public RectTransform healthMask;
         public PerkManager perkManager;
 
+        public GameObject redCard;
+
         public SpriteRenderer sprite;
 
         public GameObject commands;
@@ -62,6 +64,8 @@ namespace ASimpleRoguelike {
         #region Audio
         public AudioSource moveSound;
         public AudioSource shootSound;
+        public AudioSource swingSound;
+        public AudioSource magicSound;
         
         public AudioSource levelUpSound;
         public AudioSource staminaExhaustedSound;
@@ -428,9 +432,7 @@ namespace ASimpleRoguelike {
                     }
                     delayTimer = fireRateUsed;
                 }
-            }
-            else
-            {
+            } else {
                 sprite.sprite = attackSprite;
                 delayTimer -= Time.deltaTime;
             }
@@ -440,14 +442,41 @@ namespace ASimpleRoguelike {
             if (delayTimer <= 0) {
                 sprite.sprite = idleSprite;
                 if (Input.GetMouseButton(0)) {
-                    shootSound.Play();
+                    swingSound.Play();
                     
                     swordObject.GetComponent<RotateController>().Rotate(fireRateUsed * 0.75f);
+
+                    if (GlobalGameData.fingerSlot != null && GlobalGameData.fingerSlot.name == "RedCard") {
+                        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector2 direction = (Vector2)mousePosition - (Vector2)transform.position;
+                        direction.Normalize();
+                        
+                        for (int i = 0; i < 5; i++) {
+                            // Calculate the angle for each projectile with spread
+                            float spread = Mathf.Lerp(-projectileSpread.value, projectileSpread.value, (float)i / (projectileCount.value - 1));
+                            float angleWithSpread = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + spread;
+
+                            // Instantiate the projectile
+                            GameObject clone = Instantiate(redCard, transform.position, Quaternion.identity);
+                            clone.transform.parent = null;
+
+                            // Calculate the new direction based on the spread angle
+                            Vector2 spreadDirection = new(Mathf.Cos(angleWithSpread * Mathf.Deg2Rad), Mathf.Sin(angleWithSpread * Mathf.Deg2Rad));
+
+                            // Set position and rotation
+                            clone.transform.SetPositionAndRotation(transform.position + (Vector3)(spreadDirection * vec), Quaternion.Euler(new Vector3(0, 0, angleWithSpread)));
+
+                            // Set the projectile velocity
+                            clone.GetComponent<Rigidbody2D>().velocity = spreadDirection * projectileSpeed.value;
+
+                            // Initialize projectile properties
+                            clone.GetComponent<Projectile>().InitStuff(1.5f, projectileDamage.value, 3.5f, 3);
+                        }
+                    }
+
                     delayTimer = fireRateUsed;
                 }
-            }
-            else
-            {
+            } else {
                 sprite.sprite = attackSprite;
                 delayTimer -= Time.deltaTime;
             }
@@ -470,13 +499,11 @@ namespace ASimpleRoguelike {
             StaminaTime();
         }
 
-        public void BoostSpeed(float amount, float duration)
-        {
+        public void BoostSpeed(float amount, float duration) {
             StartCoroutine(BoostSpeedCoroutine(amount, duration));
         }
 
-        private IEnumerator BoostSpeedCoroutine(float amount, float duration)
-        {
+        private IEnumerator BoostSpeedCoroutine(float amount, float duration) {
             tempSpeed += amount;
             yield return new WaitForSeconds(duration);
             tempSpeed -= amount;
@@ -507,8 +534,7 @@ namespace ASimpleRoguelike {
     }
 
     [Serializable]
-    public struct FloatStat : IValueStat
-    {
+    public struct FloatStat : IValueStat {
         public string format;
         public TMP_Text text;
         public float value;
@@ -521,8 +547,7 @@ namespace ASimpleRoguelike {
     }
 
     [Serializable]
-    public struct IntStat : IValueStat
-    {
+    public struct IntStat : IValueStat {
         public string format;
         public TMP_Text text;
         public int value;

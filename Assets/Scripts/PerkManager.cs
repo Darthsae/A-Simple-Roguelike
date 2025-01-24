@@ -85,9 +85,9 @@ namespace ASimpleRoguelike {
             if (temper == 0) {
                 GlobalGameData.isPaused = false;
                 ClosePerkDisplayUI();
+            } else {
+                perkChoiceUI.SetActive(true);
             }
-
-            perkChoiceUI.SetActive(true);
         }
 
         public int GetPerkCount(PerkData perkData) {

@@ -139,15 +139,19 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (health.health <= health.maxHealth * 0.5f) {
                 if (bombTimer >= bombDelayTime) {
                     bombTimer = 0f;
-                    GameObject bomb = Instantiate(bombPrefab, transform.position + (Vector3)Random.insideUnitCircle * 4.5f, Quaternion.identity);
-                    bomb.transform.Rotate(new(0, 0, Random.Range(0, 360)));
-                    bomb.GetComponent<Projectile>().InitStuff(2.5f, 35f, 2, 1, Owner.Enemy, ProjectileType.Normal);
+                    for (int i = 0; i < 10; i++) {
+                        float angle = Random.Range(0, 360);
+                        GameObject bomb = Instantiate(bombPrefab, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * 4.5f, Quaternion.identity);
+                        bomb.transform.Rotate(new(0, 0, angle));
+                        bomb.GetComponent<Projectile>().InitStuff(6f, 35f, 2, 1, Owner.Enemy, ProjectileType.Normal);
+                    }
 
                     if (summonCounter >= maxSummon) {
                         summonCounter = 0;
-                        for (int i = 0; i < 4; i++) {
-                            GameObject summon = Instantiate(summondPrefab, transform.position + (Vector3)Random.insideUnitCircle * 4.5f, Quaternion.identity);
-                            summon.GetComponent<Enemy>().speed = 2.5f;
+                        for (int i = 0; i < 8; i++) {
+                            GameObject summon = Instantiate(summondPrefab, transform.position + (Vector3)Random.insideUnitCircle * 12.5f, Quaternion.identity);
+                            summon.GetComponent<Enemy>().speed *= 2f;
+                            summon.GetComponent<Enemy>().health.SetMaxHealth(100);
                         }
                     } else {
                         summonCounter++;
@@ -222,7 +226,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             float angleArm = Mathf.Lerp(-min, min, 0.5f + times * 0.5f);
             float forearmAngle = Mathf.Lerp(-max, max, 0.5f + times * 0.5f);
 
-            print("Time: " + times);
+            //print("Time: " + times);
 
             leftArmObject.transform.localRotation = Quaternion.Euler(0, 0, 45 + angleArm);
             leftForearmObject.transform.localRotation = Quaternion.Euler(0, 0, forearmAngle);
@@ -325,7 +329,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             // Step 4: Calculate the direction from the arm base to the target
             float shoulderToTargetAngle = Vector2.Angle(armBasePosition, target);
 
-            Debug.Log(shoulderToTargetAngle);
+            //Debug.Log(shoulderToTargetAngle);
 
             // Step 5: Apply angle constraints for the arm
             float finalArmAngle = shoulderToTargetAngle - angleArm;  // This is the actual angle for the arm based on the target
@@ -339,9 +343,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
             // Clamp the final forearm angle between the constraints (-100° to 100°)
             finalForearmAngle = Mathf.Clamp(finalForearmAngle, minForearmAngle, maxForearmAngle);
 
-            Debug.Log(finalArmAngle);
+            //Debug.Log(finalArmAngle);
 
-            Debug.Log((finalArmAngle + finalForearmAngle));
+            //Debug.Log((finalArmAngle + finalForearmAngle));
 
             // Step 7: Apply the rotations
             leftArmObject.transform.rotation = Quaternion.Euler(0, 0, finalArmAngle);   // Rotate the arm to the clamped angle
@@ -374,7 +378,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
                     if (angleTo > clampedAngleTo || angleTo < clampedAngleTo) {
                         float angle = Vector3.Angle(leftForearmObject.transform.position + forearmLength * new Vector3(Mathf.Cos(clampedAngleTo), Mathf.Sin(clampedAngleTo), 0), targetPosition); // Should be the ;
-                        Debug.Log(angle);
+                        //Debug.Log(angle);
                         leftForearmObject.transform.rotation = Quaternion.Euler(0, 0, clampedAngleTo + Mathf.Clamp(angle, minForearmAngle, maxForearmAngle));
                     }
                 }

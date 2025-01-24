@@ -22,6 +22,8 @@ namespace ASimpleRoguelike {
             }
             
             mixerGroup.SetFloat(group, Mathf.Log10(sliderValue) * 20);
+
+            GlobalGameData.audioMixerVolumes[GlobalGameData.audioMixerGroups.IndexOf(group)] = sliderValue;
         }
     }
 }

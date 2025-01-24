@@ -80,7 +80,7 @@ namespace ASimpleRoguelike.Entity {
         private void AttackTarget() {
             // Assuming the player has a Health component
             if (target.TryGetComponent<Health>(out var playerHealth)) {
-                Debug.Log("Enemy health: " + playerHealth.health);
+                //Debug.Log("Enemy health: " + playerHealth.health);
                 playerHealth.ChangeHealth((int)-attackDamage);
             }
         }

@@ -29,6 +29,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         public GameObject homingProjectile;
         public GameObject fleshLump;
+        public GameObject dracolich;
         #endregion
 
         #region Timer Info
@@ -199,12 +200,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
                     attackTimer = 0;
                     counter++;
                 } else {
+                    summoningCircle.SetActive(false);
                     AIState = LichAIState.Follow;
                     attackTimer = 0f;
                     counter = 0;
                 }
             } else {
                 if (attackTimer == 0) {
+                    summoningCircle.SetActive(true);
                     float angle = 360 / fleshLumpCount;
                     for (int i = 0; i < fleshLumpCount; i++) {
                         Vector3 position = 4 * new Vector3(Mathf.Sin(angle * i), Mathf.Cos(angle * i));
@@ -259,7 +262,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public static int LichMaxHealth(LichType type) {
             return type switch
             {
-                LichType.Aserik => 12000,
+                LichType.Aserik => 36000,
                 _ => 1000,
             };
         }

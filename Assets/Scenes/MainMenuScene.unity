@@ -3818,6 +3818,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c49d28edeff6d44a9b46bdf571696ba, type: 2}
   - {fileID: 11400000, guid: e3bd21ba6c84db74c9ddcbac0973c4bd, type: 2}
   - {fileID: 11400000, guid: 6b84b002742f8b94798016cb9ef60999, type: 2}
+  - {fileID: 11400000, guid: 80c35edb76cc380469dc33f390d305ef, type: 2}
 --- !u!1 &579721267
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,6 +3956,16 @@ MonoBehaviour:
   equinoxSetup: {fileID: 519420033}
   factionSetup: {fileID: 519420034}
   itemSetup: {fileID: 519420035}
+  audioMixer: {fileID: 24100000, guid: 72c93cf8c76c96c47b39eb93642e5222, type: 2}
+  audioMixers:
+  - Master
+  - Music
+  - Boss Theme
+  - Menu Theme
+  - Game Theme
+  - Ambient
+  - Player
+  - Enemy
 --- !u!1 &589429299
 GameObject:
   m_ObjectHideFlags: 0

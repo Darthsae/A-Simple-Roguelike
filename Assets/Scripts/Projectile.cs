@@ -16,6 +16,8 @@ namespace ASimpleRoguelike {
         public ProjectileType type = ProjectileType.Normal;
         public Transform target;
 
+        public LayerMask enemyLayer;
+
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -30,6 +32,14 @@ namespace ASimpleRoguelike {
             this.type = type;
             this.target = target;
             StartCoroutine(DestroyAfterTime());
+
+            if (owner == Owner.Enemy) {
+                Collider2D collider = GetComponent<Collider2D>();
+                if (collider != null) {
+                    // The enemy layer mask is called: "Enemy", add it to excludeLayers
+                    Physics2D.IgnoreLayerCollision(collider.gameObject.layer, LayerMask.NameToLayer("Enemy"), true);
+                }
+            }
 
             last = transform.position;
         }

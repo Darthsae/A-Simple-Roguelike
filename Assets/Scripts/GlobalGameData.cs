@@ -5,6 +5,7 @@ using UnityEngine;
 using ASimpleRoguelike.Inventory;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 namespace ASimpleRoguelike {
     public class GlobalGameData : MonoBehaviour {
@@ -48,6 +49,12 @@ namespace ASimpleRoguelike {
         public static double longestTime = 0;
         public static int highestPhase = 0;
 
+        #region Settings
+        public static AudioMixer audioMixer;
+        public static List<string> audioMixerGroups = new();
+        public static float[] audioMixerVolumes;
+        #endregion
+
         #region Flags for Major Unlocks
         public static bool unlockedEquinox;
         public static bool[] unlockedEquinoxes;
@@ -89,6 +96,10 @@ namespace ASimpleRoguelike {
             #endregion
         
             #region Settings
+            audioMixerVolumes = new float[audioMixerGroups.Count]; // Set all volumes to 1ss
+            for (int i = 0; i < audioMixerGroups.Count; i++) {
+                audioMixerVolumes[i] = 0;
+            }
             #endregion
 
             #region Equips
@@ -114,6 +125,7 @@ namespace ASimpleRoguelike {
             #endregion
 
             #region Settings
+
             #endregion
 
             #region Equips
@@ -167,12 +179,12 @@ namespace ASimpleRoguelike {
 
                     #region Equinoxes
                     GlobalGameData.unlockedEquinox = reader.ReadBoolean(); // Equinox Unlocked flag
-                    reader.ReadArray(ref GlobalGameData.unlockedEquinoxes); // Unlocked Equinoxes
+                    reader.ReadArray(ref GlobalGameData.unlockedEquinoxes, Equinox.Equinox.EquinoxCount); // Unlocked Equinoxes
                     #endregion
 
                     #region Items
                     GlobalGameData.unlockedItem = reader.ReadBoolean(); // Item Unlocked flag
-                    reader.ReadArray(ref GlobalGameData.unlockedItems); // Unlocked Items
+                    reader.ReadArray(ref GlobalGameData.unlockedItems, Item.ItemCount); // Unlocked Items
                     #endregion
 
                     GlobalGameData.longestTime = reader.ReadDouble(); // Longest Time
@@ -187,6 +199,16 @@ namespace ASimpleRoguelike {
                     #endregion
 
                     #region Settings
+                    reader.ReadArray(ref GlobalGameData.audioMixerVolumes, GlobalGameData.audioMixerGroups.Count);
+                    for (int i = 0; i < GlobalGameData.audioMixerVolumes.Length; i++) {
+                        if (GlobalGameData.audioMixerVolumes[i] == 0)
+                        {
+                            GlobalGameData.audioMixer.SetFloat(GlobalGameData.audioMixerGroups[i], -100);
+                            return;
+                        }
+                        
+                        GlobalGameData.audioMixer.SetFloat(GlobalGameData.audioMixerGroups[i], Mathf.Log10(GlobalGameData.audioMixerVolumes[i]) * 20);
+                    }
                     #endregion
 
                     #region Equips
@@ -268,6 +290,7 @@ namespace ASimpleRoguelike {
                 #endregion
 
                 #region Settings
+                writer.WriteArray(GlobalGameData.audioMixerVolumes);
                 #endregion
 
                 #region Equips
@@ -337,9 +360,9 @@ namespace ASimpleRoguelike {
         /// </summary>
         /// <param name="reader">The binary reader to read from.</param>
         /// <param name="array">The array to read into.</param>
-        public static void ReadArray(this BinaryReader reader, ref bool[] array) {
+        public static void ReadArray(this BinaryReader reader, ref bool[] array, int lengthMin = 0) {
             int length = reader.ReadInt32();
-            array = new bool[length];
+            array = new bool[length < lengthMin ? lengthMin : length];
             for (int i = 0; i < length; i++) {
                 array[i] = reader.ReadBoolean();
             }
@@ -362,11 +385,26 @@ namespace ASimpleRoguelike {
         /// </summary>
         /// <param name="reader">The BinaryReader instance to read the data from.</param>
         /// <param name="array">The reference to the integer array to populate with data from the stream.</param>
-        public static void ReadArray(this BinaryReader reader, ref int[] array) {
+        public static void ReadArray(this BinaryReader reader, ref int[] array, int lengthMin = 0) {
             int length = reader.ReadInt32();
-            array = new int[length];
+            array = new int[length < lengthMin ? lengthMin : length];
             for (int i = 0; i < length; i++) {
                 array[i] = reader.ReadInt32();
+            }
+        }
+
+        public static void WriteArray(this BinaryWriter writer, float[] array) {
+            writer.Write(array.Length);
+            for (int i = 0; i < array.Length; i++) {
+                writer.Write(array[i]);
+            }
+        }
+
+        public static void ReadArray(this BinaryReader reader, ref float[] array, int lengthMin = 0) {
+            int length = reader.ReadInt32();
+            array = new float[length < lengthMin ? lengthMin : length];
+            for (int i = 0; i < length; i++) {
+                array[i] = reader.ReadSingle();
             }
         }
     }

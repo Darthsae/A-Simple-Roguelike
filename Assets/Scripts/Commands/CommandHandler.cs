@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using ASimpleRoguelike.Inventory;
 using TMPro;
 using UnityEngine;
 
@@ -75,6 +75,73 @@ namespace ASimpleRoguelike.Commands {
                         enemyObject.transform.parent = null;
                     }
                 }),
+            new Command("ChangeEquipment", "Change equipment.",  new Command.ParameterValue[] {
+                    new("Slot ID", "The slot ID to change.", Commands.Command.ParameterType.INT, true),
+                    new("Item ID", "The item ID to put in the slot.", Commands.Command.ParameterType.INT, true)
+                }, (CommandHandler commandHandler, string[] parameters) => {
+                    int slot = int.Parse(parameters[0]);
+                    int item = int.Parse(parameters[1]);
+                    
+                    switch (slot) {
+                        case 0: // Head
+                            GlobalGameData.headSlot = Item.items[item];
+                            break;
+                        case 1: // Neck
+                            GlobalGameData.neckSlot = Item.items[item];
+                            break;
+                        case 2: // Chest
+                            GlobalGameData.chestSlot = Item.items[item];
+                            break;
+                        case 3: // Shoulder
+                            GlobalGameData.shoulderSlot = Item.items[item];
+                            break;
+                        case 4: // Upper Arm
+                            GlobalGameData.upperArmSlot = Item.items[item];
+                            break;
+                        case 5: // Elbow
+                            GlobalGameData.elbowSlot = Item.items[item];
+                            break;
+                        case 6: // Forearm
+                            GlobalGameData.forearmSlot = Item.items[item];
+                            break;
+                        case 7: // Hand
+                            GlobalGameData.handSlot = Item.items[item];
+                            break;
+                        case 8: // Finger
+                            GlobalGameData.fingerSlot = Item.items[item];
+                            break;
+                        case 9: // Back
+                            GlobalGameData.backSlot = Item.items[item];
+                            break;
+                        case 10: // Stomach
+                            GlobalGameData.stomachSlot = Item.items[item];
+                            break;
+                        case 11: // Waist
+                            GlobalGameData.waistSlot = Item.items[item];
+                            break;
+                        case 12: // Abdomen
+                            GlobalGameData.abdomenSlot = Item.items[item];
+                            break;
+                        case 13: // Hip
+                            GlobalGameData.hipSlot = Item.items[item];
+                            break;
+                        case 14: // Upper Leg
+                            GlobalGameData.upperLegSlot = Item.items[item];
+                            break;
+                        case 15: // Knee
+                            GlobalGameData.kneeSlot = Item.items[item];
+                            break;
+                        case 16: // Lower Leg
+                            GlobalGameData.lowerLegSlot = Item.items[item];
+                            break;
+                        case 17: // Foot
+                            GlobalGameData.footSlot = Item.items[item];
+                            break;
+                        case 18: // Toe
+                            GlobalGameData.toeSlot = Item.items[item];
+                            break;
+                    }
+                }),
         };
 
         public void Command(string commandPrompt) {
@@ -84,10 +151,11 @@ namespace ASimpleRoguelike.Commands {
             try {
                 string[] mappy = commandPrompt.Split(' ');
 
-                string[] arguments = commandPrompt[mappy[0].Length..].Split(' ');
+                string[] arguments = new string[mappy.Length - 1];
 
-                for (int i = 0; i < mappy.Length; i++) {
+                for (int i = 1; i < mappy.Length; i++) {
                     Debug.Log($"Argument {i}: {mappy[i]}");
+                    arguments[i - 1] = mappy[i];
                 }
 
                 foreach (Command command in commands) {

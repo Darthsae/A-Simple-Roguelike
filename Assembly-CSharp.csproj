@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Inventory\ItemData.cs" />
     <Compile Include="Assets\Scripts\FactionData.cs" />
     <Compile Include="Assets\Scripts\TaggedObject.cs" />
+    <Compile Include="Assets\Scripts\RotateTowards.cs" />
     <Compile Include="Assets\Scripts\DamageHandler.cs" />
     <Compile Include="Assets\Scripts\Stamina.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxSetup.cs" />

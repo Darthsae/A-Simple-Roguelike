@@ -15,6 +15,11 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public bool brainDead = false;
         #endregion
 
+        #region CURVES
+        public AnimationCurve chargeCurve;
+        public AnimationCurve attackCurve;
+        #endregion
+
         #region Attack Info
         public float attackDamage = 15f;
 
@@ -167,14 +172,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 if (!isCharging) {
                     float idealAngle = Util.AngleToPlayer(transform, player);
 
-                    if (currentChargeTime <= chargeAttackTime * 0.8f) {
+                    if (currentChargeTime <= chargeAttackTime * chargeCurve.Evaluate((float) health.health / health.maxHealth) * 0.8f) {
                         rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, 15f);
                     } else {
                         rb.velocity = (Vector2)(Time.deltaTime * 3.5f * -transform.right);
                     }
                     
                     currentChargeTime += Time.deltaTime;
-                    if (currentChargeTime >= chargeAttackTime) {
+                    if (currentChargeTime >= chargeAttackTime * chargeCurve.Evaluate((float) health.health / health.maxHealth)) {
                         currentChargeTime = 0;
                         if (charged < maxCharges) {
                             charged++;
@@ -196,7 +201,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
                     currentChargeTime += Time.deltaTime;
 
-                    if (currentChargeTime >= chargeCooldownTime) {
+                    if (currentChargeTime >= chargeCooldownTime * chargeCurve.Evaluate((float) health.health / health.maxHealth)) {
                         currentChargeTime = 0;
                         isCharging = false;
                         rb.velocity = Vector2.zero;

@@ -40,6 +40,10 @@ namespace ASimpleRoguelike {
                     GlobalGameData.unlockedEquinox = true;
                     GlobalGameData.unlockedItem = true;
                     GlobalGameData.unlockedItems[2] = true;
+
+                    if (player.currentWeapon == WeaponType.Sword) {
+                        GlobalGameData.unlockedItems[3] = true;
+                    }
                 }); 
                 foreach (Spawner spawner in spawnersForNormal) {
                     spawner.spawning = true;
