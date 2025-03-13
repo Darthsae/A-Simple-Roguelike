@@ -19,15 +19,18 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         #region Magic Circles
         public GameObject summoningCircle;
+        public GameObject damageCircle;
         #endregion 
 
         #region Attack Info
         public float attackDamage = 15f;
 
         public int homingProjectileCount = 4;
+        public int maxBulletHellProjectileCount = 72;
         public int fleshLumpCount = 2;
 
         public GameObject homingProjectile;
+        public GameObject bulletHellProjectile;
         public GameObject fleshLump;
         public GameObject dracolich;
         #endregion
@@ -42,12 +45,20 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         public float maxCircleTimer = 4f;
         public float circleTimer = 0f;
+
+        public float maxDamageTimer = 4f;
+        public float damageTimer = 0f;
+
+        public float maxBulletHellTimer = 0.1f;
+        public float bulletHellTimer = 0f;
         #endregion
 
         #region Counters
         public int maxHomingCounter = 3;
         public int maxSummonCounter = 1;
         public int counter = 0;
+        public int maxBulletHellCounter = 24;
+        public int bulletHellCounter = 0;
         #endregion
         
         #region Sprite Info
@@ -101,6 +112,12 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 case LichAIState.Summon:
                     Summon();
                     break;
+                case LichAIState.Damage:
+                    Damage();
+                    break;
+                case LichAIState.BulletHell:
+                    BulletHell();
+                    break;
             }
         }
 
@@ -142,7 +159,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (player != null) {
                 if (attackTimer >= maxHomingTimer) {
                     if (counter < maxHomingCounter) {
-                        AIState = LichAIState.Teleport;
+                        AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Teleport : LichAIState.Damage;
                         attackTimer = 0f;
                         teleportTimer = 0f;
                         counter++;
@@ -176,7 +193,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (player == null) return;
 
             if (teleportTimer >= maxTeleportTimer) {
-                AIState = LichAIState.Attack;
+                AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Attack : LichAIState.Damage;
                 teleportTimer = 0;
             } else {
                 if (teleportTimer == 0) {
@@ -218,6 +235,45 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 LookAt();
 
                 attackTimer += Time.deltaTime;
+            }
+        }
+        
+        public void Damage() {
+            rb.velocity = Vector2.zero;
+
+            if (damageTimer >= maxDamageTimer) {
+                AIState = LichAIState.Attack;
+                damageTimer = 0f;
+            } else {
+                if (attackTimer == 0) {
+                    damageCircle.SetActive(true);
+                }
+                damageTimer += Time.deltaTime;
+            }
+        }
+
+        public void BulletHell() {
+            rb.velocity = Vector2.zero;
+
+            if (bulletHellTimer >= maxBulletHellTimer) {
+                if (bulletHellCounter >= maxBulletHellCounter) {
+                    AIState = LichAIState.Teleport;
+                } else {
+                    bulletHellCounter++;
+                }
+                bulletHellTimer = 0f;
+            } else {
+                if (bulletHellTimer == 0) {
+                    // Do attack logic here
+                    float increment = 360f / maxBulletHellProjectileCount;
+
+                    for (float i = 0f; i < 360f; i += increment) {
+                        GameObject projectile = Instantiate(bulletHellProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i + 15f * bulletHellCounter)));
+                        projectile.transform.parent = null;
+                        projectile.GetComponent<Projectile>().InitStuff(25, 15, 15, 1, Owner.Enemy, ProjectileType.Normal, player);
+                    }
+                }
+                bulletHellTimer += Time.deltaTime;
             }
         }
         #endregion
@@ -282,7 +338,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
         Follow,
         Attack,
         Teleport,
-        Summon
+        Summon,
+        Damage,
+        BulletHell
     }
 
     [System.Serializable]

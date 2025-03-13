@@ -38,8 +38,14 @@ namespace ASimpleRoguelike{
         [Tooltip("Current Music Track")]
         public int currentMusicTrack = 0;
 
+        public bool snap = false;
+
         void Start() {
             StartMusic(0, null);
+        }
+
+        public void SetSnap(bool snapNew) {
+            snap = snapNew;
         }
 
         private void FixedUpdate()
@@ -52,7 +58,7 @@ namespace ASimpleRoguelike{
             if (target != null)
             {
                 Vector3 desiredPosition = target.position + offset;
-                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+                Vector3 smoothedPosition = snap ? desiredPosition : Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
                 transform.position = smoothedPosition;
             }
         }

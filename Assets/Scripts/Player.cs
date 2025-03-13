@@ -4,10 +4,34 @@ using TMPro;
 using UnityEngine;
 using ASimpleRoguelike.Equinox;
 using System.Linq;
+using ASimpleRoguelike.Movement;
 
 namespace ASimpleRoguelike {
     public class Player : Entity.Entity
     {
+        public void SetMove(bool move) {
+            GlobalGameData.moveMode = move;
+        }
+
+        #region Movement
+        public AudioSource moveSound;
+
+        #region Rush
+        public GameObject rushIndicator;
+        public GameObject rushMover;
+
+        public void RushSpeed(int amount) {movementController.RushSpeed(amount); alternateMovementController.RushSpeed(amount);}
+        #endregion
+        public void Speed(float amount) {movementController.Speed(amount); alternateMovementController.Speed(amount);}
+
+        public void SetSpeed(float speed) {movementController.speed.Set(speed); alternateMovementController.speed.Set(speed);}
+        public void SetRushSpeed(int rushSpeed) {movementController.rushSpeed.Set(rushSpeed); alternateMovementController.rushSpeed.Set(rushSpeed);}
+        public void SetRushSpeed(float rushSpeed) {SetRushSpeed((int)rushSpeed);}
+        #endregion
+
+        public MovementController movementController;
+        public MovementController alternateMovementController;
+
         public static Vector2 vec = new(1f, 1f);
         public GameObject levelUp;
         public RectTransform xpMask;
@@ -22,14 +46,16 @@ namespace ASimpleRoguelike {
 
         public WeaponType currentWeapon = WeaponType.MagicOne; 
 
-        #region 
+        #region Weapons
         public GameObject swordObject;
         public GameObject spearObject;
+        public GameObject gunMouseObject;
+        public GameObject magicOneMouseObject;
+        public GameObject swordMouseObject;
+        public GameObject spearMouseObject;
         #endregion
 
         #region Indicator Objects
-        public GameObject rushIndicator;
-        public GameObject rushMover;
         public GameObject equinoxIndicator;
         #endregion
 
@@ -37,13 +63,6 @@ namespace ASimpleRoguelike {
         public Sprite idleSprite;
         public Sprite attackSprite;
         #endregion
-
-        #region Rush
-        public bool isRushing = false;
-        public bool isRushingEnabled = true;
-        public float russianSpeed;
-        #endregion
-        
         public GameObject notificationUI;
 
         public RectTransform staminaMask;
@@ -62,7 +81,6 @@ namespace ASimpleRoguelike {
         public TMP_Text levelText;
 
         #region Audio
-        public AudioSource moveSound;
         public AudioSource shootSound;
         public AudioSource swingSound;
         public AudioSource magicSound;
@@ -75,8 +93,8 @@ namespace ASimpleRoguelike {
 
         public event Action OnDie;
 
-        private float delayTimer = 1f;
-        private float stamTimer = 0.0f;
+        public float delayTimer = 1f;
+        public float stamTimer = 0.0f;
         public float stamDelay = 0.5f;
         
 
@@ -86,7 +104,6 @@ namespace ASimpleRoguelike {
         public Vector2 equinoxVector;
         #endregion
 
-        public float tempSpeed = 0f;
 
         public static int maxBarHealth = 400;
         public static int maxBarStamina = 400;
@@ -106,9 +123,7 @@ namespace ASimpleRoguelike {
         public float fireRateDefault = 1f;
         public float fireRateUsed;
         public IntStat fireRate;
-        public FloatStat speed;
         public IntStat staminaRegenDelay;
-        public IntStat rushSpeed;
 
         public IntStat projectileDamage;
         public FloatStat projectileSpeed;
@@ -122,10 +137,6 @@ namespace ASimpleRoguelike {
         }
 
 
-        public void CalculateRushSpeed() {
-            russianSpeed = 1.0f * (2.5f + (0.25f * rushSpeed.value));
-        }
-
         public void XPIncrement(int amount) {
             spendXP += amount;
             spendXPText.text = spendXP.ToString();
@@ -133,14 +144,32 @@ namespace ASimpleRoguelike {
 
         public void ProjectileDamage(int amount) {if (spendXP > 0) { projectileDamage.Change(amount); swordObject.GetComponent<HarmingArea>().damage += amount; XPIncrement(-1);}}
         public void ProjectileSpeed(float amount) {if (spendXP > 0) { projectileSpeed.Change(amount); XPIncrement(-1); }}
-        public void RushSpeed(int amount) {if (spendXP > 0) { rushSpeed.Change(amount); CalculateRushSpeed(); XPIncrement(-1);}}
         public void ProjectileDuration(float amount) {if (spendXP > 0) { projectileDuration.Change(amount); XPIncrement(-1); }}
         public void ProjectileSpread(float amount) {if (spendXP > 0) { projectileSpread.Change(amount); XPIncrement(-1); }}
         public void ProjectilePiercing(int amount) {if (spendXP > 0) { projectilePiercing.Change(amount); XPIncrement(-1); }}
         public void ProjectileCount(int amount) {if (spendXP > 0) { projectileCount.Change(amount); XPIncrement(-1); }}
-        public void Speed(float amount) {if (spendXP > 0) { speed.Change(amount); XPIncrement(-1); }}
         public void FireRate(int amount) {if (spendXP > 0) { fireRate.Change(amount); CalculateFireRate(); XPIncrement(-1); }}
         public void StaminaRegenDelay(int amount) {if (spendXP > 0) { staminaRegenDelay.Change(amount); XPIncrement(-1); }}
+
+        public void SetMovementController(MovementController movementController, MovementController alternateMovementController) {
+            this.movementController = movementController;
+
+            this.movementController.moveSound = moveSound;
+            this.movementController.rushMover = rushMover;
+            this.movementController.rushIndicator = rushIndicator;
+            this.movementController.PreStart();
+            
+            this.movementController.PostStart();
+
+            this.alternateMovementController = alternateMovementController;
+
+            this.alternateMovementController.moveSound = moveSound;
+            this.alternateMovementController.rushMover = rushMover;
+            this.alternateMovementController.rushIndicator = rushIndicator;
+            this.alternateMovementController.PreStart();
+            
+            this.alternateMovementController.PostStart();
+        }
 
         private void Start()
         {
@@ -162,14 +191,12 @@ namespace ASimpleRoguelike {
             projectileSpread.Change(0);
             projectilePiercing.Change(0);
             projectileCount.Change(0);
-            speed.Change(0);
             fireRate.Change(0);
             staminaRegenDelay.Change(0);
-            rushSpeed.Change(0);
             ChangeXP(0);
             StaminaTime();
             CalculateFireRate();
-            CalculateRushSpeed();
+            SetMovementController(movementController, alternateMovementController);
 
             if (GlobalGameData.unlockedEquinox) {
                 if (!GlobalGameData.unlockedEquinoxes[1]) OnDie += () => { GlobalGameData.unlockedEquinoxes[1] = true; };
@@ -196,6 +223,9 @@ namespace ASimpleRoguelike {
             }
 
             ApplyCorrectUpgrades();
+
+            GlobalGameData.isPaused = false;
+            Cursor.visible = false;
         }
 
         public void ApplyCorrectUpgrades() {
@@ -208,18 +238,22 @@ namespace ASimpleRoguelike {
                     projectileCount.GameObject.SetActive(false);
                     swordObject.SetActive(true);
                     spearObject.SetActive(false);
+                    swordMouseObject.SetActive(true);
                     break;
                 case WeaponType.Spear:
                     swordObject.SetActive(false);
                     spearObject.SetActive(true);
+                    spearMouseObject.SetActive(true);
                     break;
                 case WeaponType.Gun:
                     swordObject.SetActive(false);
                     spearObject.SetActive(false);
+                    gunMouseObject.SetActive(true);
                     break;
                 case WeaponType.MagicOne:
                     swordObject.SetActive(false);
                     spearObject.SetActive(false);
+                    magicOneMouseObject.SetActive(true);
                     break;
             }
         }
@@ -261,35 +295,43 @@ namespace ASimpleRoguelike {
             settingsUI.SetActive(false);
             generalUI.SetActive(true);
             GlobalGameData.isPaused = false;
+            Cursor.visible = false;
         }
 
         private void Update()
         {
             // If clicked e toggle the level up menu
             if (Input.GetKeyDown(KeyCode.E) && !commands.activeSelf) {
-                if (levelUp.activeSelf) { levelUp.SetActive(false); GlobalGameData.isPaused = false; }
-                else { 
+                if (levelUp.activeSelf) { 
+                    levelUp.SetActive(false); 
+                    GlobalGameData.isPaused = false; 
+                    Cursor.visible = false;
+                } else { 
                     levelUp.SetActive(true); 
                     GlobalGameData.isPaused = true; 
-                    if (notificationUI.activeSelf) { notificationUI.SetActive(false);}
+                    if (notificationUI.activeSelf) { 
+                        notificationUI.SetActive(false);
+                    }
+                    Cursor.visible = true;
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape) && !commands.activeSelf) {
+            } else if (Input.GetKeyDown(KeyCode.Escape) && !commands.activeSelf) {
                 if (settingsUI.activeSelf) {
                     LeaveSettings();
                 } else {
                     settingsUI.SetActive(true);
                     generalUI.SetActive(false);
                     GlobalGameData.isPaused = true;
+                    Cursor.visible = true;
                 }
-            } 
-            else if (Input.GetKeyDown(KeyCode.Tab)) {
+            } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 if (commands.activeSelf) {
                     commands.SetActive(false);
                     GlobalGameData.isPaused = false;
+                    Cursor.visible = false;
                 } else {
                     commands.SetActive(true);
                     GlobalGameData.isPaused = true;
+                    Cursor.visible = true;
                 }
             }
 
@@ -300,7 +342,12 @@ namespace ASimpleRoguelike {
                 return;
             }
 
-            HandleMovement();
+            if (GlobalGameData.moveMode) {
+                alternateMovementController.HandleMovement(rb);
+            } else { 
+                movementController.HandleMovement(rb);
+            }
+
             switch (currentWeapon) {
                 case WeaponType.MagicOne:
                     HandleShooting();
@@ -346,6 +393,7 @@ namespace ASimpleRoguelike {
             xpMask.sizeDelta = new Vector2(percent * maxBarXP, xpMask.sizeDelta.y);
         }
 
+        /*
         private void HandleMovement()
         {
             float moveX = Input.GetAxis("Horizontal");
@@ -399,6 +447,7 @@ namespace ASimpleRoguelike {
                 rushIndicator.transform.localPosition = rb.velocity * russianSpeed;
             }
         }
+        */
 
         private void HandleShooting() {
             if (delayTimer <= 0) {
@@ -504,9 +553,9 @@ namespace ASimpleRoguelike {
         }
 
         private IEnumerator BoostSpeedCoroutine(float amount, float duration) {
-            tempSpeed += amount;
+            movementController.tempSpeed += amount;
             yield return new WaitForSeconds(duration);
-            tempSpeed -= amount;
+            movementController.tempSpeed -= amount;
         }
 
         void OnTriggerEnter2D(Collider2D other) {
@@ -544,6 +593,11 @@ namespace ASimpleRoguelike {
             value += amount; 
             text.text = format + value;
         }
+
+        public void Set(float amount) {
+            value = amount;
+            text.text = format + value;
+        }
     }
 
     [Serializable]
@@ -555,6 +609,11 @@ namespace ASimpleRoguelike {
 
         public void Change(int amount) { 
             value += amount; 
+            text.text = format + value;
+        }
+
+        public void Set(int amount) {
+            value = amount;
             text.text = format + value;
         }
     }

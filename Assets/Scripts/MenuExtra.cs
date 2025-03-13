@@ -30,6 +30,8 @@ namespace ASimpleRoguelike {
             GlobalGameData.NewData();
 
             GlobalGameData.LoadData();
+
+            Cursor.visible = true;
         }
     }
 }

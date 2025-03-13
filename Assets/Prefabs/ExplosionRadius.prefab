@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  owner: 1
+  hurtPlayer: 1
+  hurtEnemy: 1
 --- !u!212 &2875958436014280443
 SpriteRenderer:
   m_ObjectHideFlags: 0

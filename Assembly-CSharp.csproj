@@ -59,7 +59,7 @@
     <UnityVersion>2022.3.30f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\sockm\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.5\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\sockm\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="E:\Code\UNITY\2022.3.30f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="E:\Code\UNITY\2022.3.30f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\PhaseManager.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\LichController.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Movement\OldPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PerkData.cs" />
     <Compile Include="Assets\Scripts\RotateAround.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemSetup.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\RingCollider.cs" />
+    <Compile Include="Assets\Scripts\Movement\FacingMovementController.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxData.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\RotateController.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxUIPanelHandler.cs" />
     <Compile Include="Assets\Scripts\ChainRotater.cs" />
+    <Compile Include="Assets\Scripts\Movement\MoveChoice.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxSelectionUI.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="Assets\Scripts\PerkManager.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxHandler.cs" />
+    <Compile Include="Assets\Scripts\Movement\MovementController.cs" />
     <Compile Include="Assets\Scripts\Parallax\AdvancedParallaxManager.cs" />
     <Compile Include="Assets\Scripts\ConditionalShowUp.cs" />
     <Compile Include="Assets\Scripts\SpawnOnDie.cs" />

@@ -12,6 +12,8 @@ namespace ASimpleRoguelike {
         public static ItemData item;
         public static Image spriteRenderer;
 
+        public static bool moveMode = true;
+
         public static TMP_Text tooltipText;
         public static GameObject tooltip;
 
