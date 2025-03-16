@@ -85,6 +85,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             health.SetMaxHealth(LichMaxHealth(type));
             health.OnHealthZero += Die;
+
+            damageCircle.SetActive(false);
+            summoningCircle.SetActive(false);
         
             xp = LichXP(type);
 
@@ -242,6 +245,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             rb.velocity = Vector2.zero;
 
             if (damageTimer >= maxDamageTimer) {
+                damageCircle.SetActive(false);
                 AIState = LichAIState.Attack;
                 damageTimer = 0f;
             } else {

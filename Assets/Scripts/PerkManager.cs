@@ -59,10 +59,12 @@ namespace ASimpleRoguelike {
             }
 
             perkDisplayUI.SetActive(true);
+            Cursor.visible = true;
         }
 
         public void ClosePerkDisplayUI() {
             perkDisplayUI.SetActive(false);
+            Cursor.visible = false;
         }
 
         public void BeginPerkChoice() {

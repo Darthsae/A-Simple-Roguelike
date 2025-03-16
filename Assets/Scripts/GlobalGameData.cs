@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using ASimpleRoguelike.Inventory;
+using ASimpleRoguelike.Equinox;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -254,6 +255,7 @@ namespace ASimpleRoguelike {
                     GlobalGameData.lowerLegSlot = Item.items[reader.ReadInt32()];
                     GlobalGameData.footSlot = Item.items[reader.ReadInt32()];
                     GlobalGameData.toeSlot = Item.items[reader.ReadInt32()];
+                    EquinoxHandler.currentEquinox = reader.ReadInt32();
                     #endregion
                 }
             }
@@ -336,6 +338,8 @@ namespace ASimpleRoguelike {
                 writer.Write(Item.items.FindIndex(item => item == GlobalGameData.lowerLegSlot));
                 writer.Write(Item.items.FindIndex(item => item == GlobalGameData.footSlot));
                 writer.Write(Item.items.FindIndex(item => item == GlobalGameData.toeSlot));
+
+                writer.Write(EquinoxHandler.currentEquinox);
                 #endregion
             }
             catch (Exception e) {
