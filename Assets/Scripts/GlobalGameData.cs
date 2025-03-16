@@ -23,6 +23,8 @@ namespace ASimpleRoguelike {
         public Player player;
         public TimerHandler timer;
 
+        public static List<string> pauseReasons = new();
+
         #region Items
         public static ItemData headSlot;
         public static ItemData neckSlot;
@@ -67,6 +69,29 @@ namespace ASimpleRoguelike {
 
         #region Factions
         public static Dictionary<string, int> factionRelations = new();
+        #endregion
+
+        #region Pause Handling
+        public static void ClearPauseReasons() {
+            pauseReasons.Clear();
+            isPaused = false;
+        }
+
+        public static void AddPauseReason(string reason) {
+            if (!isPaused) {
+                isPaused = true;
+            }
+
+            pauseReasons.Add(reason);
+        }
+
+        public static void RemovePauseReason(string reason) {
+            pauseReasons.Remove(reason);
+
+            if (pauseReasons.Count == 0) {
+                isPaused = false;
+            }
+        }
         #endregion
 
         public static void NewData() {

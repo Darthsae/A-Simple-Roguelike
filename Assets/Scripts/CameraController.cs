@@ -81,7 +81,7 @@ namespace ASimpleRoguelike{
 
         IEnumerator CutsceneCoroutine(int cutsceneIndex, Action callback) {
             inCutscene = true;
-            GlobalGameData.isPaused = true;
+            GlobalGameData.AddPauseReason("Cutscene");
             cutsceneQuad.SetActive(true);
             cutsceneQuad.GetComponent<VideoPlayer>().clip = cutscenes[cutsceneIndex].videoClip;
             cutsceneQuad.GetComponent<VideoPlayer>().Play();
@@ -89,7 +89,7 @@ namespace ASimpleRoguelike{
             yield return new WaitForSeconds((float)cutscenes[cutsceneIndex].Duration);
             ui.SetActive(true);
             cutsceneQuad.SetActive(false);
-            GlobalGameData.isPaused = false;
+            GlobalGameData.RemovePauseReason("Cutscene");
             inCutscene = false;
             callback?.Invoke();
         }

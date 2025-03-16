@@ -9,6 +9,13 @@ using ASimpleRoguelike.Movement;
 namespace ASimpleRoguelike {
     public class Player : Entity.Entity
     {
+        #region Pause Reasons
+        [Header("Pause Reasons")]
+        public string levelUpMenu = "Level Up Menu";
+        public string settingsMenu = "Settings Menu";
+        public string commandsMenu = "Commands Menu";
+        #endregion
+
         public void SetMove(bool move) {
             GlobalGameData.moveMode = move;
         }
@@ -224,7 +231,7 @@ namespace ASimpleRoguelike {
 
             ApplyCorrectUpgrades();
 
-            GlobalGameData.isPaused = false;
+            GlobalGameData.ClearPauseReasons();
             Cursor.visible = false;
         }
 
@@ -294,7 +301,7 @@ namespace ASimpleRoguelike {
         public void LeaveSettings() {
             settingsUI.SetActive(false);
             generalUI.SetActive(true);
-            GlobalGameData.isPaused = false;
+            GlobalGameData.RemovePauseReason(settingsMenu);
             Cursor.visible = false;
         }
 
@@ -304,11 +311,11 @@ namespace ASimpleRoguelike {
             if (Input.GetKeyDown(KeyCode.E) && !commands.activeSelf) {
                 if (levelUp.activeSelf) { 
                     levelUp.SetActive(false); 
-                    GlobalGameData.isPaused = false; 
+                    GlobalGameData.RemovePauseReason(levelUpMenu);
                     Cursor.visible = false;
                 } else { 
                     levelUp.SetActive(true); 
-                    GlobalGameData.isPaused = true; 
+                    GlobalGameData.AddPauseReason(levelUpMenu);
                     if (notificationUI.activeSelf) { 
                         notificationUI.SetActive(false);
                     }
@@ -320,17 +327,17 @@ namespace ASimpleRoguelike {
                 } else {
                     settingsUI.SetActive(true);
                     generalUI.SetActive(false);
-                    GlobalGameData.isPaused = true;
+                    GlobalGameData.AddPauseReason(settingsMenu);
                     Cursor.visible = true;
                 }
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 if (commands.activeSelf) {
                     commands.SetActive(false);
-                    GlobalGameData.isPaused = false;
+                    GlobalGameData.AddPauseReason(commandsMenu);
                     Cursor.visible = false;
                 } else {
                     commands.SetActive(true);
-                    GlobalGameData.isPaused = true;
+                    GlobalGameData.RemovePauseReason(commandsMenu);
                     Cursor.visible = true;
                 }
             }

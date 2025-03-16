@@ -68,7 +68,7 @@ namespace ASimpleRoguelike {
         }
 
         public void BeginPerkChoice() {
-            GlobalGameData.isPaused = true;
+            GlobalGameData.AddPauseReason("Perk Choice Menu");
             List<PerkData> perks = new();
             int temper = 0;
             for (int i = 0; i < perkCards.Count; i++) {
@@ -85,7 +85,7 @@ namespace ASimpleRoguelike {
             }
 
             if (temper == 0) {
-                GlobalGameData.isPaused = false;
+                GlobalGameData.RemovePauseReason("Perk Choice Menu");
                 ClosePerkDisplayUI();
             } else {
                 perkChoiceUI.SetActive(true);
@@ -182,7 +182,7 @@ namespace ASimpleRoguelike {
                 card.gameObject.SetActive(false);
             }
 
-            GlobalGameData.isPaused = false;
+            GlobalGameData.RemovePauseReason("Perk Choice Menu");
         }
 
         public void AddRotating(GameObject scythe, int indice) {
