@@ -239,8 +239,16 @@ MonoBehaviour:
   speed: 2
   damage: 1
   duration: 10
+  homingSpeed: 45
   piercing: 1
   owner: 1
+  type: 0
+  target: {fileID: 0}
+  effects:
+  - {fileID: 11400000, guid: 0228b8b6051ec994985adb2e0f7ad272, type: 2}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &3249370459357986724
 Rigidbody2D:
   serializedVersion: 4
@@ -283,7 +291,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

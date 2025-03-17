@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using ASimpleRoguelike.Entity;
+using System.Collections.Generic;
+using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
     public class HarmingArea : MonoBehaviour
@@ -11,14 +13,17 @@ namespace ASimpleRoguelike {
         public bool hurtPlayer = true;
         public bool hurtEnemy = false;
 
-        void Start()
-        {
-            if (GetComponent<RingCollider>() != null)
-            {
+        public List<StatusEffectData> effectDatas = new();
+
+        void Start() {
+            if (GetComponent<RingCollider>() != null) {
                 if (hurtPlayer) {
                     GetComponent<RingCollider>().onCollide += (other) => {
                         if (other.gameObject.GetComponent<Player>() != null) {
                             other.gameObject.GetComponent<Player>().DirectDamage(-damage);
+                            foreach (StatusEffectData effect in effectDatas) {
+                                other.gameObject.GetComponent<Player>().AddStatusEffect(effect);
+                            }
                         }
                     };
                 }
@@ -26,15 +31,20 @@ namespace ASimpleRoguelike {
                     GetComponent<RingCollider>().onCollide += (other) => {
                         if (other.gameObject.GetComponent<Enemy>() != null) {
                             other.gameObject.GetComponent<Enemy>().DirectDamage(-damage);
+                            foreach (StatusEffectData effect in effectDatas) {
+                                other.gameObject.GetComponent<Enemy>().AddStatusEffect(effect);
+                            }
                         }
                     };
                 }
-            }
-            else {
+            } else {
                 if (hurtPlayer) {
                     action += (other) => {
                         if (other.gameObject.GetComponent<Player>() != null) {
                             other.gameObject.GetComponent<Player>().DirectDamage(-damage);
+                            foreach (StatusEffectData effect in effectDatas) {
+                                other.gameObject.GetComponent<Player>().AddStatusEffect(effect);
+                            }
                         }
                     };
                 }
@@ -42,14 +52,16 @@ namespace ASimpleRoguelike {
                     action += (other) => {
                         if (other.gameObject.GetComponent<Enemy>() != null) {
                             other.gameObject.GetComponent<Enemy>().DirectDamage(-damage);
+                            foreach (StatusEffectData effect in effectDatas) {
+                                other.gameObject.GetComponent<Enemy>().AddStatusEffect(effect);
+                            }
                         }
                     };
                 }
             }
         }
 
-        void OnTriggerStay2D(Collider2D other)
-        {
+        void OnTriggerStay2D(Collider2D other) {
             action?.Invoke(other);
         }
     }

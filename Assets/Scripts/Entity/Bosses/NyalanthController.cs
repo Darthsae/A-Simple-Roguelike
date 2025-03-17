@@ -88,13 +88,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 roarSound.Play();
         }
 
-        void Update() {
-            if (GlobalGameData.isPaused) {
-                rb.velocity = Vector2.zero;
-                rb.angularVelocity = 0;
-                return;
-            }
-
+        public override void UpdateAI() {
+            base.UpdateAI();
+            
             rb.angularVelocity = 0;
 
             switch (AIState) {

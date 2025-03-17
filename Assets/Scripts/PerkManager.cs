@@ -68,6 +68,8 @@ namespace ASimpleRoguelike {
         }
 
         public void BeginPerkChoice() {
+            Cursor.visible = true;
+            
             GlobalGameData.AddPauseReason("Perk Choice Menu");
             List<PerkData> perks = new();
             int temper = 0;

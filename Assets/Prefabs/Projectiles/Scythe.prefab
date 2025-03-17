@@ -103,7 +103,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -136,7 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  owner: 0
+  hurtPlayer: 1
+  hurtEnemy: 0
 --- !u!114 &1004670467183723551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,5 +167,8 @@ MonoBehaviour:
   rotateAroundTransform: {fileID: 0}
   rotateSpeed: 180
   offset: 5
+  rotationOffset: 0
   instantSnap: 1
   isPausable: 1
+  otherRotation: 0
+  lookAt: 0

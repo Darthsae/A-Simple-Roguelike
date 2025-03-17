@@ -6,7 +6,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
     public class RotnotHandController : MonoBehaviour
     {
         public RotnotController rotnotController;
-        public Animation animation;
+        public Animation animationToPlay;
         public RotnotHand type;
         public float time;
         public float timeInUse;
@@ -30,7 +30,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         public void Use() {
             inUse = true;
-            if (animation != null) animation.Play();
+            if (animationToPlay != null) animationToPlay.Play();
             StartCoroutine(UseCoroutine());
         }
 

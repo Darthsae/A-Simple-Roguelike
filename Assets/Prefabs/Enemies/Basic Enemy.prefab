@@ -184,7 +184,7 @@ MonoBehaviour:
   AIType: 0
   rotationOffset: 0
   xp: 10
-  speed: 0.75
+  speed: 1.25
   modulateSpeedByDistance:
     serializedVersion: 2
     m_Curve:

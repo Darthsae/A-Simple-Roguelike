@@ -122,13 +122,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
             xp = RotnotXP(type);
         }
 
-        void Update() {
+        public override void UpdateAI() {
+            base.UpdateAI();
             rb.angularVelocity = 0;
-            
-            if (GlobalGameData.isPaused) {
-                rb.velocity = Vector2.zero;
-                return;
-            }
 
             if (brainDead) {
                 //LeftHandIK(player.position);
@@ -151,7 +147,8 @@ namespace ASimpleRoguelike.Entity.Bosses {
                         for (int i = 0; i < 8; i++) {
                             GameObject summon = Instantiate(summondPrefab, transform.position + (Vector3)Random.insideUnitCircle * 12.5f, Quaternion.identity);
                             summon.GetComponent<Enemy>().speed *= 2f;
-                            summon.GetComponent<Enemy>().health.SetMaxHealth(100);
+                            summon.GetComponent<Enemy>().health.SetMaxHealth(20);
+                            summon.GetComponent<Enemy>().AIType = EnemyAIType.ZigFollow;
                         }
                     } else {
                         summonCounter++;

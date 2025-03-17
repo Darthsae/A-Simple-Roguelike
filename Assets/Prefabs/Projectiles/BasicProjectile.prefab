@@ -239,7 +239,14 @@ MonoBehaviour:
   speed: 2
   damage: 1
   duration: 10
+  homingSpeed: 45
   piercing: 1
+  owner: 0
+  type: 0
+  target: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &790889306140235295
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -255,7 +262,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

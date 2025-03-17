@@ -32,12 +32,7 @@ namespace ASimpleRoguelike.Entity {
             }
         }
 
-        private void Update() {
-            if (GlobalGameData.isPaused) {
-                rb.velocity = Vector2.zero;
-                return;
-            }
-
+        public override void UpdateAI() {
             switch (AIType) {
                 case MinionAIType.Follow:
                     MoveTowardsTarget();
@@ -49,8 +44,7 @@ namespace ASimpleRoguelike.Entity {
             }
         }
 
-        void OnCollisionEnter2D(Collision2D other)
-        {
+        void OnCollisionEnter2D(Collision2D other) {
             if (other.gameObject.TryGetComponent<Enemy>(out var enemy)) {
                 DirectDamage(-(int)enemy.attackDamage);
             }
@@ -63,8 +57,7 @@ namespace ASimpleRoguelike.Entity {
 
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rb.rotation = angle + rotationOffset; // Adjust based on the enemy's default orientation
-            }
-            else {
+            } else {
                 GetTarget();
             }
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 using ASimpleRoguelike.Equinox;
 using System.Linq;
 using ASimpleRoguelike.Movement;
+using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
     public class Player : Entity.Entity
@@ -305,8 +306,7 @@ namespace ASimpleRoguelike {
             Cursor.visible = false;
         }
 
-        private void Update()
-        {
+        public override void UpdateOther() {
             // If clicked e toggle the level up menu
             if (Input.GetKeyDown(KeyCode.E) && !commands.activeSelf) {
                 if (levelUp.activeSelf) { 
@@ -333,21 +333,20 @@ namespace ASimpleRoguelike {
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 if (commands.activeSelf) {
                     commands.SetActive(false);
-                    GlobalGameData.AddPauseReason(commandsMenu);
+                    GlobalGameData.RemovePauseReason(commandsMenu);
                     Cursor.visible = false;
                 } else {
                     commands.SetActive(true);
-                    GlobalGameData.RemovePauseReason(commandsMenu);
+                    GlobalGameData.AddPauseReason(commandsMenu);
                     Cursor.visible = true;
                 }
             }
+        }
+
+        public override void UpdateAI() {
+            base.UpdateAI();
 
             rb.angularVelocity = 0;
-
-            if (GlobalGameData.isPaused) {
-                rb.velocity = Vector2.zero;
-                return;
-            }
 
             if (GlobalGameData.moveMode) {
                 alternateMovementController.HandleMovement(rb);
@@ -574,6 +573,9 @@ namespace ASimpleRoguelike {
 
             if (other.gameObject.CompareTag("Projectile") && other.gameObject.TryGetComponent<Projectile>(out var projectile) && projectile.owner == Owner.Enemy) {
                 projectile.Hit();
+                foreach (StatusEffectData effect in projectile.effects) {
+                    AddStatusEffect(effect);
+                }
                 DirectDamage((int)-projectile.damage);
             }
         }

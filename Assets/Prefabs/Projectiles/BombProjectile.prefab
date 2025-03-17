@@ -247,6 +247,9 @@ MonoBehaviour:
   owner: 0
   type: 0
   target: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &790889306140235295
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -262,7 +265,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -336,6 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 1438001065583244860, guid: c6d94f70c8c20a140b71b4bb5e3d49f4, type: 3}
+  inheritRotation: 0
 --- !u!114 &2757369624044604555
 MonoBehaviour:
   m_ObjectHideFlags: 0

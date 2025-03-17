@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using ASimpleRoguelike.Entity;
+using System.Collections.Generic;
+using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
     public class Projectile : MonoBehaviour
@@ -15,6 +17,7 @@ namespace ASimpleRoguelike {
         public Owner owner;
         public ProjectileType type = ProjectileType.Normal;
         public Transform target;
+        public List<StatusEffectData> effects = new();
 
         public LayerMask enemyLayer;
 

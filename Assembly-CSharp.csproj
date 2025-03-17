@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\ProjectileShooter.cs" />
     <Compile Include="Assets\Scripts\Entity\PlayerMinion.cs" />
     <Compile Include="Assets\Scripts\MenuExtra.cs" />
+    <Compile Include="Assets\Scripts\Data\StateMachine.cs" />
     <Compile Include="Assets\Scripts\PhaseManager.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\LichController.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy.cs" />
@@ -95,6 +96,8 @@
     <Compile Include="Assets\Scripts\RotateController.cs" />
     <Compile Include="Assets\Scripts\Parallax\ParallaxManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\AotStubs.cs" />
+    <Compile Include="Assets\Scripts\Status Effects\StatusEffectData.cs" />
     <Compile Include="Assets\Scripts\KillAfterTime.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\Miniboss\DracolichController.cs" />
     <Compile Include="Assets\Scripts\SnapTo.cs" />
@@ -103,8 +106,10 @@
     <Compile Include="Assets\Scripts\Quit.cs" />
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxUIPanelHandler.cs" />
+    <Compile Include="Assets\Scripts\Status Effects\StatusEffect.cs" />
     <Compile Include="Assets\Scripts\ChainRotater.cs" />
     <Compile Include="Assets\Scripts\Movement\MoveChoice.cs" />
+    <Compile Include="Assets\Scripts\Data\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxSelectionUI.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -141,6 +146,7 @@
     <Compile Include="Assets\Scripts\AnimatibleSprite.cs" />
     <Compile Include="Assets\Scripts\GlobalGameData.cs" />
     <Compile Include="Assets\Scripts\ChainDamage.cs" />
+    <Compile Include="Assets\Scripts\Movement\OldFacingPlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\DamagedSprite.cs" />
     <Compile Include="Assets\Scripts\VolumeController.cs" />
     <Compile Include="Assets\Scripts\HealthShield.cs" />
@@ -158,6 +164,7 @@
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Shaders\EdgeShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />

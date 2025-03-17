@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba12975ca1edd964ebec377911db758f, type: 3}
+  m_Name: Straight Fire
+  m_EditorClassIdentifier: 
+  tags: []
+  description: On Fire
+  sprite: {fileID: 21300000, guid: 3035e7ed642f0fe4792859e302556dc5, type: 3}
+  time: 1
+  timerDamageTime: 0.5
+  damage: -5
+  speed: 0
+  toSpawn: {fileID: 8019911226796000117, guid: fc90566574dcbb74b81bb3750b49a1ac, type: 3}

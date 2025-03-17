@@ -1,10 +1,27 @@
 using System.Collections.Generic;
+using ASimpleRoguelike.StatusEffects;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
-    public class Enemy : Entity
-    {
+    public class Enemy : Entity {
         public static List<Enemy> enemies = new();
+
+        public float laserRange = 5.0f;
+        public float laserTime = 1.5f;
+        public float laserCooldown = 2.5f;
+        public float laserCharge = 0.75f;
+        private float laserTimer = 0;
+        public GameObject laserGameObject;
+        public GameObject laserDetector;
+        public AudioSource laserSound;
+        public AudioSource laserChargeSound;
+        public ParticleSystem laserParticles;
+
+        public bool hasLaser = false;
+        public bool chargingLaser = false;
+        public bool canMoveWhileLaser = false;
+        public bool usingLaser = false;
+        public bool laserOnCooldown = false;
 
         public EnemyAIType AIType = EnemyAIType.Follow;
         public float rotationOffset = -90f;
@@ -48,18 +65,49 @@ namespace ASimpleRoguelike.Entity {
             enemies.Add(this);
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() {
             enemies.Remove(this);
         }
 
-        private void Update() {
-            if (GlobalGameData.isPaused) {
-                rb.velocity = Vector2.zero;
-                return;
+        private void UpdateLaser() {
+            if (chargingLaser) {
+                laserTimer -= Time.deltaTime;
+                if (laserTimer < 0.0f) {
+                    laserGameObject.SetActive(true);
+                    laserTimer = laserTime;
+                    usingLaser = true;
+                    chargingLaser = false;
+                    laserSound.Play();
+                }
+            } else if (laserOnCooldown) {
+                laserTimer -= Time.deltaTime;
+                if (laserTimer < 0.0f) {
+                    laserOnCooldown = false;
+                }
+            } else if (usingLaser) {
+                laserTimer -= Time.deltaTime;
+                if (laserTimer < 0.0f) {
+                    laserGameObject.SetActive(false);
+                    usingLaser = false;
+                    laserOnCooldown = true;
+                    laserTimer = laserCooldown;
+                }
+            } else if (laserDetector.GetComponent<BoxCollider2D>().IsTouching(player.GetComponent<Collider2D>())) {
+                chargingLaser = true;
+                laserTimer = laserCharge;
+                laserChargeSound.Play();
+                laserParticles.Play();
             }
+        }
+
+        public override void UpdateAI() {
+            base.UpdateAI();
 
             timerer += Time.deltaTime;
+
+            if (hasLaser) {
+                UpdateLaser();
+            }
 
             switch (AIType) {
                 case EnemyAIType.Follow:
@@ -86,8 +134,7 @@ namespace ASimpleRoguelike.Entity {
                             delayTimer = delayBetweenAttacks;
                             isCircling = false;
                         }
-                    }
-                    else {
+                    } else {
                         MoveTowardsPlayer();
                         if (IsPlayerInRange()) {
                             AttackPlayer();
@@ -107,11 +154,14 @@ namespace ASimpleRoguelike.Entity {
                     CirclePlayer();
                     break;
             }
-
-            
         }
 
         private void CirclePlayer() {
+            if (hasLaser && usingLaser) {
+                rb.velocity = Vector2.zero;
+                return;
+            }
+
             if (player != null) {
                 Vector2 directionToPlayer = (player.position - transform.position).normalized;
                 Vector2 perpendicularDirection = new Vector2(-directionToPlayer.y, directionToPlayer.x) * circleDistance; // Perpendicular to the direction to the player
@@ -125,6 +175,11 @@ namespace ASimpleRoguelike.Entity {
         }
 
         private void MoveTowardsPlayer() {
+            if (hasLaser && (usingLaser || chargingLaser)) {
+                rb.velocity = Vector2.zero;
+                return;
+            }
+
             if (player != null) {
                 Vector2 direction = (player.position - transform.position).normalized;
                 rb.velocity = (AIType == EnemyAIType.Circle ? 1.75f : 1f) * speed * modulateSpeedByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * direction;
@@ -135,6 +190,11 @@ namespace ASimpleRoguelike.Entity {
         }
 
         private void MoveTowardsPlayerZigZag() {
+            if (hasLaser && (usingLaser || chargingLaser)) {
+                rb.velocity = Vector2.zero;
+                return;
+            }
+
             if (player != null) {
                 Vector2 direction = (player.position - transform.position).normalized;
                 
@@ -176,6 +236,10 @@ namespace ASimpleRoguelike.Entity {
 
             if (other.gameObject.CompareTag("Projectile") && other.gameObject.TryGetComponent<Projectile>(out var projectile) && projectile.owner == Owner.Player) {
                 projectile.Hit();
+                
+                foreach (StatusEffectData effect in projectile.effects) {
+                    AddStatusEffect(effect);
+                }
                 DirectDamage((int)-projectile.damage, true);
             }
         }
@@ -236,11 +300,11 @@ namespace ASimpleRoguelike.Entity {
     }
 
     [System.Serializable]
-    public struct WeightedEntry<T>{
+    public struct WeightedEntry<T> {
         public T Item;
         public float Weight;
 
-        public WeightedEntry(T item, float weight){
+        public WeightedEntry(T item, float weight) {
             Item = item;
             Weight = weight;
         }
@@ -263,8 +327,7 @@ namespace ASimpleRoguelike.Entity {
             return Vector2.Distance(player.position, transform.position);
         }
 
-        public static Vector3 RotateAroundOrigin(Vector3 origin, Vector3 rotate, float angle, Vector3 axis)
-        {
+        public static Vector3 RotateAroundOrigin(Vector3 origin, Vector3 rotate, float angle, Vector3 axis) {
             // Translate the point to the origin
             Vector3 direction = rotate - origin;
 
