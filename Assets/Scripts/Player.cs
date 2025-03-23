@@ -190,11 +190,21 @@ namespace ASimpleRoguelike {
                 OnDie?.Invoke(); GlobalGameData.SaveData(); 
                 switcher.PlayGame(deathScene); 
             };
+
+            #region Stamina
             stamina.OnStaminaChanged += () => { 
                 staminaMask.sizeDelta = new Vector2((float)stamina.stamina / stamina.maxStamina * maxBarStamina, staminaMask.sizeDelta.y); 
             };
-            stamina.OnStaminaZero += () => { staminaExhaustedSound.Play(); };
-            stamina.OnStaminaMax += () => { if (pauseStaminaRegen) pauseStaminaRegen = false; };
+
+            stamina.OnStaminaZero += () => { 
+                staminaExhaustedSound.Play(); 
+            };
+
+            stamina.OnStaminaMax += () => { 
+                if (pauseStaminaRegen) pauseStaminaRegen = false; 
+            };
+            #endregion
+
             projectileDamage.Change(0);
             projectileSpeed.Change(0);
             projectileDuration.Change(0);
@@ -401,62 +411,6 @@ namespace ASimpleRoguelike {
 
             xpMask.sizeDelta = new Vector2(percent * maxBarXP, xpMask.sizeDelta.y);
         }
-
-        /*
-        private void HandleMovement()
-        {
-            float moveX = Input.GetAxis("Horizontal");
-            float moveY = Input.GetAxis("Vertical");
-
-            Vector2 movement = new(moveX, moveY);
-            movement.Normalize();
-            rb.velocity = (speed.value + tempSpeed) * movement;
-
-            float tempPitch = movement.magnitude;
-
-            if (movement != Vector2.zero)
-            {
-                if (GlobalGameData.neckSlot != null && GlobalGameData.neckSlot.name == "DiscordantPendant") {
-                    if (Input.GetKeyDown(KeyCode.LeftControl)) {
-                        isRushing = true;
-                        rushIndicator.SetActive(true);
-                        rushMover.SetActive(true);
-                        rushMover.transform.localPosition = Vector3.zero;
-                    } else if (Input.GetKeyUp(KeyCode.LeftControl)) {
-                        isRushing = false;
-                        transform.position = rushMover.transform.position;
-                        rushIndicator.SetActive(false);
-                        rushMover.SetActive(false);
-                    }
-                } else {
-                    if (Input.GetKey(KeyCode.LeftShift) && stamina.stamina > 0 && !pauseStaminaRegen) {
-                        rb.velocity *= 1.5f; 
-
-                        tempPitch *= 1.5f;
-
-                        if (stamTimer > 0) stamTimer -= Time.deltaTime;
-                        else {
-                            stamina.ChangeStamina(-1);
-                            stamTimer = stamDelay;
-                        }
-                    }
-                    else if (pauseStaminaRegen) {
-                        rb.velocity *= 0.9f;
-                    }
-                }
-                
-                moveSound.pitch = tempPitch; 
-                if (!moveSound.isPlaying) { moveSound.Play(); }
-                float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            }
-
-            if (isRushing) {
-                Debug.Log("Rushing: " + rb.velocity.magnitude + " * " + russianSpeed + " = " + rb.velocity.magnitude * russianSpeed);
-                rushIndicator.transform.localPosition = rb.velocity * russianSpeed;
-            }
-        }
-        */
 
         private void HandleShooting() {
             if (delayTimer <= 0) {

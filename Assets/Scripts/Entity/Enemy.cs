@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using ASimpleRoguelike.StatusEffects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
     public class Enemy : Entity {
         public static List<Enemy> enemies = new();
+
+        public float turnSpeed = 90.0f;
 
         public float laserRange = 5.0f;
         public float laserTime = 1.5f;
@@ -164,10 +167,13 @@ namespace ASimpleRoguelike.Entity {
 
             if (player != null) {
                 Vector2 directionToPlayer = (player.position - transform.position).normalized;
+                
+                float angler = Mathf.MoveTowardsAngle(MathfEx.Wrap(rb.rotation - rotationOffset, 360), Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg, turnSpeed);
+                directionToPlayer = new Vector2(Mathf.Cos(angler), Mathf.Sin(angler));
                 Vector2 perpendicularDirection = new Vector2(-directionToPlayer.y, directionToPlayer.x) * circleDistance; // Perpendicular to the direction to the player
 
                 // Move around the player in a circular motion
-                rb.velocity = (directionToPlayer + perpendicularDirection).normalized * speed * modulateSpeedByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * 1.5f;
+                rb.velocity = 1.5f * modulateSpeedByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * speed * (directionToPlayer + perpendicularDirection).normalized;
 
                 float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
                 rb.rotation = angle + rotationOffset; // Adjust based on the enemy's default orientation
@@ -182,9 +188,11 @@ namespace ASimpleRoguelike.Entity {
 
             if (player != null) {
                 Vector2 direction = (player.position - transform.position).normalized;
+                float angle = Mathf.MoveTowardsAngle(MathfEx.Wrap(rb.rotation - rotationOffset, 360), Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, turnSpeed);
+                direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
                 rb.velocity = (AIType == EnemyAIType.Circle ? 1.75f : 1f) * speed * modulateSpeedByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * direction;
 
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rb.rotation = angle + rotationOffset; // Adjust based on the enemy's default orientation
             }
         }
@@ -197,12 +205,13 @@ namespace ASimpleRoguelike.Entity {
 
             if (player != null) {
                 Vector2 direction = (player.position - transform.position).normalized;
+                float angle = Mathf.MoveTowardsAngle(MathfEx.Wrap(rb.rotation - rotationOffset, 360), Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, turnSpeed);
+                direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
                 
                 rb.velocity = (AIType == EnemyAIType.Circle ? 1.75f : 1f) * speed * modulateSpeedByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * direction;
 
                 rb.velocity += zigAmount * modulateZigAmountByDistance.Evaluate(Vector2.Distance(transform.position, player.position)) * Mathf.Sin(timerer) * (Vector2)transform.up;
 
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rb.rotation = angle + rotationOffset; // Adjust based on the enemy's default orientation
             }
         }
@@ -224,7 +233,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log(other.gameObject.tag);
+            //Debug.Log(other.gameObject.name + "." + other.gameObject.tag);
             if (GlobalGameData.isPaused) return;
             
             CallDamage(other);
@@ -235,7 +244,7 @@ namespace ASimpleRoguelike.Entity {
                 return;
             }
 
-            Debug.Log(other.gameObject.tag + "." + other.gameObject.TryGetComponent<Projectile>(out var a) + "." + a.owner);
+            //Debug.Log(other.gameObject.tag + "." + (other.gameObject.TryGetComponent<Projectile>(out var a) ? a.owner : "None"));
 
             if (other.gameObject.CompareTag("Projectile") && other.gameObject.TryGetComponent<Projectile>(out var projectile) && projectile.owner == Owner.Player) {
                 projectile.Hit();

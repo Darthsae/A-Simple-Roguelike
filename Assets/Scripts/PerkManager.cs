@@ -111,7 +111,7 @@ namespace ASimpleRoguelike {
                         timeOnSet = perkData.timers[0],
                         perkName = perkData.name
                     });
-                    Debug.Log(perkData.name + " " + perkData.timers[0]);
+                    //Debug.Log(perkData.name + " " + perkData.timers[0]);
                 }
 
                 if (perkData.onKill != KillType.None) {

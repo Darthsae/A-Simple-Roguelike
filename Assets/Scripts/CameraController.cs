@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 
 namespace ASimpleRoguelike{
-    public class CameraController : MonoBehaviour
-    {
+    public class CameraController : MonoBehaviour {
         [Tooltip("The target object to follow")]
         public Transform target;
         [Tooltip("The smoothness factor of the camera movement")]
@@ -48,15 +47,13 @@ namespace ASimpleRoguelike{
             snap = snapNew;
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             if (inCutscene) {
                 transform.position = new Vector3(transform.position.x, transform.position.y, cutsceneZPosition);
                 return;
             }
             
-            if (target != null)
-            {
+            if (target != null) {
                 Vector3 desiredPosition = target.position + offset;
                 Vector3 smoothedPosition = snap ? desiredPosition : Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
                 transform.position = smoothedPosition;

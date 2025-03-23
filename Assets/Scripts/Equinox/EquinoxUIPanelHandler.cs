@@ -13,7 +13,7 @@ namespace ASimpleRoguelike.Equinox {
             title.text = data.name;
             attunement.text = data.attunement.ToString();
             description.text = data.description;
-            Debug.Log(description.textInfo.lineCount);
+            //Debug.Log(description.textInfo.lineCount);
         }
 
         public void Resize() {

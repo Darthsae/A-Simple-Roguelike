@@ -117,7 +117,7 @@ namespace ASimpleRoguelike {
             #region Factions
             for (int i = 0; i < Faction.FactionCount - 1; i++) {
                 for (int j = i + 1; j < Faction.FactionCount; j++) {
-                    Debug.Log("Setting relation between " + Faction.factions[i] + " and " + Faction.factions[j] + " to 0");
+                    //Debug.Log("Setting relation between " + Faction.factions[i] + " and " + Faction.factions[j] + " to 0");
                     factionRelations[Faction.FactionNamePair(Faction.factions[i], Faction.factions[j])] = 0;
                 }
             }
@@ -220,7 +220,7 @@ namespace ASimpleRoguelike {
                     GlobalGameData.gameContext = (GameContext)reader.ReadInt32(); // Game Context
 
                     #region Factions
-                    long longer = reader.ReadInt64();
+                    long longer = reader.ReadInt32();
                     for (int i = 0; i < longer; i++) {
                         GlobalGameData.factionRelations[reader.ReadString()] = reader.ReadInt32();
                     }

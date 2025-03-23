@@ -15,10 +15,10 @@ namespace ASimpleRoguelike.Commands {
         }
 
         public bool IsValid(string initializer, string[] parameters) {
-            Debug.Log("" + initializer + "" + parameters);
+            //Debug.Log("" + initializer + "" + parameters);
             if (name != initializer) return false;
 
-            Debug.Log("Passed this check");
+            //Debug.Log("Passed this check");
 
             if (this.parameters != null) {
                 for (int i = 0; i < this.parameters.Length; i++) {

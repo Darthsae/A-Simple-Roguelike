@@ -35,10 +35,9 @@ namespace ASimpleRoguelike {
             StartCoroutine(DestroyAfterTime());
 
             if (owner == Owner.Enemy) {
-                Collider2D collider = GetComponent<Collider2D>();
-                if (collider != null) {
+                if (TryGetComponent<Collider2D>(out var collider)) {
                     // The enemy layer mask is called: "Enemy", add it to excludeLayers
-                    Physics2D.IgnoreLayerCollision(collider.gameObject.layer, LayerMask.NameToLayer("Enemy"), true);
+                    collider.excludeLayers |= enemyLayer;
                 }
             }
 

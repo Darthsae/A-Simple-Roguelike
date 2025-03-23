@@ -2,8 +2,7 @@ using UnityEngine;
 using ASimpleRoguelike.Entity.Bosses;
 
 namespace ASimpleRoguelike {
-    public class PhaseManager : MonoBehaviour
-    {
+    public class PhaseManager : MonoBehaviour {
         public Player player;
 
         public Spawner[] spawnersForNormal;

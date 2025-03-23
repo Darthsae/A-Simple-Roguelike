@@ -41,7 +41,7 @@ namespace ASimpleRoguelike {
                                 if (lightningBolt != null) {
                                     lightningBolt.startPoint = transform.position;
                                     lightningBolt.endPoint = enemy.transform.position;
-                                    Debug.Log("Remaining bounces: " + remainingBounces);
+                                    //Debug.Log("Remaining bounces: " + remainingBounces);
                                     if (parent != null) {
                                         //Debug.Log("Parent: " + parent.transform.position);
                                     }

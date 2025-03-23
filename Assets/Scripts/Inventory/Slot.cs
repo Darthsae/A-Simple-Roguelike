@@ -27,7 +27,7 @@ namespace ASimpleRoguelike.Inventory {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
-            Debug.Log($"Mouse down slot {item?.name}");
+            //Debug.Log($"Mouse down slot {item?.name}");
 
             if (GlobalGameData.item == null && item != null) {
                 GlobalGameData.SetItem(item);

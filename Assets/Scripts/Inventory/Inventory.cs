@@ -22,8 +22,8 @@ namespace ASimpleRoguelike.Inventory {
 
             for (int i = 0; i < slots.Length; i++) {
                 // Use a modulo with xAmount to get the x position of the slot, and use i / xAmount to get the y position of the slot
-                float x = (i % xAmount) * (slotWidth + padding) + padding;
-                float y = (i / xAmount) * (slotHeight + padding) + padding;
+                float x = i % xAmount * (slotWidth + padding) + padding;
+                float y = i / xAmount * (slotHeight + padding) + padding;
                 Debug.Log($"Slot {i}: x: {x}, y: {y}");
                 slots[i] = Instantiate(slotTemplate, transform).GetComponent<Slot>();
                 slots[i].Init(this, x - offsetX, -y);

@@ -37,7 +37,7 @@ namespace ASimpleRoguelike.Equinox {
             EquinoxHandler.currentEquinox = info[newIndex];
             description.text = Equinox.equinoxes[EquinoxHandler.currentEquinox].description;
             attunement.text = Equinox.equinoxes[EquinoxHandler.currentEquinox].attunement.ToString();
-            Debug.Log("Selected option index: " + newIndex + " Equinox: " + EquinoxHandler.currentEquinox);
+            //Debug.Log("Selected option index: " + newIndex + " Equinox: " + EquinoxHandler.currentEquinox);
         }
     }
 }
