@@ -3,8 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class ChainDamage : MonoBehaviour
-    {
+    public class ChainDamage : MonoBehaviour {
         public int remainingBounces = 3;
         public float maxBounceDistance;
 
@@ -72,8 +71,7 @@ namespace ASimpleRoguelike {
         public List<GameObject> GetCantHit(GameObject add) {
             if (parent != null) {
                 return parent.GetCantHit(target).Concat(new List<GameObject>() { add }).ToList();
-            }
-            else {
+            } else {
                 return new List<GameObject>() { target };
             }
         }

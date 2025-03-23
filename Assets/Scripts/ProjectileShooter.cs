@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class ProjectileShooter : MonoBehaviour
-    {
+    public class ProjectileShooter : MonoBehaviour {
         public float delay = 2.5f;
         public float timer = 0.0f;
         public GameObject prefab;

@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class RotnotHandController : MonoBehaviour
-    {
+    public class RotnotHandController : MonoBehaviour {
         public RotnotController rotnotController;
         public Animation animationToPlay;
         public RotnotHand type;

@@ -39,8 +39,9 @@ namespace ASimpleRoguelike.Commands {
                             case ParameterType.STRING:
                                 break;
                         }
+                    } else if (this.parameters[i].required) {
+                        return false;
                     }
-                    else if (this.parameters[i].required) return false;
                 }
             }
 

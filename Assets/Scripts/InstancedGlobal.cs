@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ASimpleRoguelike {
-    public class InstancedGlobal : MonoBehaviour
-    {
+    public class InstancedGlobal : MonoBehaviour {
         public Image spriteRenderer;
 
         public TMP_Text tooltipText;

@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Equinox {
-    public class EquinoxHandler : MonoBehaviour
-    {
+    public class EquinoxHandler : MonoBehaviour {
         public List<Equinox> equinoxes;
         public static int currentEquinox = -1;
 

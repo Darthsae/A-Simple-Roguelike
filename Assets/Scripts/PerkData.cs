@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace ASimpleRoguelike {
     [CreateAssetMenu(menuName = "A Simple Roguelike/PerkData")]
-    public class PerkData : ScriptableObject
-    {
+    public class PerkData : ScriptableObject {
         public static HashSet<PerkData> perks = new();
 
         [Tooltip("Dependenant perks that need to be unlocked before this perk can be unlocked")]

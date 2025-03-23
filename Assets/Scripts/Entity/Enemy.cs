@@ -224,6 +224,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         void OnTriggerEnter2D(Collider2D other) {
+            Debug.Log(other.gameObject.tag);
             if (GlobalGameData.isPaused) return;
             
             CallDamage(other);
@@ -233,6 +234,8 @@ namespace ASimpleRoguelike.Entity {
             if (Time.time < nextInvulnerabilityTime) {
                 return;
             }
+
+            Debug.Log(other.gameObject.tag + "." + other.gameObject.TryGetComponent<Projectile>(out var a) + "." + a.owner);
 
             if (other.gameObject.CompareTag("Projectile") && other.gameObject.TryGetComponent<Projectile>(out var projectile) && projectile.owner == Owner.Player) {
                 projectile.Hit();

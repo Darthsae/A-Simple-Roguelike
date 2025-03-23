@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace ASimpleRoguelike {
-    public class PerkCardDisplay : MonoBehaviour
-    {
+    public class PerkCardDisplay : MonoBehaviour {
         public PerkManager perkManager;
 
         public PerkData perkData;

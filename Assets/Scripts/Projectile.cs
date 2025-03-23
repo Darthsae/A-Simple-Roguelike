@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
-    public class Projectile : MonoBehaviour
-    {
+    public class Projectile : MonoBehaviour {
         public float speed = 10;
         public float damage = 1;
         public float duration = 10;
@@ -21,8 +20,7 @@ namespace ASimpleRoguelike {
 
         public LayerMask enemyLayer;
 
-        private void Start()
-        {
+        private void Start() {
             rb = GetComponent<Rigidbody2D>();
         }
 
@@ -56,8 +54,7 @@ namespace ASimpleRoguelike {
             Destroy(gameObject);
         }
 
-        void Update()
-        {
+        void Update() {
             if (GlobalGameData.isPaused) {
                 rb.velocity = Vector2.zero;
                 rb.angularVelocity = 0;

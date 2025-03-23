@@ -33,6 +33,7 @@ namespace ASimpleRoguelike.Data {
         }
     }
 
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>))]
     public class SerializableDictionaryEditor : PropertyDrawer {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
@@ -49,4 +50,5 @@ namespace ASimpleRoguelike.Data {
             return base.GetPropertyHeight(property, label);
         }
     }
+    #endif
 }

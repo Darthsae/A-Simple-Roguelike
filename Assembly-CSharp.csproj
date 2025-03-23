@@ -96,7 +96,6 @@
     <Compile Include="Assets\Scripts\RotateController.cs" />
     <Compile Include="Assets\Scripts\Parallax\ParallaxManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
-    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\AotStubs.cs" />
     <Compile Include="Assets\Scripts\Status Effects\StatusEffectData.cs" />
     <Compile Include="Assets\Scripts\KillAfterTime.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\Miniboss\DracolichController.cs" />

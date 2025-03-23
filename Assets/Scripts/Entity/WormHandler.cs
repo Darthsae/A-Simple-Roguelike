@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
     [RequireComponent(typeof(Enemy))]
-    public class WormHandler : MonoBehaviour
-    {
+    public class WormHandler : MonoBehaviour {
         public Enemy enemy;
         public GameObject bodyPrefab;
         public List<Sprite> bodySprites;

@@ -1,13 +1,11 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class ConditionalShowUp : MonoBehaviour
-    {
+    public class ConditionalShowUp : MonoBehaviour {
         public ConditionType conditionType;
 
         // Start is called before the first frame update
-        void Start()
-        {
+        void Start() {
             switch (conditionType) {
                 case ConditionType.EquinoxUnlocked:
                     gameObject.SetActive(GlobalGameData.unlockedEquinox);

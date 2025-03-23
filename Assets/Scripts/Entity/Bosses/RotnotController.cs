@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class RotnotController : Entity
-    {
+    public class RotnotController : Entity {
         public int xp = 10;
         public Transform player;
         

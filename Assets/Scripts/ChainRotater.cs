@@ -4,8 +4,7 @@ using ASimpleRoguelike.Entity;
 namespace ASimpleRoguelike {
     public class ChainRotater : MonoBehaviour {
         [ContextMenu("Make New Child")]
-        void MakeNewChild()
-        {
+        void MakeNewChild() {
             NewChild();
         }
         
@@ -45,18 +44,15 @@ namespace ASimpleRoguelike {
             this.lookAt = lookAt;
         }
 
-        void Update()
-        {
+        void Update() {
             if (GlobalGameData.isPaused && isPausable) return;
 
             timerer += Time.deltaTime;
 
-            if (instantSnap)
-            {
+            if (instantSnap) {
                 Vector3 pos = rotateAroundTransform.position + new Vector3(Mathf.Sin((timerer * rotateSpeed + rotationOffset) * Mathf.Deg2Rad), Mathf.Cos((timerer * rotateSpeed + rotationOffset) * Mathf.Deg2Rad), 0) * offset;
                 transform.position = pos;
-            }
-            else if (rotateAroundTransform != null){
+            } else if (rotateAroundTransform != null) {
                 transform.RotateAround(rotateAroundTransform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
             }
 

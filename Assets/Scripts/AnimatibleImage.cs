@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class AnimatibleImage : MonoBehaviour
-    {
+    public class AnimatibleImage : MonoBehaviour {
         public List<SpriteHolder> sprites;
 
         public SpriteRenderer image;
 
         public int index = -1;
 
-        public void Start()
-        {
+        public void Start() {
             StartCoroutine(ChangeSprite());
         }
 

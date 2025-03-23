@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class Faction : MonoBehaviour
-    {
+    public class Faction : MonoBehaviour {
         public static List<FactionData> factions;
         public static int FactionCount => factions.Count;
         public FactionData faction;

@@ -6,8 +6,7 @@ using TMPro;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Commands {
-    public class CommandHandler : MonoBehaviour
-    {
+    public class CommandHandler : MonoBehaviour {
         public Player player;
         public TimerHandler timerHandler;
         public GameObject[] enemies;

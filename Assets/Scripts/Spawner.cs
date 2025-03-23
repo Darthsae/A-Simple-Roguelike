@@ -5,8 +5,7 @@ using UnityEngine;
 using ASimpleRoguelike.Entity;
 
 namespace ASimpleRoguelike {
-    public class Spawner : MonoBehaviour
-    {
+    public class Spawner : MonoBehaviour {
         public TimerHandler phaseManager;
         public PerkManager perkManager;
 
@@ -102,16 +101,14 @@ namespace ASimpleRoguelike {
                         }
                     }
                 };
-            }
-            else {
+            } else {
                 timeSinceLastSpawn -= Time.deltaTime;
             }
         }
     }
 
     [Serializable]
-    public class SpawnHolder
-    {
+    public class SpawnHolder {
         public GameObject ToSpawn;
         public float Weight;
         public int minimumPhase = 0;

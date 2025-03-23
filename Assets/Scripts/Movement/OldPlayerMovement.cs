@@ -6,8 +6,7 @@ namespace ASimpleRoguelike.Movement {
             displayName = "Old";
         }
 
-        public override void HandleMovement(Rigidbody2D rigidbody)
-        {
+        public override void HandleMovement(Rigidbody2D rigidbody) {
             float moveX = Input.GetAxis("Horizontal");
             float moveY = Input.GetAxis("Vertical");
 
@@ -17,8 +16,7 @@ namespace ASimpleRoguelike.Movement {
 
             float tempPitch = movement.magnitude;
 
-            if (movement != Vector2.zero)
-            {
+            if (movement != Vector2.zero) {
                 if (GlobalGameData.neckSlot != null && GlobalGameData.neckSlot.name == "DiscordantPendant") {
                     if (Input.GetKeyDown(KeyCode.LeftControl)) {
                         isRushing = true;
@@ -37,13 +35,13 @@ namespace ASimpleRoguelike.Movement {
 
                         tempPitch *= 1.5f;
 
-                        if (player.stamTimer > 0) player.stamTimer -= Time.deltaTime;
-                        else {
+                        if (player.stamTimer > 0) {
+                            player.stamTimer -= Time.deltaTime;
+                        } else {
                             player.stamina.ChangeStamina(-1);
                             player.stamTimer = player.stamDelay;
                         }
-                    }
-                    else if (player.pauseStaminaRegen) {
+                    } else if (player.pauseStaminaRegen) {
                         rigidbody.velocity *= 0.9f;
                     }
                 }

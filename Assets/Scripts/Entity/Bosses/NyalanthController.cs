@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class NyalanthController : Entity
-    {
+    public class NyalanthController : Entity {
         public int xp = 10;
         public Transform player;
         

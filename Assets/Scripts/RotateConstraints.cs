@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class RotateConstraints : MonoBehaviour
-    {
+    public class RotateConstraints : MonoBehaviour {
         [Tooltip("Degrees per second")]
         public float rotateSpeed = 10f;
 
@@ -21,8 +20,7 @@ namespace ASimpleRoguelike {
         [Tooltip("Can be paused")]
         public bool isPausable = true;
         
-        void Update()
-        {
+        void Update() {
             if (GlobalGameData.isPaused && isPausable) return;
 
             pos += Time.deltaTime * direction;

@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Inventory {
-    public class Inventory : MonoBehaviour
-    {
+    public class Inventory : MonoBehaviour {
         public int size;
         public GameObject slotTemplate;
         public Slot[] slots;

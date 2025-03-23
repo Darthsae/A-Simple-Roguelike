@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class MouseLocked : MonoBehaviour
-    {
+    public class MouseLocked : MonoBehaviour {
         public bool isUiElement = false;
         public bool caresAboutTime = false;
         public Vector3 offset = Vector3.zero;

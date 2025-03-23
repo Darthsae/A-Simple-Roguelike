@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class TaggedObject : MonoBehaviour
-    {
+    public class TaggedObject : MonoBehaviour {
         private HashSet<string> tags;
 
         public bool HasTag(string name) {

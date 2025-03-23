@@ -17,6 +17,8 @@ namespace ASimpleRoguelike {
         public string commandsMenu = "Commands Menu";
         #endregion
 
+        public SpriteRenderer discordMarker;
+
         public void SetMove(bool move) {
             GlobalGameData.moveMode = move;
         }
@@ -276,6 +278,7 @@ namespace ASimpleRoguelike {
                         equinoxIndicator.transform.localPosition = (Vector3)equinoxVector;
                     }
                     equinoxTimer += Time.deltaTime;
+                    discordMarker.color = new Color(discordMarker.color.r, discordMarker.color.g, discordMarker.color.b, equinoxTimer / equinoxDelay);
                     break;
                 case 1: // Lament
                     break;

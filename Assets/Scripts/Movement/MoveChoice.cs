@@ -9,8 +9,7 @@ namespace ASimpleRoguelike.Movement {
         public List<MovementController> movementControllers;
 
         // Start is called before the first frame update
-        void Start()
-        {
+        void Start() {
             dropdown.ClearOptions();
             for (int i = 0; i < movementControllers.Count; i++) {
                 dropdown.options.Add(new TMP_Dropdown.OptionData(movementControllers[i].displayName));
@@ -24,8 +23,7 @@ namespace ASimpleRoguelike.Movement {
             dropdown.RefreshShownValue();
         }
 
-        void HandleDropdownChange(int newIndex)
-        {
+        void HandleDropdownChange(int newIndex) {
             player.SetMovementController(movementControllers[newIndex], movementControllers[newIndex]);
         }
     }

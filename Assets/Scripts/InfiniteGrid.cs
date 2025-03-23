@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class InfiniteGrid : MonoBehaviour
-{
+public class InfiniteGrid : MonoBehaviour {
     public float cellSize = 1f;
     public Color lineColor = Color.white;
     public float lineThickness = 0.1f;
@@ -9,15 +8,13 @@ public class InfiniteGrid : MonoBehaviour
     private Camera mainCamera;
     private Material lineMaterial;
 
-    private void Start()
-    {
+    private void Start() {
         mainCamera = Camera.main;
         lineMaterial = new Material(Shader.Find("Sprites/Default"));
         lineMaterial.color = lineColor;
     }
 
-    private void OnPostRender()
-    {
+    private void OnPostRender() {
         DrawGrid();
     }
 

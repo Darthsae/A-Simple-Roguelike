@@ -261,25 +261,25 @@ namespace ASimpleRoguelike {
                     footSlot
                     toeSlot*/
 
-                    GlobalGameData.headSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.neckSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.chestSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.shoulderSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.upperArmSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.elbowSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.forearmSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.handSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.fingerSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.backSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.stomachSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.waistSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.abdomenSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.hipSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.upperLegSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.kneeSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.lowerLegSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.footSlot = Item.items[reader.ReadInt32()];
-                    GlobalGameData.toeSlot = Item.items[reader.ReadInt32()];
+                    GlobalGameData.headSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.neckSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.chestSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.shoulderSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.upperArmSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.elbowSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.forearmSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.handSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.fingerSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.backSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.stomachSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.waistSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.abdomenSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.hipSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.upperLegSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.kneeSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.lowerLegSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.footSlot = Item.items.GetSafe(reader.ReadInt32(), null);
+                    GlobalGameData.toeSlot = Item.items.GetSafe(reader.ReadInt32(), null);
                     EquinoxHandler.currentEquinox = reader.ReadInt32();
                     #endregion
                 }
@@ -437,6 +437,12 @@ namespace ASimpleRoguelike {
             for (int i = 0; i < length; i++) {
                 array[i] = reader.ReadSingle();
             }
+        }
+    }
+
+    public static class ListExtensions {
+        public static T GetSafe<T>(this List<T> list, int index, T defaultReturn) {
+            return list.Count >= index || index < 0 ? defaultReturn : list[index];
         }
     }
 }

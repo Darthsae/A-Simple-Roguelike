@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class LichController : Entity
-    {
+    public class LichController : Entity {
         public int xp = 10;
         public Transform player;
         

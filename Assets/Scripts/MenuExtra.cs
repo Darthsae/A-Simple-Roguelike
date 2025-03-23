@@ -4,8 +4,7 @@ using ASimpleRoguelike.Inventory;
 using UnityEngine.Audio;
 
 namespace ASimpleRoguelike {
-    public class MenuExtra : MonoBehaviour
-    {
+    public class MenuExtra : MonoBehaviour {
         public PerkData[] perks;
         public EquinoxSetup equinoxSetup;
         public FactionSetup factionSetup;
@@ -13,8 +12,7 @@ namespace ASimpleRoguelike {
         public AudioMixer audioMixer;
         public string[] audioMixers;
 
-        void Start()
-        {
+        void Start() {
             foreach (var perk in perks) 
                 PerkData.perks.Add(perk);
             

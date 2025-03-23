@@ -12,11 +12,9 @@ namespace ASimpleRoguelike {
         ALL
     }
 
-    public class PerkManager : MonoBehaviour
-    {
+    public class PerkManager : MonoBehaviour {
         [ContextMenu("Add Perk")]
-        void AddPerk()
-        {
+        void AddPerk() {
             BeginPerkChoice();
         }
 
@@ -199,8 +197,7 @@ namespace ASimpleRoguelike {
             }
         }
 
-        public void Update()
-        {
+        public void Update() {
             float delta = !GlobalGameData.isPaused ? Time.deltaTime : 0;
 
             if (times == null) return;
@@ -208,8 +205,7 @@ namespace ASimpleRoguelike {
             for (int i = 0; i < times.Count; i++) {
                 if (times[i].time > 0) {
                     times[i].time -= delta;
-                }
-                else {
+                } else {
                     times[i].time = times[i].timeOnSet;
 
                     if (times[i].perkName != null) {

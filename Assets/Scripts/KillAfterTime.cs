@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace ASimpleRoguelike {
     [RequireComponent(typeof(Health))]
-    public class KillAfterTime : MonoBehaviour
-    {
+    public class KillAfterTime : MonoBehaviour {
         public float killTime = 10f;
         private float timer = 0f;
 

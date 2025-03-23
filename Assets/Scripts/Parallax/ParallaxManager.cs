@@ -1,11 +1,9 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Parallax {
-    public class ParallaxManager : MonoBehaviour
-    {
+    public class ParallaxManager : MonoBehaviour {
         [System.Serializable]
-        public class ParallaxLayer
-        {
+        public class ParallaxLayer {
             public Sprite sprite;             // The sprite for this layer
             public Vector2 size = Vector2.one; // The size of the sprite
             public Vector2 parallaxMultiplier; // The parallax effect multiplier for movement
@@ -15,30 +13,25 @@ namespace ASimpleRoguelike.Parallax {
         public Transform target;       // The target the camera or player follows
         public Vector2 viewSize;       // The size of the camera's visible area in world units
 
-        private class LayerInstance
-        {
+        private class LayerInstance {
             public Transform[] tiles;  // The tile transforms
             public Vector2 size;       // The size of each tile
         }
 
         private LayerInstance[] layerInstances;
 
-        private void Start()
-        {
+        private void Start() {
             InitializeLayers();
         }
 
-        private void LateUpdate()
-        {
+        private void LateUpdate() {
             UpdateParallax();
         }
 
-        private void InitializeLayers()
-        {
+        private void InitializeLayers() {
             layerInstances = new LayerInstance[layers.Length];
 
-            for (int i = 0; i < layers.Length; i++)
-            {
+            for (int i = 0; i < layers.Length; i++) {
                 ParallaxLayer layer = layers[i];
                 GameObject layerContainer = new($"Layer_{i}");
                 layerContainer.transform.SetParent(transform);
@@ -52,10 +45,8 @@ namespace ASimpleRoguelike.Parallax {
 
                 Transform[] tiles = new Transform[tileCount.x * tileCount.y];
 
-                for (int x = 0; x < tileCount.x; x++)
-                {
-                    for (int y = 0; y < tileCount.y; y++)
-                    {
+                for (int x = 0; x < tileCount.x; x++) {
+                    for (int y = 0; y < tileCount.y; y++) {
                         GameObject tile = new($"Tile_{x}_{y}");
                         tile.transform.SetParent(layerContainer.transform);
 
@@ -75,32 +66,31 @@ namespace ASimpleRoguelike.Parallax {
             }
         }
 
-        private void UpdateParallax()
-        {
-            for (int i = 0; i < layers.Length; i++)
-            {
+        private void UpdateParallax() {
+            for (int i = 0; i < layers.Length; i++) {
                 ParallaxLayer layer = layers[i];
                 LayerInstance instance = layerInstances[i];
                 Vector2 targetPosition = target.position * layer.parallaxMultiplier;
 
-                foreach (var tile in instance.tiles)
-                {
+                foreach (var tile in instance.tiles) {
                     Vector3 tilePosition = tile.localPosition;
 
                     // Calculate the distance between the tile and the target
                     Vector2 distance = (Vector2)tilePosition - targetPosition;
 
                     // Wrap horizontally
-                    if (distance.x > instance.size.x * (viewSize.x / 2 + 1))
+                    if (distance.x > instance.size.x * (viewSize.x / 2 + 1)) {
                         tilePosition.x -= instance.size.x * Mathf.CeilToInt(viewSize.x / instance.size.x);
-                    else if (distance.x < -instance.size.x * (viewSize.x / 2 + 1))
+                    } else if (distance.x < -instance.size.x * (viewSize.x / 2 + 1)) {
                         tilePosition.x += instance.size.x * Mathf.CeilToInt(viewSize.x / instance.size.x);
+                    } 
 
                     // Wrap vertically
-                    if (distance.y > instance.size.y * (viewSize.y / 2 + 1))
+                    if (distance.y > instance.size.y * (viewSize.y / 2 + 1)) {
                         tilePosition.y -= instance.size.y * Mathf.CeilToInt(viewSize.y / instance.size.y);
-                    else if (distance.y < -instance.size.y * (viewSize.y / 2 + 1))
+                    } else if (distance.y < -instance.size.y * (viewSize.y / 2 + 1)) {
                         tilePosition.y += instance.size.y * Mathf.CeilToInt(viewSize.y / instance.size.y);
+                    }
 
                     tile.localPosition = tilePosition;
 

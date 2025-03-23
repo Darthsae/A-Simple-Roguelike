@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
-    public class PlayerMinion : Entity
-    {
+    public class PlayerMinion : Entity {
         public MinionAIType AIType = MinionAIType.Follow;
         public float rotationOffset = -90f;
         public float speed = 10f;

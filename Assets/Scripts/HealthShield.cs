@@ -2,8 +2,7 @@ using UnityEngine;
 using ASimpleRoguelike.Entity;
 
 namespace ASimpleRoguelike {
-    public class HealthShield : MonoBehaviour
-    {
+    public class HealthShield : MonoBehaviour {
         public Health health;
         public float invulnerabilityDuration = 0.5f;
         public float dropChance = 0.05f;
@@ -28,9 +27,8 @@ namespace ASimpleRoguelike {
         }
 
         public void DirectDamage(int amount, bool ignoreInvulnerability = false) {
-            if (!ignoreInvulnerability && Time.time < nextInvulnerabilityTime) {
+            if (!ignoreInvulnerability && Time.time < nextInvulnerabilityTime) 
                 return;
-            }
 
             //Debug.Log("Direct damage: " + amount + " ignoreInvulnerability: " + ignoreInvulnerability);
 

@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace ASimpleRoguelike {
     [RequireComponent(typeof(Health))]
-    public class DamagedSprite : MonoBehaviour
-    {
+    public class DamagedSprite : MonoBehaviour {
         public List<Sprite> sprites = new();
 
         void Start () {

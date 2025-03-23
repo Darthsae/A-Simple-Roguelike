@@ -4,8 +4,7 @@ using UnityEngine;
 namespace ASimpleRoguelike {
     public delegate bool PreHealthZero(int health, out int newHealth);
 
-    public class Health : MonoBehaviour
-    {
+    public class Health : MonoBehaviour {
         public int maxHealth = 100;
         public int health;
         public event Action OnHealthZero;
@@ -13,8 +12,7 @@ namespace ASimpleRoguelike {
         public event Action<int> OnHealthChanged;
         public event PreHealthZero PreHealthZero;
 
-        void Start()
-        {
+        void Start() {
             health = maxHealth;
         }
 

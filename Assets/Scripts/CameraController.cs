@@ -111,8 +111,6 @@ namespace ASimpleRoguelike{
             Debug.LogError("Cutscene not found: " + musicName);
         }
 
-        
-
         public IEnumerator MusicCoroutine(int musicIndex, Action callback) {
             switch (onCurrent) {
                 case true:

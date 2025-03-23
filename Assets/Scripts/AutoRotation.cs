@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class AutoRotation : MonoBehaviour
-{
+public class AutoRotation : MonoBehaviour {
     public Vector3 rotation;
 
     void Update() {

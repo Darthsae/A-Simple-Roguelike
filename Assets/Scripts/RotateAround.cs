@@ -2,8 +2,7 @@ using UnityEngine;
 using ASimpleRoguelike.Entity;
 
 namespace ASimpleRoguelike {
-    public class RotateAround : MonoBehaviour
-    {
+    public class RotateAround : MonoBehaviour {
         [Tooltip("The object to rotate around")]
         public Transform rotateAroundTransform;
 
@@ -24,16 +23,13 @@ namespace ASimpleRoguelike {
         [Tooltip("Look at")]
         public bool lookAt = false;
 
-        void Update()
-        {
+        void Update() {
             if (GlobalGameData.isPaused && isPausable) return;
 
-            if (instantSnap)
-            {
+            if (instantSnap) {
                 Vector3 pos = rotateAroundTransform.position + new Vector3(Mathf.Sin((Time.time * rotateSpeed + rotationOffset) * Mathf.Deg2Rad), Mathf.Cos((Time.time * rotateSpeed + rotationOffset) * Mathf.Deg2Rad), 0) * offset;
                 transform.position = pos;
-            }
-            else if (rotateAroundTransform != null){
+            } else if (rotateAroundTransform != null) {
                 transform.RotateAround(rotateAroundTransform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
             }
 

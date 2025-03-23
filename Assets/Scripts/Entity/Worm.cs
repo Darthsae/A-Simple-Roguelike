@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
-    public class Worm : MonoBehaviour
-    {
+    public class Worm : MonoBehaviour {
         public Enemy leader;
         public Transform leaderTransform;
         public Collider2D bodyCollider;

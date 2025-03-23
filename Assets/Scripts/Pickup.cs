@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class Pickup : MonoBehaviour
-    {
+    public class Pickup : MonoBehaviour {
         //For when the player picks it up.
         public PickupType pickupType;
 
@@ -11,21 +10,17 @@ namespace ASimpleRoguelike {
             GetComponent<SpriteRenderer>().sprite = GameObject.Find("GlobalHolder").GetComponent<GlobalGameData>().barrelSprites[(int)type];
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             if (GlobalGameData.isPaused) return;
             
-            if (other.CompareTag("Player"))
-            {
+            if (other.CompareTag("Player")) {
                 HandlePickup(other.gameObject);
                 Destroy(gameObject); // Destroy the pickup after it's picked up
             }
         }
 
-        private void HandlePickup(GameObject player)
-        {
-            switch (pickupType)
-            {
+        private void HandlePickup(GameObject player) {
+            switch (pickupType) {
                 case PickupType.Health:
                     // Handle health pickup
                     player.GetComponent<Health>().ChangeHealth(10); // Example logic
@@ -39,8 +34,7 @@ namespace ASimpleRoguelike {
     }
 
     [System.Serializable]
-    public enum PickupType
-    {
+    public enum PickupType {
         Health,
         SpeedBoost,
         PlaceHolder3,

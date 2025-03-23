@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ASimpleRoguelike.Inventory {
-    public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
-    {
+    public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
         public ItemData item;
         public Image image;
         public List<string> validTags;

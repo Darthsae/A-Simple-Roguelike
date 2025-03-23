@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace ASimpleRoguelike {
     [RequireComponent(typeof(LineRenderer))]
-    public class LightningBolt : MonoBehaviour
-    {
+    public class LightningBolt : MonoBehaviour {
         public Vector2 startPoint;
         public Vector2 endPoint;
         public int segmentCount = 20;
@@ -13,24 +12,20 @@ namespace ASimpleRoguelike {
         public LineRenderer lineRenderer;
         private float fadeTime;
 
-        void Update()
-        {
+        void Update() {
             // Fade the lightning bolt over time
-            if (fadeDuration > 0)
-            {
+            if (fadeDuration > 0) {
                 fadeTime += Time.deltaTime;
                 float alpha = Mathf.Lerp(1, 0, fadeTime / fadeDuration);
                 SetLineRendererAlpha(alpha);
 
-                if (fadeTime >= fadeDuration)
-                {
+                if (fadeTime >= fadeDuration) {
                     Destroy(gameObject); // Destroy the lightning after it fades out
                 }
             }
         }
 
-        public void GenerateLightning()
-        {
+        public void GenerateLightning() {
             lineRenderer.positionCount = segmentCount + 1;
             lineRenderer.useWorldSpace = true;
             lineRenderer.startWidth = 0.1f;
@@ -39,8 +34,7 @@ namespace ASimpleRoguelike {
             Vector2 direction = endPoint - startPoint;
             Vector2 perpendicular = Vector2.Perpendicular(direction).normalized;
 
-            for (int i = 0; i <= segmentCount; i++)
-            {
+            for (int i = 0; i <= segmentCount; i++) {
                 float t = (float)i / segmentCount;
                 Vector2 point = Vector2.Lerp(startPoint, endPoint, t);
 
@@ -55,8 +49,7 @@ namespace ASimpleRoguelike {
             lineRenderer.SetPosition(0, startPoint);
         }
 
-        private void SetLineRendererAlpha(float alpha)
-        {
+        private void SetLineRendererAlpha(float alpha) {
             Gradient gradient = new();
             gradient.SetKeys(
                 new GradientColorKey[] { new(Color.white, 0.0f), new(Color.white, 1.0f) },

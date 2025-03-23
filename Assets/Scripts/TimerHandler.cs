@@ -3,8 +3,7 @@ using TMPro;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
-    public class TimerHandler : MonoBehaviour
-    {
+    public class TimerHandler : MonoBehaviour {
         private int phases = 0;
         public double time = 0f;
         public float timeScale = 1f;
@@ -14,13 +13,14 @@ namespace ASimpleRoguelike {
 
         public int GetPhase() => phases;
 
-        void Start()
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().OnDie += () => {GlobalGameData.longestTime = Math.Max(GlobalGameData.longestTime, time); GlobalGameData.highestPhase = Math.Max(GlobalGameData.highestPhase, phases);};
+        void Start() {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().OnDie += () => {
+                GlobalGameData.longestTime = Math.Max(GlobalGameData.longestTime, time); 
+                GlobalGameData.highestPhase = Math.Max(GlobalGameData.highestPhase, phases);
+            };
         }
 
-        void Update()
-        {
+        void Update() {
             if (GlobalGameData.isPaused) return;
             
             time += Time.deltaTime * timeScale;
@@ -59,6 +59,5 @@ namespace ASimpleRoguelike {
             string text = $"<mspace=28px>{days:D3}</mspace>:<mspace=28px>{hours:D2}</mspace>:<mspace=28px>{minutes:D2}</mspace>:<mspace=28px>{seconds:D2}</mspace>";
             timer_text.text = text;
         }
-
     }
 }

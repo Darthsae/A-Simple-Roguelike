@@ -32,6 +32,7 @@ namespace ASimpleRoguelike {
             RotnotController rotnotController = clone.GetComponent<RotnotController>();
             rotnotController.player = player.transform;
 
+            float temp = timerHandler.timeScale;
             timerHandler.timeScale = 0f;
             
             rotnotController.health.OnHealthZero += () => {
@@ -49,7 +50,7 @@ namespace ASimpleRoguelike {
                     spawner.spawning = true;
                 } 
                 cameraController.BossKilled("Post Rotnot");
-                timerHandler.timeScale = 1f;
+                timerHandler.timeScale = temp;
             };
             
             cameraController.bossNotification = clone.GetComponent<BossNotification>();
@@ -73,6 +74,7 @@ namespace ASimpleRoguelike {
             NyalanthController nyalanthController = clone.GetComponent<NyalanthController>();
             nyalanthController.player = player.transform;
 
+            float temp = timerHandler.timeScale;
             timerHandler.timeScale = 0f;
 
             nyalanthController.health.OnHealthZero += () => {
@@ -83,7 +85,7 @@ namespace ASimpleRoguelike {
                     spawner.spawning = true;
                 } 
                 cameraController.BossKilled("Post Nyalanth");
-                timerHandler.timeScale = 1f;
+                timerHandler.timeScale = temp;
             };
             
             cameraController.bossNotification = clone.GetComponent<BossNotification>();
@@ -107,6 +109,7 @@ namespace ASimpleRoguelike {
             LichController lichController = clone.GetComponent<LichController>();
             lichController.player = player.transform;
 
+            float temp = timerHandler.timeScale;
             timerHandler.timeScale = 0f;
 
             lichController.health.OnHealthZero += () => { // REMEMBER THIS IS FOR THE DEMO
@@ -118,7 +121,7 @@ namespace ASimpleRoguelike {
                     spawner.spawning = true;
                 } 
                 cameraController.BossKilled("Post Lich");
-                timerHandler.timeScale = 1f;
+                timerHandler.timeScale = temp;
             };
             
             cameraController.bossNotification = clone.GetComponent<BossNotification>();

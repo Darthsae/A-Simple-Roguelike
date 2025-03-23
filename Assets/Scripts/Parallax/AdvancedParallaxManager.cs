@@ -2,11 +2,9 @@ using UnityEngine;
 using System;
 
 namespace ASimpleRoguelike.Parallax {
-    public class AdvancedParallaxManager : MonoBehaviour
-    {
+    public class AdvancedParallaxManager : MonoBehaviour {
         [Serializable]
-        public class ParallaxLayer
-        {
+        public class ParallaxLayer {
             public Transform layer;           // The transform of the layer
             public Vector2 parallaxEffect;    // Parallax speed multiplier
             public Vector2 layerSize;         // Size of the layer
@@ -18,8 +16,7 @@ namespace ASimpleRoguelike.Parallax {
         private Vector2 camStartPos;          // Initial position of the camera
         private Vector2[] layerStartPositions;// Initial positions of the layers
 
-        void Start()
-        {
+        void Start() {
             if (cam == null)
                 cam = Camera.main;
 
@@ -28,18 +25,15 @@ namespace ASimpleRoguelike.Parallax {
 
             // Cache the initial positions of the layers
             layerStartPositions = new Vector2[layers.Length];
-            for (int i = 0; i < layers.Length; i++)
-            {
+            for (int i = 0; i < layers.Length; i++) {
                 layerStartPositions[i] = layers[i].layer.position;
             }
         }
 
-        void LateUpdate()
-        {
+        void LateUpdate() {
             Vector2 camDelta = (Vector2)cam.transform.position - camStartPos;
 
-            for (int i = 0; i < layers.Length; i++)
-            {
+            for (int i = 0; i < layers.Length; i++) {
                 ParallaxLayer layer = layers[i];
                 Vector2 offset = camDelta * layer.parallaxEffect;
 
@@ -56,8 +50,7 @@ namespace ASimpleRoguelike.Parallax {
         }
 
         // Wraps a position around the camera, ensuring seamless tiling
-        private float WrapPosition(float layerPos, float camPos, float layerSize)
-        {
+        private float WrapPosition(float layerPos, float camPos, float layerSize) {
             float distance = layerPos - camPos;
 
             // Determine how many full layer sizes the distance exceeds, and adjust accordingly
@@ -67,13 +60,11 @@ namespace ASimpleRoguelike.Parallax {
             return layerPos;
         }
 
-        void OnDrawGizmos()
-        {
+        void OnDrawGizmos() {
             if (layers == null || cam == null) return;
 
             // Draw the wrapping lines and layer bounds
-            foreach (var layer in layers)
-            {
+            foreach (var layer in layers) {
                 if (layer.layer == null) continue;
 
                 float width = layer.layerSize.x;

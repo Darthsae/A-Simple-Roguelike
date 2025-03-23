@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
-    public class HarmingArea : MonoBehaviour
-    {
+    public class HarmingArea : MonoBehaviour {
         Action<Collider2D> action;
 
         public int damage = 1;

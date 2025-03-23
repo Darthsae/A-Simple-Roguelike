@@ -15,6 +15,7 @@ namespace ASimpleRoguelike.Entity {
 
         #region Invulnerability
         public float invulnerabilityDuration = 0.5f;
+        [SerializeField]
         protected float nextInvulnerabilityTime = 0f;
         #endregion
 

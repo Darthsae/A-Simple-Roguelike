@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac5f4b4bd6847f4b81e3d897e02a06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 25
   health: 0
 --- !u!50 &616855798550943625
 Rigidbody2D:
@@ -180,9 +180,23 @@ MonoBehaviour:
   hurtSound: {fileID: 0}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
   invulnerabilityDuration: 0.1
+  laserRange: 5
+  laserTime: 1.5
+  laserCooldown: 2.5
+  laserCharge: 0.75
+  laserGameObject: {fileID: 0}
+  laserDetector: {fileID: 0}
+  laserSound: {fileID: 0}
+  laserChargeSound: {fileID: 0}
+  laserParticles: {fileID: 0}
+  hasLaser: 0
+  chargingLaser: 0
+  canMoveWhileLaser: 0
+  usingLaser: 0
+  laserOnCooldown: 0
   AIType: 5
   rotationOffset: 0
-  xp: 5
+  xp: 4
   speed: 2
   modulateSpeedByDistance:
     serializedVersion: 2

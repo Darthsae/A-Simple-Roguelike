@@ -3,8 +3,7 @@ using TMPro;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Equinox {
-    public class EquinoxSelectionUI : MonoBehaviour
-    {
+    public class EquinoxSelectionUI : MonoBehaviour {
         public TMP_Text description;
         public TMP_Dropdown dropdown;
         public TMP_Text attunement;
@@ -12,8 +11,7 @@ namespace ASimpleRoguelike.Equinox {
         public List<int> info;
 
         // Start is called before the first frame update
-        void Start()
-        {
+        void Start() {
             dropdown.ClearOptions();
             for (int i = 0; i < Equinox.equinoxes.Count; i++) {
                 if (!GlobalGameData.unlockedEquinoxes[i]) continue;
@@ -25,12 +23,17 @@ namespace ASimpleRoguelike.Equinox {
                 return;
             }
             dropdown.onValueChanged.AddListener(HandleDropdownChange); // Add listener to the onValueChanged events
-            HandleDropdownChange(0);
+            
+            if (EquinoxHandler.currentEquinox == -1) {
+                HandleDropdownChange(0);
+            } else {
+                HandleDropdownChange(EquinoxHandler.currentEquinox);
+            }
+
             dropdown.RefreshShownValue();
         }
 
-        void HandleDropdownChange(int newIndex)
-        {
+        void HandleDropdownChange(int newIndex) {
             EquinoxHandler.currentEquinox = info[newIndex];
             description.text = Equinox.equinoxes[EquinoxHandler.currentEquinox].description;
             attunement.text = Equinox.equinoxes[EquinoxHandler.currentEquinox].attunement.ToString();
