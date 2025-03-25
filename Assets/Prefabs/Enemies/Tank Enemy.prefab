@@ -5199,6 +5199,7 @@ GameObject:
   - component: {fileID: 7648747686458635658}
   - component: {fileID: 1625259391218829019}
   - component: {fileID: 5168349955912345909}
+  - component: {fileID: 8897591907609283159}
   m_Layer: 3
   m_Name: Tank Enemy
   m_TagString: Enemy
@@ -5335,20 +5336,9 @@ MonoBehaviour:
   hurtSound: {fileID: 0}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
   invulnerabilityDuration: 0.5
-  laserRange: 5
-  laserTime: 1.5
-  laserCooldown: 2.5
-  laserCharge: 0.75
-  laserGameObject: {fileID: 748497196111941504}
-  laserDetector: {fileID: 3104143281326945894}
-  laserSound: {fileID: 5228027660204710376}
-  laserChargeSound: {fileID: 4168495285289056299}
-  laserParticles: {fileID: 5296190651597141339}
-  hasLaser: 1
-  chargingLaser: 0
-  canMoveWhileLaser: 0
-  usingLaser: 0
-  laserOnCooldown: 0
+  nextInvulnerabilityTime: 0
+  movementBlockers: []
+  canMove: 1
   AIType: 0
   rotationOffset: 90
   xp: 15
@@ -5495,6 +5485,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 7495422176079405579, guid: 39b6fea409c55c949ac97770406f4f12, type: 3}
   inheritRotation: 1
+--- !u!114 &8897591907609283159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495422176079405579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6e6ddf7731a0f46beb75a264426222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: TankLaser
+  globalGameData: {fileID: 0}
+  entity: {fileID: 8078556624955680103}
+  laserRange: 5
+  laserTime: 1.5
+  laserCooldown: 2.5
+  laserCharge: 0.75
+  laserGameObject: {fileID: 748497196111941504}
+  laserDetector: {fileID: 3104143281326945894}
+  laserSound: {fileID: 5228027660204710376}
+  laserChargeSound: {fileID: 4168495285289056299}
+  laserParticles: {fileID: 5296190651597141339}
+  hasLaser: 1
+  chargingLaser: 0
+  canMoveWhileChargingLaser: 0
+  canMoveWhileUsingLaser: 0
+  usingLaser: 0
+  laserOnCooldown: 0
 --- !u!1 &8306274354671805259
 GameObject:
   m_ObjectHideFlags: 0

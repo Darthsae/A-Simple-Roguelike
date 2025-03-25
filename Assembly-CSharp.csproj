@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Entity\PlayerMinion.cs" />
     <Compile Include="Assets\Scripts\MenuExtra.cs" />
     <Compile Include="Assets\Scripts\Data\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\Detector.cs" />
     <Compile Include="Assets\Scripts\PhaseManager.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\LichController.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy.cs" />

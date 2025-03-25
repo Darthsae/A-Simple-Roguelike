@@ -6,22 +6,30 @@ namespace ASimpleRoguelike.Entity {
     public class Enemy : Entity {
         public static List<Enemy> enemies = new();
 
-        public float laserRange = 5.0f;
-        public float laserTime = 1.5f;
-        public float laserCooldown = 2.5f;
-        public float laserCharge = 0.75f;
-        private float laserTimer = 0;
-        public GameObject laserGameObject;
-        public GameObject laserDetector;
-        public AudioSource laserSound;
-        public AudioSource laserChargeSound;
-        public ParticleSystem laserParticles;
+        public List<string> movementBlockers = new();
 
-        public bool hasLaser = false;
-        public bool chargingLaser = false;
-        public bool canMoveWhileLaser = false;
-        public bool usingLaser = false;
-        public bool laserOnCooldown = false;
+        public void ClearMovementBlockers() {
+            movementBlockers.Clear();
+            canMove = true;
+        }
+
+        public void AddMovementBlocker(string reason) {
+            if (!canMove) {
+                canMove = false;
+            }
+
+            movementBlockers.Add(reason);
+        }
+
+        public void RemoveMovementBlocker(string reason) {
+            movementBlockers.Remove(reason);
+
+            if (movementBlockers.Count == 0) {
+                canMove = true;
+            }
+        }
+
+        public bool canMove = true;
 
         public EnemyAIType AIType = EnemyAIType.Follow;
         public float rotationOffset = -90f;
@@ -69,45 +77,11 @@ namespace ASimpleRoguelike.Entity {
             enemies.Remove(this);
         }
 
-        private void UpdateLaser() {
-            if (chargingLaser) {
-                laserTimer -= Time.deltaTime;
-                if (laserTimer < 0.0f) {
-                    laserGameObject.SetActive(true);
-                    laserTimer = laserTime;
-                    usingLaser = true;
-                    chargingLaser = false;
-                    laserSound.Play();
-                }
-            } else if (laserOnCooldown) {
-                laserTimer -= Time.deltaTime;
-                if (laserTimer < 0.0f) {
-                    laserOnCooldown = false;
-                }
-            } else if (usingLaser) {
-                laserTimer -= Time.deltaTime;
-                if (laserTimer < 0.0f) {
-                    laserGameObject.SetActive(false);
-                    usingLaser = false;
-                    laserOnCooldown = true;
-                    laserTimer = laserCooldown;
-                }
-            } else if (laserDetector.GetComponent<BoxCollider2D>().IsTouching(player.GetComponent<Collider2D>())) {
-                chargingLaser = true;
-                laserTimer = laserCharge;
-                laserChargeSound.Play();
-                laserParticles.Play();
-            }
-        }
-
+        
         public override void UpdateAI() {
             base.UpdateAI();
 
             timerer += Time.deltaTime;
-
-            if (hasLaser) {
-                UpdateLaser();
-            }
 
             switch (AIType) {
                 case EnemyAIType.Follow:
@@ -157,7 +131,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         private void CirclePlayer() {
-            if (hasLaser && usingLaser) {
+            if (!canMove) {
                 rb.velocity = Vector2.zero;
                 return;
             }
@@ -175,7 +149,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         private void MoveTowardsPlayer() {
-            if (hasLaser && (usingLaser || chargingLaser)) {
+            if (!canMove) {
                 rb.velocity = Vector2.zero;
                 return;
             }
@@ -190,7 +164,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         private void MoveTowardsPlayerZigZag() {
-            if (hasLaser && (usingLaser || chargingLaser)) {
+            if (!canMove) {
                 rb.velocity = Vector2.zero;
                 return;
             }
