@@ -20,6 +20,34 @@ namespace ASimpleRoguelike {
             };
         }
 
+        /*
+        void Update() {
+            if (GlobalGameData.isPaused) return;
+            
+            time += Time.deltaTime * timeScale;
+            Format();
+            switch (phases) {
+                case 0:
+                    if (time > 360) {
+                        phases = 1;
+                        phaseManager.PhaseOne();
+                    }
+                    break;
+                case 1:
+                    if (time > 900) {
+                        phases = 2;
+                        phaseManager.PhaseTwo();
+                    }
+                    break;
+                case 2:
+                    if (time > 1500) {
+                        phases = 3;
+                        phaseManager.PhaseThree();
+                    }
+                    break;
+            }
+        }*/
+
         void Update() {
             if (GlobalGameData.isPaused) return;
             

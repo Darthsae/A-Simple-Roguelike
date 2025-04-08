@@ -1,6 +1,7 @@
 using UnityEngine;
 using ASimpleRoguelike.Equinox;
 using ASimpleRoguelike.Inventory;
+using ASimpleRoguelike.Map;
 using UnityEngine.Audio;
 
 namespace ASimpleRoguelike {
@@ -9,6 +10,7 @@ namespace ASimpleRoguelike {
         public EquinoxSetup equinoxSetup;
         public FactionSetup factionSetup;
         public ItemSetup itemSetup;
+        public MapSetup mapSetup;
         public AudioMixer audioMixer;
         public string[] audioMixers;
 
@@ -25,6 +27,7 @@ namespace ASimpleRoguelike {
             equinoxSetup.Setup();
             factionSetup.Setup();
             itemSetup.Setup();
+            mapSetup.Setup();
             GlobalGameData.NewData();
 
             GlobalGameData.LoadData();

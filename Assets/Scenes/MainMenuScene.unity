@@ -3970,6 +3970,7 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   - component: {fileID: 519420035}
+  - component: {fileID: 519420036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4099,6 +4100,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3bd21ba6c84db74c9ddcbac0973c4bd, type: 2}
   - {fileID: 11400000, guid: 6b84b002742f8b94798016cb9ef60999, type: 2}
   - {fileID: 11400000, guid: 80c35edb76cc380469dc33f390d305ef, type: 2}
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335b7c4e902b4864c853b6709d241021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maps:
+  - {fileID: 11400000, guid: 2f8f306b35b29d24abf16ca3a6380c04, type: 2}
+  - {fileID: 11400000, guid: bb0f25237c70d4b4da8eb97643816f54, type: 2}
+  - {fileID: 11400000, guid: a9925ec8d257d6442932ad3354ebde2a, type: 2}
+  - {fileID: 11400000, guid: b26fb48f3de751143ac720931a6e9d60, type: 2}
 --- !u!1 &579721267
 GameObject:
   m_ObjectHideFlags: 0
@@ -4237,6 +4255,7 @@ MonoBehaviour:
   equinoxSetup: {fileID: 519420033}
   factionSetup: {fileID: 519420034}
   itemSetup: {fileID: 519420035}
+  mapSetup: {fileID: 519420036}
   audioMixer: {fileID: 24100000, guid: 72c93cf8c76c96c47b39eb93642e5222, type: 2}
   audioMixers:
   - Master

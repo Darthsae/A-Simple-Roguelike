@@ -8,13 +8,13 @@ using ASimpleRoguelike.Movement;
 using ASimpleRoguelike.StatusEffects;
 
 namespace ASimpleRoguelike {
-    public class Player : Entity.Entity
-    {
+    public class Player : Entity.Entity {
         #region Pause Reasons
         [Header("Pause Reasons")]
         public string levelUpMenu = "Level Up Menu";
         public string settingsMenu = "Settings Menu";
         public string commandsMenu = "Commands Menu";
+        public string mapMenu = "Map Menu";
         #endregion
 
         public SpriteRenderer discordMarker;
@@ -38,6 +38,8 @@ namespace ASimpleRoguelike {
         public void SetRushSpeed(int rushSpeed) {movementController.rushSpeed.Set(rushSpeed); alternateMovementController.rushSpeed.Set(rushSpeed);}
         public void SetRushSpeed(float rushSpeed) {SetRushSpeed((int)rushSpeed);}
         #endregion
+
+        public GameObject map;
 
         public MovementController movementController;
         public MovementController alternateMovementController;
