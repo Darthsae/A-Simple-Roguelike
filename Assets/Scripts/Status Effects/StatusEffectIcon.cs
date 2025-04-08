@@ -7,7 +7,7 @@ namespace ASimpleRoguelike.StatusEffects {
 
         public void Init(StatusEffect statusEffect) {
             this.statusEffect = statusEffect;
-            icon.sprite = statusEffect.icon;
+            icon.sprite = statusEffect.statusEffect.sprite;
         }
     }
 }
