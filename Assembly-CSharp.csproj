@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\PhaseManager.cs" />
     <Compile Include="Assets\Scripts\Entity\Bosses\LichController.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Status Effects\StatusEffectDisplay.cs" />
     <Compile Include="Assets\Scripts\Movement\OldPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PerkData.cs" />
     <Compile Include="Assets\Scripts\RotateAround.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Commands\CommandHandler.cs" />
     <Compile Include="Assets\Scripts\RotateSelf.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Status Effects\StatusEffectIcon.cs" />
     <Compile Include="Assets\Scripts\AutoRotation.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Assets\Scripts\AnimatibleImage.cs" />
     <Compile Include="Assets\Scripts\PerkManager.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
+    <Compile Include="Assets\Scripts\SpawnAfterTime.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxHandler.cs" />
     <Compile Include="Assets\Scripts\Map\MapSetup.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementController.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Assets\Scripts\Faction.cs" />
     <Compile Include="Assets\Scripts\TimerHandler.cs" />
     <Compile Include="Assets\Scripts\RotateConstraints.cs" />
+    <Compile Include="Assets\Scripts\ScreenLocked.cs" />
     <Compile Include="Assets\Scripts\Map\IconData.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\AnimatibleSprite.cs" />

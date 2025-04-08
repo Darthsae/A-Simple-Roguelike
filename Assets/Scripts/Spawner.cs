@@ -23,7 +23,7 @@ namespace ASimpleRoguelike {
 
         public void Despawn() {
             DespawnAll?.Invoke();
-        )
+        }
 
         public void SetSpawning(bool spawning) {
             this.spawning = spawning;
