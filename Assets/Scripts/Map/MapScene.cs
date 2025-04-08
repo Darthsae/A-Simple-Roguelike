@@ -7,11 +7,9 @@ namespace ASimpleRoguelike.Map {
         public IconData icon;
         public GameObject scene;
         public string description = "";
-        public float time = 360;
         public float weight = 1.0f;
         public int minPhase = 0;
         public int maxPhase = 2;
-        public int incrementPhaseBy = 1;
         public List<MapScene> prereqs = new();
 
         [Header("Spawner Settings")]
