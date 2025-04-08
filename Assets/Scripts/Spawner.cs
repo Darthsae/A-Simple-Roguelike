@@ -19,6 +19,12 @@ namespace ASimpleRoguelike {
 
         public bool spawning = true;
 
+        public event Action DespawnAll;
+
+        public void Despawn() {
+            DespawnAll?.Invoke();
+        )
+
         public void SetSpawning(bool spawning) {
             this.spawning = spawning;
         }
