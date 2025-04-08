@@ -19,6 +19,10 @@ namespace ASimpleRoguelike {
 
         public bool spawning = true;
 
+        public void SetSpawning(bool spawning) {
+            this.spawning = spawning;
+        }
+
         public GameObject GetSpawnable() {
             float random = UnityEngine.Random.Range(0f, TotalWeight);
             
