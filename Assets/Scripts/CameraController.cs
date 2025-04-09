@@ -61,6 +61,21 @@ namespace ASimpleRoguelike{
         }
 
         #region Cutscenes
+        public void StartCutscene(int cutsceneIndex) {
+            StartCoroutine(CutsceneCoroutine(cutsceneIndex, null));
+        }
+
+        public void StartCutscene(string cutsceneName) {
+            for (int i = 0; i < cutscenes.Length; i++) {
+                if (cutscenes[i].name == cutsceneName) {
+                    StartCoroutine(CutsceneCoroutine(i, null));
+                    return;
+                }
+            }
+
+            Debug.LogError("Cutscene not found: " + cutsceneName);
+        }
+
         public void StartCutscene(int cutsceneIndex, Action callback) {
             StartCoroutine(CutsceneCoroutine(cutsceneIndex, callback));
         }

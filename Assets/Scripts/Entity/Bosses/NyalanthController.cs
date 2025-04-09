@@ -2,10 +2,7 @@ using System;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class NyalanthController : Entity {
-        public int xp = 10;
-        public Transform player;
-        
+    public class NyalanthController : Boss {
         #region Locamotion Info
         private float time = 0f;
         public float speed = 10f;

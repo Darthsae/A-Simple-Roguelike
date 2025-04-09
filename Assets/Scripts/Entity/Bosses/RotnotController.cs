@@ -1,10 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class RotnotController : Entity {
-        public int xp = 10;
-        public Transform player;
-        
+    public class RotnotController : Boss {
         #region Locamotion Info
         public float speed = 10f;
         public float turningSpeed = 180f;

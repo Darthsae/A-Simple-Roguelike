@@ -1,4 +1,4 @@
-using UnityEngine;
+using UnityEngine.UI;
 
 namespace ASimpleRoguelike.StatusEffects {
     public class StatusEffectIcon {

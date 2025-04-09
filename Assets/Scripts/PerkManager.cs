@@ -37,7 +37,7 @@ namespace ASimpleRoguelike {
 
         public List<RotationHolder> spawnedRotating = new();
 
-        public TimerHandler timer;
+        public PhaseManager phaseManager;
 
         public GameObject graveThrall;
 
@@ -68,11 +68,13 @@ namespace ASimpleRoguelike {
         public void BeginPerkChoice() {
             Cursor.visible = true;
             
-            GlobalGameData.AddPauseReason("Perk Choice Menu");
+            if (!GlobalGameData.pauseReasons.Contains("Perk Choice Menu")) {
+                GlobalGameData.AddPauseReason("Perk Choice Menu");
+            }
             List<PerkData> perks = new();
             int temper = 0;
             for (int i = 0; i < perkCards.Count; i++) {
-                PerkData perkOption = PerkData.GetRandomValidPerk(unlockedPerks, timer.GetPhase(), perks);
+                PerkData perkOption = PerkData.GetRandomValidPerk(unlockedPerks, phaseManager.GetPhase(), perks);
 
                 if (perkOption == null) break;
 

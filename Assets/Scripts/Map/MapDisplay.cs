@@ -15,9 +15,15 @@ namespace ASimpleRoguelike.Map {
         public List<int> flow = new() {0};
         public List<MapScene> displayedMaps = new();
         public List<MapScene> completed = new();
+        public GameObject map;
 
         public float Height() {
             return icons.Depth() * 120.0f;
+        }
+
+        private void Start() {
+            phaseManager.StartMap(icons.data.map);
+            map.SetActive(false);
         }
 
         [ContextMenu("Add Manual Flow")]
@@ -35,7 +41,7 @@ namespace ASimpleRoguelike.Map {
             }
 
             for (int i = 0; i < 3; i++) {
-                MapScene thing = GetRandomValidMap(phaseManager.timerHandler.GetPhase(), maps);
+                MapScene thing = GetRandomValidMap(phaseManager.GetPhase(), maps);
 
                 if (thing != null) {
                     maps.Add(thing);
@@ -46,6 +52,7 @@ namespace ASimpleRoguelike.Map {
 
             if (maps.Count == 0) {
                 // IDK
+                Debug.LogError("You still haven't implemented what happens when you have no maps.");
                 return;
             }
 
@@ -57,7 +64,7 @@ namespace ASimpleRoguelike.Map {
                 GameObject thing = Instantiate(iconObject, content.transform);
                 thing.GetComponent<RectTransform>().sizeDelta.Set(start + push * i, height);
                 Node<IconElement> node = new() { data = thing.GetComponent<IconElement>() };
-                node.data.Init(maps[i]);
+                node.data.Init(maps[i], phaseManager);
                 if (current.TryGetTarget(out Node<IconElement> target)) {
                     target.children.Append(node);
                 }

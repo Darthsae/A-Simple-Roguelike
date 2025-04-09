@@ -1502,6 +1502,8 @@ GameObject:
   - component: {fileID: 583230444417039332}
   - component: {fileID: 6169006094451697568}
   - component: {fileID: 3728653360784120036}
+  - component: {fileID: 2829743334064118235}
+  - component: {fileID: -4267254999327048484}
   m_Layer: 0
   m_Name: Nyalanth
   m_TagString: Enemy
@@ -1693,6 +1695,7 @@ MonoBehaviour:
   hurtSound: {fileID: 2454617325031528453}
   faction: {fileID: 0}
   invulnerabilityDuration: 0.5
+  nextInvulnerabilityTime: 0
   xp: 10
   player: {fileID: 0}
   speed: 10
@@ -1771,6 +1774,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+--- !u!114 &2829743334064118235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6521505503241579647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c6a13d19e282f4792753804f95a499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 0}
+  events:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2829743334064118235}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: StartCutscene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Nyalanth Cutscene
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: -4267254999327048484}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.AdvancePhase, Assembly-CSharp
+        m_MethodName: AdvanceScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2829743334064118235}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: BossKilled
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Post Nyalanth
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-4267254999327048484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6521505503241579647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7d023cf159cbf4e99ed4ec244e429d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 0}
+  phases: 1
+  items:
+  - validWeapons: 
+    perks: []
+    minPhase: 0
+    maxPhase: 2147483647
+    data: {fileID: 11400000, guid: e3bd21ba6c84db74c9ddcbac0973c4bd, type: 2}
+  equinoxes: []
 --- !u!1 &7288247667214919966
 GameObject:
   m_ObjectHideFlags: 0

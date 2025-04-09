@@ -1,10 +1,21 @@
 using System.Collections.Generic;
 using ASimpleRoguelike.StatusEffects;
+using ASimpleRoguelike.Util;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity {
     public class Enemy : Entity {
         public static List<Enemy> enemies = new();
+
+        public bool marked = false;
+
+        public static void DespawnAll() {
+            MethodQueue queue = new();
+            foreach (Enemy enemy in enemies) {
+                queue.Enqueue(enemy.Despawn);
+            }
+            queue.InvokeAll();
+        }
 
         public List<string> movementBlockers = new();
 
@@ -14,7 +25,7 @@ namespace ASimpleRoguelike.Entity {
         }
 
         public void AddMovementBlocker(string reason) {
-            if (!canMove) {
+            if (canMove) {
                 canMove = false;
             }
 
@@ -77,6 +88,16 @@ namespace ASimpleRoguelike.Entity {
             enemies.Remove(this);
         }
 
+        public void FromSpawner(Spawner spawner) {
+            this.spawner = spawner;
+            spawner.DespawnAll += OnDespawnTrigger;
+
+        }
+
+        void OnDespawnTrigger() {
+            Despawn();
+            spawner.DespawnAll -= OnDespawnTrigger;
+        }
         
         public override void UpdateAI() {
             base.UpdateAI();
@@ -262,6 +283,12 @@ namespace ASimpleRoguelike.Entity {
                 player.GetComponent<Player>().ChangeXP(xp);
             }
 
+            enemies.Remove(this);
+            print(name);
+            if (marked) {
+                return;
+            }
+            marked = true;
             Destroy(gameObject);
         }
     }

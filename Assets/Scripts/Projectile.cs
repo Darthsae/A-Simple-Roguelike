@@ -73,7 +73,7 @@ namespace ASimpleRoguelike {
                     rb.velocity = transform.right * speed;
                     break;
                 case ProjectileType.Homing:
-                    float idealAngle = Util.AngleToPlayer(transform, target);
+                    float idealAngle = Entity.Util.AngleToPlayer(transform, target);
                     rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, homingSpeed * Time.deltaTime);
                     rb.velocity = transform.right * speed;
                     break;

@@ -7,6 +7,7 @@ using ASimpleRoguelike.Equinox;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using ASimpleRoguelike.Entity;
 
 namespace ASimpleRoguelike {
     public class GlobalGameData : MonoBehaviour {
@@ -22,6 +23,8 @@ namespace ASimpleRoguelike {
         public GameObject pickup;
         public Player player;
         public TimerHandler timer;
+        public PhaseManager phaseManager;
+        public CameraController cameraController;
 
         public static List<string> pauseReasons = new();
 
@@ -65,6 +68,36 @@ namespace ASimpleRoguelike {
         public static bool[] unlockedEquinoxes;
         public static bool unlockedItem;
         public static bool[] unlockedItems;
+        
+        public static void UnlockEquinox(GlobalGameData globalGameData, DataPrereq<EquinoxData> equinox) {
+            if (!equinox.Evaluate(globalGameData)) {
+                return;
+            }
+            int index = Equinox.Equinox.equinoxes.IndexOf(equinox.data);
+            unlockedEquinoxes[index] = true;
+            unlockedEquinox = true;
+        }
+
+        public static void UnlockEquinoxes(GlobalGameData globalGameData, List<DataPrereq<EquinoxData>> equinoxes) {
+            foreach (DataPrereq<EquinoxData> equinox in equinoxes) {
+                UnlockEquinox(globalGameData, equinox);
+            }
+        }
+
+        public static void UnlockItem(GlobalGameData globalGameData, DataPrereq<ItemData> item) {
+            if (!item.Evaluate(globalGameData)) {
+                return;
+            }
+            int index = Item.items.IndexOf(item.data);
+            unlockedItems[index] = true;
+            unlockedItem = true;
+        }
+
+        public static void UnlockItems(GlobalGameData globalGameData, List<DataPrereq<ItemData>> items) {
+            foreach (DataPrereq<ItemData> item in items) {
+                UnlockItem(globalGameData, item);
+            }
+        }
         #endregion
 
         #region Factions
@@ -190,6 +223,16 @@ namespace ASimpleRoguelike {
             } else {
                 spriteRenderer.gameObject.SetActive(false);
             }
+        }
+
+        public List<string> dis = new();
+        public List<Enemy> enemies = new();
+
+        private void Update() {
+            #if UNITY_EDITOR
+            dis = pauseReasons;
+            enemies = Enemy.enemies;
+            #endif
         }
     }
 
@@ -444,5 +487,62 @@ namespace ASimpleRoguelike {
         public static T GetSafe<T>(this List<T> list, int index, T defaultReturn) {
             return list.Count >= index || index < 0 ? defaultReturn : list[index];
         }
+    }
+
+    [Serializable]
+    public class DataPrereq<T> {
+        public List<WeaponType> validWeapons = new();
+        public List<CriteriaHolder<PerkWithLevel>> perks = new();
+        public int minPhase = 0;
+        public int maxPhase = int.MaxValue;
+        public T data;
+
+        public DataPrereq(T data) {
+            this.data = data;
+        }
+
+        public bool Evaluate(GlobalGameData globalGameData) {
+            if (globalGameData.phaseManager.GetPhase() > maxPhase || globalGameData.phaseManager.GetPhase() < minPhase || (validWeapons.Count > 0 && !validWeapons.Contains(globalGameData.player.currentWeapon))) {
+                return false;
+            }
+
+            List<PerkWithLevel> found = perks.ConvertAll((x) => x.data);
+
+            foreach (CriteriaHolder<PerkWithLevel> criteriaHolder in perks) {
+                foreach (PerkWithLevel perkWithLevel in globalGameData.player.perkManager.unlockedPerks) {
+                    if (criteriaHolder.data.perk == perkWithLevel.perk) {
+                        switch (criteriaHolder.criteria) {
+                            case SelectionCriteria.REQUIRED:
+                                if (perkWithLevel.level < criteriaHolder.data.level) {
+                                    return false;
+                                } else {
+                                    found.Remove(criteriaHolder.data);
+                                }
+                                break;
+                            case SelectionCriteria.ABSENT:
+                                if (perkWithLevel.level >= criteriaHolder.data.level) {
+                                    return false;
+                                }
+                                break;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return found.Count == 0;
+        }
+    }
+
+    [Serializable]
+    public class CriteriaHolder<T> {
+        public SelectionCriteria criteria;
+        public T data;
+    }
+
+    [Serializable]
+    public enum SelectionCriteria {
+        REQUIRED,
+        ABSENT
     }
 }

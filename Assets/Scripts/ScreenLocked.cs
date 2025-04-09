@@ -7,8 +7,8 @@ namespace ASimpleRoguelike {
         public bool caresAboutTime = false;
         public Vector2 bottomLeftOffset = new(0,0);
         public Vector2 topRightOffset = new(1,1);
-        public Vector2 bottomLeft => transform.position + bottomLeftOffset;
-        public Vector2 topRight => transform.position + topRightOffset;
+        public Vector2 BottomLeft => (Vector2)transform.position + bottomLeftOffset;
+        public Vector2 TopRight => (Vector2)transform.position + topRightOffset;
 
         public void Update() {
             if (caresAboutTime && GlobalGameData.isPaused)
@@ -16,19 +16,18 @@ namespace ASimpleRoguelike {
             
             if (isUiElement) {
                 Vector3 newPosition = transform.position;
-                if (topRight.y > Screen.height) {
-                    newPosition.y -= Screen.height - topRight.y;
+                if (TopRight.y > Screen.height) {
+                    newPosition.y -= Screen.height - TopRight.y;
                 }
-                if (topRight.x > Screen.width) {
-                    newPosition.x -= Screen.width - topRight.x;
+                if (TopRight.x > Screen.width) {
+                    newPosition.x -= Screen.width - TopRight.x;
                 }
-                if (bottomLeft.y < 0) {
-                    newPosition.y -= bottomLeft.y;
+                if (BottomLeft.y < 0) {
+                    newPosition.y -= BottomLeft.y;
                 }
-                if (bottomLeft.x < 0) {
-                    newPosition.x -= bottomLeft.x;
+                if (BottomLeft.x < 0) {
+                    newPosition.x -= BottomLeft.x;
                 }
-                // Set the position of the object to the mouse position
                 transform.position = newPosition;
             } else {
             }

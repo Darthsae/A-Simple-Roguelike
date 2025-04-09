@@ -15,9 +15,53 @@ MonoBehaviour:
   icon: {fileID: 11400000, guid: d1d3c79e06533ff47ad0b14842a0ec1c, type: 2}
   scene: {fileID: 3925091997860078558, guid: ea23538aa520c8e468ca5d7b7d4655c6, type: 3}
   description: A Lich.
-  time: 360
   weight: 1
   minPhase: 2
   maxPhase: 4
-  incrementPhaseBy: 1
   prereqs: []
+  spawnables:
+  - ToSpawn: {fileID: 7495422176079405579, guid: dcb3ef4c7ed7ca7409e078b05e0e17e0, type: 3}
+    Weight: 0.5
+    minimumPhase: 0
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 7495422176079405579, guid: ef680ad3881ada5449b1fd7a5f7a3f3b, type: 3}
+    Weight: 0.8
+    minimumPhase: 0
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 7495422176079405579, guid: bc9b57c0dc83e044ba367562e3140634, type: 3}
+    Weight: 0.3
+    minimumPhase: 0
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 7495422176079405579, guid: 7c0015fe6f8792a4a9912bd43bd6482d, type: 3}
+    Weight: 0.05
+    minimumPhase: 0
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 8499645109508444234, guid: 40e8a6894c8c74f4a8dccc8002aa2600, type: 3}
+    Weight: 0.25
+    minimumPhase: 1
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 7495422176079405579, guid: 4588cd54bad55834c998fe81fd6876aa, type: 3}
+    Weight: 0.15
+    minimumPhase: 2
+    maximumPhase: 2147483647
+    minimumGodState: 0
+    maximumGodState: 4
+  - ToSpawn: {fileID: 6102297025482058143, guid: 979a8ec491ed2c643af2a03c557a9996, type: 3}
+    Weight: 0.1
+    minimumPhase: 0
+    maximumPhase: 2147483647
+    minimumGodState: 1
+    maximumGodState: 4
+  spawnRange: {x: 5, y: 5}
+  spawnRate: 5
+  maxSpawn: 10

@@ -398,6 +398,8 @@ GameObject:
   - component: {fileID: 4492743253122239199}
   - component: {fileID: 2078352856486962998}
   - component: {fileID: 2670585194729980377}
+  - component: {fileID: -6800679999655066707}
+  - component: {fileID: 3821028992894168911}
   m_Layer: 0
   m_Name: Rotnot
   m_TagString: Enemy
@@ -583,6 +585,7 @@ MonoBehaviour:
   hurtSound: {fileID: 1467824135832675002}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
   invulnerabilityDuration: 0.5
+  nextInvulnerabilityTime: 0
   xp: 10
   player: {fileID: 0}
   speed: 1
@@ -624,6 +627,89 @@ MonoBehaviour:
   type: 3
   leftHand: {fileID: 7925731766194829025}
   rightHand: {fileID: 8757390632569216385}
+--- !u!114 &-6800679999655066707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019426549990878681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c6a13d19e282f4792753804f95a499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 0}
+  events:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6800679999655066707}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: StartCutscene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Cubenot Cutscene
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 3821028992894168911}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.AdvancePhase, Assembly-CSharp
+        m_MethodName: AdvanceScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -6800679999655066707}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: BossKilled
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Post Rotnot
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3821028992894168911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019426549990878681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7d023cf159cbf4e99ed4ec244e429d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 0}
+  phases: 1
+  items:
+  - validWeapons: 
+    perks: []
+    minPhase: 0
+    maxPhase: 2147483647
+    data: {fileID: 11400000, guid: 6b84b002742f8b94798016cb9ef60999, type: 2}
+  - validWeapons: 02000000
+    perks: []
+    minPhase: 0
+    maxPhase: 2147483647
+    data: {fileID: 11400000, guid: 80c35edb76cc380469dc33f390d305ef, type: 2}
+  equinoxes:
+  - validWeapons: 
+    perks: []
+    minPhase: 0
+    maxPhase: -2147483648
+    data: {fileID: 11400000, guid: d53566e3e8a48b54a8d0226e1adbf2dc, type: 2}
 --- !u!1 &4054220762453517047
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotnotController: {fileID: 2670585194729980377}
-  animation: {fileID: 0}
+  animationToPlay: {fileID: 0}
   type: 3
   time: 0.6
   timeInUse: 0
@@ -900,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotnotController: {fileID: 2670585194729980377}
-  animation: {fileID: 0}
+  animationToPlay: {fileID: 0}
   type: 0
   time: 2
   timeInUse: 0
@@ -963,7 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotnotController: {fileID: 2670585194729980377}
-  animation: {fileID: 0}
+  animationToPlay: {fileID: 0}
   type: 1
   time: 1
   timeInUse: 0
@@ -1387,7 +1473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotnotController: {fileID: 2670585194729980377}
-  animation: {fileID: 0}
+  animationToPlay: {fileID: 0}
   type: 0
   time: 0
   timeInUse: 0

@@ -1346,7 +1346,7 @@ PrefabInstance:
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: phaseManager
       value: 
-      objectReference: {fileID: 1350081354}
+      objectReference: {fileID: 1082678373}
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: spawnables.Array.size
       value: 7
@@ -1866,6 +1866,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &300919885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300919886}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300919886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300919885}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306266154
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,7 +3924,7 @@ PrefabInstance:
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: phaseManager
       value: 
-      objectReference: {fileID: 1350081354}
+      objectReference: {fileID: 1082678373}
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: spawnables.Array.size
       value: 7
@@ -5434,10 +5465,12 @@ MonoBehaviour:
   levelUpMenu: Level Up Menu
   settingsMenu: Settings Menu
   commandsMenu: Commands Menu
+  mapMenu: Map Menu
   discordMarker: {fileID: 101794275}
   moveSound: {fileID: 1460404780}
   rushIndicator: {fileID: 2030338493}
   rushMover: {fileID: 134558653}
+  map: {fileID: 0}
   movementController: {fileID: 892549552}
   alternateMovementController: {fileID: 892549551}
   levelUp: {fileID: 37995352}
@@ -5622,7 +5655,7 @@ MonoBehaviour:
   - spawnedRotating: []
     prefab: {fileID: 4559626591579216483, guid: 65bf19b0654dd834ca68c5113d215c1a, type: 3}
     offset: 1.5
-  timer: {fileID: 1350081354}
+  phaseManager: {fileID: 1082678373}
   graveThrall: {fileID: 71295370501087432, guid: da7cf1f72a024a541adf49bbba7d64b3, type: 3}
   perkChoiceUI: {fileID: 1107086669}
   perkDisplayUI: {fileID: 2038542470}
@@ -6668,6 +6701,8 @@ MonoBehaviour:
   pickup: {fileID: 490299731667777584, guid: fa49403c36d948e4383e43a5fae4b84f, type: 3}
   player: {fileID: 892549541}
   timer: {fileID: 1350081354}
+  phaseManager: {fileID: 1082678373}
+  cameraController: {fileID: 164094992}
 --- !u!4 &1082678372
 Transform:
   m_ObjectHideFlags: 0
@@ -6699,16 +6734,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 892549541}
+  globalGameData: {fileID: 1082678371}
+  cameraController: {fileID: 164094992}
+  timerHandler: {fileID: 1350081354}
+  currentMapScene: {fileID: 0}
+  sceneObject: {fileID: 300919885}
+  map: {fileID: 1680073197}
+  mapDisplay: {fileID: 1214945004}
   spawnersForNormal:
   - {fileID: 6875276183981596348}
   - {fileID: 657945957}
   - {fileID: 1416524560}
   - {fileID: 215248967}
-  cameraController: {fileID: 164094992}
-  timerHandler: {fileID: 1350081354}
-  rotnot: {fileID: 4019426549990878681, guid: def720152e4d31a408828c8275799dcb, type: 3}
-  nyalanth: {fileID: 6521505503241579647, guid: 3b0225ffc5b488d4d9bcae8daf721953, type: 3}
-  lich: {fileID: 6166278718443296709, guid: 6a9d73fae501f22419d7ba5765e52941, type: 3}
 --- !u!1 &1102548243
 GameObject:
   m_ObjectHideFlags: 0
@@ -7290,6 +7327,7 @@ MonoBehaviour:
   displayedMaps:
   - {fileID: 11400000, guid: 2f8f306b35b29d24abf16ca3a6380c04, type: 2}
   completed: []
+  map: {fileID: 1680073197}
 --- !u!1001 &1215396571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8404,7 +8442,6 @@ MonoBehaviour:
   time: 0
   timeScale: 1
   timer_text: {fileID: 1634086013}
-  phaseManager: {fileID: 1082678373}
 --- !u!1 &1355599418
 GameObject:
   m_ObjectHideFlags: 0
@@ -9130,7 +9167,7 @@ PrefabInstance:
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: phaseManager
       value: 
-      objectReference: {fileID: 1350081354}
+      objectReference: {fileID: 1082678373}
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: spawnables.Array.size
       value: 7
@@ -12299,7 +12336,7 @@ PrefabInstance:
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: phaseManager
       value: 
-      objectReference: {fileID: 1350081354}
+      objectReference: {fileID: 1082678373}
     - target: {fileID: 6063290727785956578, guid: 6f9115abcd957614fa129fba1f9f89f5, type: 3}
       propertyPath: spawnables.Array.size
       value: 7
@@ -12701,3 +12738,4 @@ SceneRoots:
   - {fileID: 1082678372}
   - {fileID: 326246565}
   - {fileID: 2133101168}
+  - {fileID: 300919886}

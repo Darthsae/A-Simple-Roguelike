@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6325970634531500421}
+  - component: {fileID: 5417299401097036935}
+  - component: {fileID: 8113998165433577251}
   m_Layer: 0
   m_Name: Rotnot Scene
   m_TagString: Untagged
@@ -31,3 +33,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5417299401097036935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925091997860078558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddec63744cc62d49841d81e2da1cc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 8113998165433577251}
+  spawnTime: 360
+  prefabToSpawn: {fileID: 4019426549990878681, guid: def720152e4d31a408828c8275799dcb, type: 3}
+  area: {x: 25, y: 25}
+  inheritRotation: 0
+  PreSpawn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: SetSpawning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Boss Cutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: ClearEnemies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: StartCutscene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Boss Cutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+  PreApply:
+    m_PersistentCalls:
+      m_Calls: []
+  Apply:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5417299401097036935}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.SpawnAfterTime, Assembly-CSharp
+        m_MethodName: SetBoss
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PostApply:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8113998165433577251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925091997860078558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5417fb2a494309745abd1845963df487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalGameData: {fileID: 0}

@@ -1,10 +1,7 @@
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class LichController : Entity {
-        public int xp = 10;
-        public Transform player;
-        
+    public class LichController : Boss {
         public int phase = 0;
 
         #region Locamotion Info

@@ -31,7 +31,7 @@ namespace ASimpleRoguelike.Map {
         }
 
         public void OnStart(GlobalGameData globalGameData) {
-            foreach (Spawner spawner in globalGameData.timer.phaseManager.spawnersForNormal) {
+            foreach (Spawner spawner in globalGameData.phaseManager.spawnersForNormal) {
                 spawner.spawnables = spawnables;
                 spawner.spawnRange = spawnRange;
                 spawner.spawnRate = spawnRate;

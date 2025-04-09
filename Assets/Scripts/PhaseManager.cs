@@ -1,15 +1,75 @@
+using System;
 using UnityEngine;
-using ASimpleRoguelike.Entity.Bosses;
+using ASimpleRoguelike.Map;
+using ASimpleRoguelike.Entity;
+using System.Collections.Generic;
+using ASimpleRoguelike.Inventory;
+using ASimpleRoguelike.Equinox;
 
 namespace ASimpleRoguelike {
     public class PhaseManager : MonoBehaviour {
+        private int currentPhase = 0;
+        public int GetPhase() => currentPhase;
+
         public Player player;
-
-        public Spawner[] spawnersForNormal;
-
+        public GlobalGameData globalGameData;
         public CameraController cameraController;
         public TimerHandler timerHandler;
 
+        public MapScene currentMapScene;
+        public GameObject sceneObject;
+
+        public GameObject map;
+        public MapDisplay mapDisplay;
+
+        public Spawner[] spawnersForNormal;
+
+        void Start() {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().OnDie += () => {
+                GlobalGameData.longestTime = Math.Max(GlobalGameData.longestTime, timerHandler.time); 
+                GlobalGameData.highestPhase = Math.Max(GlobalGameData.highestPhase, currentPhase);
+            };
+        }
+
+        public void AdvanceScene(int phases, List<DataPrereq<ItemData>> items, List<DataPrereq<EquinoxData>> equinoxes) {
+            currentPhase += phases;
+            GlobalGameData.UnlockItems(globalGameData, items);
+            GlobalGameData.UnlockEquinoxes(globalGameData, equinoxes);
+            GlobalGameData.AddPauseReason("Map");
+            map.SetActive(true);
+            mapDisplay.AddFlow();
+        }
+
+        public void StartMap(MapScene mapScene) {
+            Vector3 position = player.transform.position;
+            Quaternion rotation = Quaternion.identity;
+            currentMapScene = mapScene;
+            sceneObject = Instantiate(currentMapScene.scene, position, rotation);
+            sceneObject.GetComponent<MapRoot>().Init(globalGameData);
+            currentMapScene.OnStart(globalGameData);
+            map.SetActive(false);
+            SetSpawning(true);
+        }
+
+        public void DisableSpawners() {
+            foreach (Spawner spawner in spawnersForNormal) {
+                spawner.SetSpawning(false);
+                spawner.Despawn();
+            }
+        }
+
+        public void SetSpawning(bool spawning) {
+            foreach (Spawner spawner in spawnersForNormal) {
+                spawner.SetSpawning(spawning);
+            }
+        }
+
+        public void ClearMap() {
+            Enemy.DespawnAll();
+            Destroy(sceneObject);
+        }
+
+        /*
         public GameObject rotnot;
         public GameObject nyalanth;
         public GameObject lich;
@@ -126,6 +186,7 @@ namespace ASimpleRoguelike {
             cameraController.bossNotification = clone.GetComponent<BossNotification>();
             cameraController.SetBoss();
         }
+        */
     }
 
     public enum GameContext {

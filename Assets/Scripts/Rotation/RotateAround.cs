@@ -34,7 +34,7 @@ namespace ASimpleRoguelike {
             }
 
             if (lookAt) {
-                transform.rotation = Quaternion.Euler(0, 0, Util.ActualAngle(transform.position, rotateAroundTransform.position) + otherRotation);
+                transform.rotation = Quaternion.Euler(0, 0, Entity.Util.ActualAngle(transform.position, rotateAroundTransform.position) + otherRotation);
             }
         }
     }

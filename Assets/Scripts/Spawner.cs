@@ -6,7 +6,7 @@ using ASimpleRoguelike.Entity;
 
 namespace ASimpleRoguelike {
     public class Spawner : MonoBehaviour {
-        public TimerHandler phaseManager;
+        public PhaseManager phaseManager;
         public PerkManager perkManager;
 
         public List<SpawnHolder> spawnables = new();
@@ -23,6 +23,7 @@ namespace ASimpleRoguelike {
 
         public void Despawn() {
             DespawnAll?.Invoke();
+            DespawnAll = null;
         }
 
         public void SetSpawning(bool spawning) {
@@ -60,7 +61,7 @@ namespace ASimpleRoguelike {
                 timeSinceLastSpawn = spawnRate;
                 spawnedCount++;
                 Enemy enemyScript = spawned.GetComponent<Enemy>();
-                enemyScript.spawner = this;
+                enemyScript.FromSpawner(this);
 
                 if (perkManager.unlockedPerks.FindIndex((park) => park.perk.name == "Fateweavers Gamble") != -1) {
                     enemyScript.health.SetMaxHealth((int)(enemyScript.health.maxHealth * 1.1f));
