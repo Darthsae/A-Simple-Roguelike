@@ -11,6 +11,8 @@ namespace ASimpleRoguelike.Entity {
 
         public FactionData faction;
 
+        public StatusEffectDisplay statusEffectDisplay;
+
         public List<StatusEffect> effects = new();
 
         #region Invulnerability
@@ -53,6 +55,9 @@ namespace ASimpleRoguelike.Entity {
         public void AddStatusEffect(StatusEffectData effect) {
             effects.Add(new StatusEffect(effect));
             effects.Last().Apply(this);
+            if (statusEffectDisplay != null) {
+                effects.Last().icon = statusEffectDisplay.Add(effects.Last());
+            }
         }
 
         public void DirectDamage(int amount, bool ignoreInvulnerability = false) {

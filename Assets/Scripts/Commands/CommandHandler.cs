@@ -141,6 +141,14 @@ namespace ASimpleRoguelike.Commands {
                             break;
                     }
                 }),
+            new Command("ClearPause", "Clear all pause reasons.", null, (commandHandler, parameters) => {
+                    GlobalGameData.ClearPauseReasons();
+                }),
+            new Command("LogPauseReasons", "Logs all pause reasons.", null, (commandHandler, parameters) => {
+                    foreach (string reason in GlobalGameData.pauseReasons) {
+                        Logger.LogInfo(reason);
+                    }
+                }),
         };
 
         public void Command(string commandPrompt) {

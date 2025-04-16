@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ASimpleRoguelike {
+namespace ASimpleRoguelike.Perk {
     [CreateAssetMenu(menuName = "A Simple Roguelike/PerkData")]
     public class PerkData : ScriptableObject {
         public static HashSet<PerkData> perks = new();

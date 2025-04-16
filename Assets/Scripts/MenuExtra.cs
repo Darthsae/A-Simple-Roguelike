@@ -3,6 +3,7 @@ using ASimpleRoguelike.Equinox;
 using ASimpleRoguelike.Inventory;
 using ASimpleRoguelike.Map;
 using UnityEngine.Audio;
+using ASimpleRoguelike.Perk;
 
 namespace ASimpleRoguelike {
     public class MenuExtra : MonoBehaviour {
@@ -15,6 +16,11 @@ namespace ASimpleRoguelike {
         public string[] audioMixers;
 
         void Start() {
+            if (!Logger.open) {
+                Logger.StartLogging();
+                Logger.LogInfo("Started logging");
+            }
+
             foreach (var perk in perks) 
                 PerkData.perks.Add(perk);
             
@@ -33,6 +39,8 @@ namespace ASimpleRoguelike {
             GlobalGameData.LoadData();
 
             Cursor.visible = true;
+
+            PerkManager.godsAttention = GodState.NONE;
         }
     }
 }

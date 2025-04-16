@@ -62,7 +62,7 @@ namespace ASimpleRoguelike.Map {
 
             for (int i = 0; i < maps.Count(); i++) {
                 GameObject thing = Instantiate(iconObject, content.transform);
-                thing.GetComponent<RectTransform>().sizeDelta.Set(start + push * i, height);
+                thing.GetComponent<RectTransform>().anchoredPosition.Set(start + push * i, height);
                 Node<IconElement> node = new() { data = thing.GetComponent<IconElement>() };
                 node.data.Init(maps[i], phaseManager);
                 if (current.TryGetTarget(out Node<IconElement> target)) {

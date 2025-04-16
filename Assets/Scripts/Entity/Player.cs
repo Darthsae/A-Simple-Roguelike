@@ -6,6 +6,7 @@ using ASimpleRoguelike.Equinox;
 using System.Linq;
 using ASimpleRoguelike.Movement;
 using ASimpleRoguelike.StatusEffects;
+using ASimpleRoguelike.Perk;
 
 namespace ASimpleRoguelike {
     public class Player : Entity.Entity {
@@ -49,6 +50,8 @@ namespace ASimpleRoguelike {
         public RectTransform xpMask;
         public RectTransform healthMask;
         public PerkManager perkManager;
+
+        public PerkUIDisplay perkDisplay;
 
         public GameObject redCard;
 
@@ -330,6 +333,7 @@ namespace ASimpleRoguelike {
                     Cursor.visible = false;
                 } else { 
                     levelUp.SetActive(true); 
+                    perkDisplay.Open();
                     GlobalGameData.AddPauseReason(levelUpMenu);
                     if (notificationUI.activeSelf) { 
                         notificationUI.SetActive(false);

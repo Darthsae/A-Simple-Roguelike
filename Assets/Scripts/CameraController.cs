@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -37,7 +38,13 @@ namespace ASimpleRoguelike{
         [Tooltip("Current Music Track")]
         public int currentMusicTrack = 0;
 
+        public GameObject waterShader;
+
         public bool snap = false;
+
+        public void SetWaterShader(bool active) {
+            waterShader.SetActive(active);
+        }
 
         void Start() {
             StartMusic(0, null);
@@ -120,7 +127,7 @@ namespace ASimpleRoguelike{
                 }
             }
 
-            Debug.LogError("Cutscene not found: " + musicName);
+            Debug.LogError("Music not found: " + musicName);
         }
 
         public IEnumerator MusicCoroutine(int musicIndex, Action callback) {

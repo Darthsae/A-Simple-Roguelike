@@ -13,6 +13,7 @@ namespace ASimpleRoguelike {
         public bool hurtEnemy = false;
 
         public List<StatusEffectData> effectDatas = new();
+        public GameObject onHitEffect;
 
         void Start() {
             if (GetComponent<RingCollider>() != null) {
@@ -23,6 +24,9 @@ namespace ASimpleRoguelike {
                             foreach (StatusEffectData effect in effectDatas) {
                                 other.gameObject.GetComponent<Player>().AddStatusEffect(effect);
                             }
+                            if (onHitEffect != null) {
+                                Instantiate(onHitEffect, other.gameObject.transform.position, Quaternion.identity);
+                            }
                         }
                     };
                 }
@@ -32,6 +36,9 @@ namespace ASimpleRoguelike {
                             other.gameObject.GetComponent<Enemy>().DirectDamage(-damage);
                             foreach (StatusEffectData effect in effectDatas) {
                                 other.gameObject.GetComponent<Enemy>().AddStatusEffect(effect);
+                            }
+                            if (onHitEffect != null) {
+                                Instantiate(onHitEffect, other.gameObject.transform.position, Quaternion.identity);
                             }
                         }
                     };
@@ -44,6 +51,9 @@ namespace ASimpleRoguelike {
                             foreach (StatusEffectData effect in effectDatas) {
                                 other.gameObject.GetComponent<Player>().AddStatusEffect(effect);
                             }
+                            if (onHitEffect != null) {
+                                Instantiate(onHitEffect, other.gameObject.transform.position, Quaternion.identity);
+                            }
                         }
                     };
                 }
@@ -53,6 +63,9 @@ namespace ASimpleRoguelike {
                             other.gameObject.GetComponent<Enemy>().DirectDamage(-damage);
                             foreach (StatusEffectData effect in effectDatas) {
                                 other.gameObject.GetComponent<Enemy>().AddStatusEffect(effect);
+                            }
+                            if (onHitEffect != null) {
+                                Instantiate(onHitEffect, other.gameObject.transform.position, Quaternion.identity);
                             }
                         }
                     };

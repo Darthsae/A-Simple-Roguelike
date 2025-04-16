@@ -170,10 +170,11 @@ namespace ASimpleRoguelike.Entity.Bosses {
                         // Do attack logic here
                         float increment = 180f / homingProjectileCount;
 
-                        for (float i = 90f; i < 270f; i += increment) {
+                        for (float i = 180f; i < 360f; i += increment) {
                             GameObject projectile = Instantiate(homingProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i)));
                             projectile.transform.parent = null;
                             projectile.GetComponent<Projectile>().InitStuff(10, 15, 15, 1, Owner.Enemy, ProjectileType.Homing, player);
+                            projectile.GetComponent<Projectile>().homingSpeed = 180f;
                         }
                     }
 

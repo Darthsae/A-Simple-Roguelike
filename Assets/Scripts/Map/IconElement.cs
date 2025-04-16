@@ -22,6 +22,7 @@ namespace ASimpleRoguelike.Map {
             Debug.Log(map.name);
             GlobalGameData.RemovePauseReason("Map");
             phaseManager.StartMap(map);
+            Cursor.visible = false;
         }
     }
 }

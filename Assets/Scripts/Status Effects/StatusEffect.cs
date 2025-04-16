@@ -6,6 +6,7 @@ namespace ASimpleRoguelike.StatusEffects {
         public float timer;
         public float timerDamage;
         public GameObject spawned;
+        public StatusEffectIcon icon; 
 
         public StatusEffect(StatusEffectData statusEffectData) {
             statusEffect = statusEffectData;
@@ -15,7 +16,7 @@ namespace ASimpleRoguelike.StatusEffects {
 
         public void Apply(Entity.Entity entity) {
             if (statusEffect.toSpawn != null) {
-                spawned = GameObject.Instantiate(statusEffect.toSpawn, entity.transform);
+                spawned = Object.Instantiate(statusEffect.toSpawn, entity.transform);
             }
         }
 
@@ -29,7 +30,10 @@ namespace ASimpleRoguelike.StatusEffects {
             }
 
             if (timer < 0) {
-                GameObject.Destroy(spawned);
+                Object.Destroy(spawned);
+                if (icon != null) {
+                    icon.Finished();
+                }
                 return true;
             }
             return false;

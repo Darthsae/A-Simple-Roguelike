@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ASimpleRoguelike {
+namespace ASimpleRoguelike.Perk {
     public class PerkCardDisplay : MonoBehaviour {
         public PerkManager perkManager;
 

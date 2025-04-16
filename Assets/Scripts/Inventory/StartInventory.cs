@@ -39,7 +39,10 @@ namespace ASimpleRoguelike.Inventory {
                     for (int j = 0; j < Item.items[i].tags.Length; j++) {
                         Debug.Log($"Tag {j}: {Item.items[i].tags[j]}");
                     }
-                    inventory.QuickAdd(Item.items[i], false);
+                    
+                    if (!GlobalGameData.HasItem(Item.items[i])) {
+                        inventory.QuickAdd(Item.items[i], false);
+                    }
 
                     foreach (string tag in Item.items[i].tags) {
                         Debug.Log("Tag: " + tag);

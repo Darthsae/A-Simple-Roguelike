@@ -82,17 +82,16 @@
     <Compile Include="Assets\Scripts\Status Effects\StatusEffectDisplay.cs" />
     <Compile Include="Assets\Scripts\Movement\OldPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\AdvancePhase.cs" />
-    <Compile Include="Assets\Scripts\PerkData.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemSetup.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateAround.cs" />
     <Compile Include="Assets\Scripts\Rotation\ChainRotater.cs" />
     <Compile Include="Assets\Scripts\KillAfterAttacks.cs" />
     <Compile Include="Assets\Scripts\InfiniteGrid.cs" />
-    <Compile Include="Assets\Scripts\PerkCardDisplay.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandHandler.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\Status Effects\StatusEffectIcon.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\UI\PackedDisplay.cs" />
     <Compile Include="Assets\Scripts\Rotation\AutoRotation.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
@@ -118,9 +117,12 @@
     <Compile Include="Assets\Scripts\Movement\MoveChoice.cs" />
     <Compile Include="Assets\Scripts\Data\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateConstraints.cs" />
+    <Compile Include="Assets\Scripts\Perk\PerkCardDisplay.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
+    <Compile Include="Assets\Scripts\Perk\PerkManager.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxSelectionUI.cs" />
     <Compile Include="Assets\Scripts\Entity\Worm.cs" />
+    <Compile Include="Assets\Scripts\Perk\PerkUIElement.cs" />
     <Compile Include="Assets\Scripts\InstancedGlobal.cs" />
     <Compile Include="Assets\Scripts\HarmingArea.cs" />
     <Compile Include="Assets\Scripts\Inventory\DefaultUnlocks.cs" />
@@ -133,7 +135,6 @@
     <Compile Include="Assets\Scripts\Equinox\EquinoxSetup.cs" />
     <Compile Include="Assets\Scripts\Entity\WormHandler.cs" />
     <Compile Include="Assets\Scripts\AnimatibleImage.cs" />
-    <Compile Include="Assets\Scripts\PerkManager.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\SpawnAfterTime.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxHandler.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\Scripts\Movement\MovementController.cs" />
     <Compile Include="Assets\Scripts\Parallax\AdvancedParallaxManager.cs" />
     <Compile Include="Assets\Scripts\ConditionalShowUp.cs" />
+    <Compile Include="Assets\Scripts\Perk\PerkUIDisplay.cs" />
     <Compile Include="Assets\Scripts\SpawnOnDie.cs" />
     <Compile Include="Assets\Scripts\MouseLocked.cs" />
     <Compile Include="Assets\Scripts\FactionSetup.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Scripts\Commands\Command.cs" />
     <Compile Include="Assets\Scripts\LightningBolt.cs" />
     <Compile Include="Assets\Scripts\Faction.cs" />
+    <Compile Include="Assets\Scripts\Perk\PerkData.cs" />
     <Compile Include="Assets\Scripts\TimerHandler.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateSelf.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateController.cs" />

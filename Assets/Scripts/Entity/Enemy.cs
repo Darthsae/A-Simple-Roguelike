@@ -238,7 +238,7 @@ namespace ASimpleRoguelike.Entity {
                 foreach (StatusEffectData effect in projectile.effects) {
                     AddStatusEffect(effect);
                 }
-                DirectDamage((int)-projectile.damage, true);
+                DirectDamage((int)-projectile.damage, false);
             }
         }
 
@@ -284,7 +284,6 @@ namespace ASimpleRoguelike.Entity {
             }
 
             enemies.Remove(this);
-            print(name);
             if (marked) {
                 return;
             }

@@ -142,8 +142,8 @@ namespace ASimpleRoguelike.Entity.Bosses {
                         summonCounter = 0;
                         for (int i = 0; i < 8; i++) {
                             GameObject summon = Instantiate(summondPrefab, transform.position + (Vector3)Random.insideUnitCircle * 12.5f, Quaternion.identity);
-                            summon.GetComponent<Enemy>().speed *= 2f;
-                            summon.GetComponent<Enemy>().health.SetMaxHealth(20);
+                            summon.GetComponent<Enemy>().speed *= 1.5f;
+                            summon.GetComponent<Enemy>().health.SetMaxHealth(5);
                             summon.GetComponent<Enemy>().AIType = EnemyAIType.ZigFollow;
                         }
                     } else {

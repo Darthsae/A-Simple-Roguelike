@@ -36,6 +36,7 @@ namespace ASimpleRoguelike {
             GlobalGameData.UnlockItems(globalGameData, items);
             GlobalGameData.UnlockEquinoxes(globalGameData, equinoxes);
             GlobalGameData.AddPauseReason("Map");
+            Cursor.visible = true;
             map.SetActive(true);
             mapDisplay.AddFlow();
         }

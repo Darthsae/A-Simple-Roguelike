@@ -218,7 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  owner: 0
+  hurtPlayer: 0
+  hurtEnemy: 1
+  effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &8411189217490033161
 GameObject:
   m_ObjectHideFlags: 0

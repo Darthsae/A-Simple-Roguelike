@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using ASimpleRoguelike.Entity;
+using ASimpleRoguelike.Perk;
 
 namespace ASimpleRoguelike {
     public class GlobalGameData : MonoBehaviour {
@@ -48,6 +49,29 @@ namespace ASimpleRoguelike {
         public static ItemData lowerLegSlot;
         public static ItemData footSlot;
         public static ItemData toeSlot;
+
+        public static bool HasItem(ItemData item) {
+            return item == headSlot || 
+                item == neckSlot || 
+                item == chestSlot || 
+                item == shoulderSlot || 
+                item == upperArmSlot || 
+                item == elbowSlot || 
+                item == forearmSlot || 
+                item == handSlot || 
+                item == fingerSlot || 
+                item == backSlot || 
+                item == stomachSlot || 
+                item == waistSlot || 
+                item == abdomenSlot || 
+                item == hipSlot || 
+                item == upperLegSlot || 
+                item == kneeSlot || 
+                item == lowerLegSlot || 
+                item == footSlot || 
+                item == toeSlot;
+            
+        }
         #endregion
 
         public static GameContext gameContext = GameContext.Default;
@@ -413,6 +437,55 @@ namespace ASimpleRoguelike {
             catch (Exception e) {
                 Debug.LogError("Error creating data directory: " + e.Message);
             }
+        }
+    }
+
+    public static class Logger {
+        private static readonly string dataDirPath = Path.Combine(Application.persistentDataPath, "Logs");
+        private static readonly string dataFileName = "data.log";  
+        
+        public static bool open = false;
+
+        private static FileStream stream;
+        private static StreamWriter writer;
+
+        public static void StartLogging() {
+            string fullPath = Path.Combine(dataDirPath, dataFileName);
+            try {
+                Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+                stream = new(fullPath, FileMode.Create);
+                writer = new(stream);
+                open = true;
+            }
+            catch (Exception e) {
+                Debug.LogError("Error creating data directory: " + e.Message);
+            }
+        }
+
+        public static void LogInfo(string message) {
+            Log("[INFO] " + message);
+        }
+        
+        public static void LogDebug(string message) {
+            Log("[DEBUG] " + message);
+        }
+        
+        public static void LogError(string message) {
+            Log("[ERROR] " + message);
+        }
+
+        public static void Log(string message) {
+            writer.WriteLine(message);
+            writer.Flush();
+        }
+
+        public static void StopLogging() {
+            open = false;
+            if (stream == null) {
+                return;
+            }
+            writer.Close();
+            stream.Close();
         }
     }
 

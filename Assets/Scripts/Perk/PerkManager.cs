@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ASimpleRoguelike.Entity;
 
-namespace ASimpleRoguelike {
+namespace ASimpleRoguelike.Perk {
     [System.Serializable]
     public enum GodState {
         NONE,

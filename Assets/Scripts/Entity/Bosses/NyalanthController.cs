@@ -268,7 +268,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         #endregion
     }
 
-    [System.Serializable]
+    [Serializable]
     public enum NyalanthAIState {
         Follow,
         Attack,
@@ -277,7 +277,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         Die
     }
 
-    [System.Serializable]
+    [Serializable]
     public enum NyalanthType {
         Ignis, // Fire
         Lapis, // Stone
