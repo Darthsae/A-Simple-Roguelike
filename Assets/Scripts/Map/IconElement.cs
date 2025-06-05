@@ -10,6 +10,8 @@ namespace ASimpleRoguelike.Map {
         public Image frame;
         public Image icon;
 
+        public bool used = false;
+
         public void Init(MapScene mapScene, PhaseManager phaseManager) {
             map = mapScene;
             iconData = map.icon;
@@ -19,10 +21,12 @@ namespace ASimpleRoguelike.Map {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
-            Debug.Log(map.name);
-            GlobalGameData.RemovePauseReason("Map");
-            phaseManager.StartMap(map);
-            Cursor.visible = false;
+            if (!used) {
+                GlobalGameData.RemovePauseReason("Map");
+                phaseManager.StartMap(map);
+                Cursor.visible = false;
+                used = true;
+            }
         }
     }
 }

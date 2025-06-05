@@ -28,6 +28,25 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public GameObject summondPrefab;
 
         public GameObject bombPrefab;
+
+        #region Laser Data
+        public float laserTime = 1.5f;
+        public float laserCharge = 0.75f;
+        private float laserTimer = 0;
+        public int laserCount = 3;
+        public int laserCounter = 0;
+        public bool hasLaser = true;
+        public bool chargingLaser = false;
+        public bool usingLaser = false;
+        public GameObject leftLaserHolder;
+        public GameObject rightLaserHolder;
+        public GameObject leftLaserGameObject;
+        public GameObject rightLaserGameObject;
+        public AudioSource laserSound;
+        public AudioSource laserChargeSound;
+        public ParticleSystem leftLaserParticles;
+        public ParticleSystem rightLaserParticles;
+        #endregion
         #endregion
 
         #region Template Info 
@@ -103,6 +122,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
                     break;
             }
 
+            leftHand.health.SetMaxHealth((int)(RotnotMaxHealth(type) * 0.35));
+            rightHand.health.SetMaxHealth((int)(RotnotMaxHealth(type) * 0.35));
+
             leftHand.PostUse += () => {
                 nextAttackTime = attackDelayTime;
                 shouldMove = true;
@@ -161,6 +183,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 case RotnotAIState.Attack:
                     Attack();
                     break;
+                case RotnotAIState.Laser:
+                    Laser();
+                    break;
             }
         }
 
@@ -181,20 +206,30 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             if (nextAttackTime > 0) {
                 nextAttackTime -= Time.deltaTime;
-            }
-            else {
-                AIState = RotnotAIState.Attack;
-                switch (leftHandAttack) {
-                    case true:
-                        leftHand.Use();
-                        leftHandAttack = false;
-                        shouldMove = leftHand.canMoveDuring;
-                        break;
-                    case false:
-                        rightHand.Use();
-                        leftHandAttack = true;
-                        shouldMove = rightHand.canMoveDuring;
-                        break;
+            } else {
+                if (laserCounter < laserCount) {
+                    laserCounter++;
+                    AIState = RotnotAIState.Attack;
+                    switch (leftHandAttack) {
+                        case true:
+                            leftHand.Use();
+                            leftHandAttack = false;
+                            shouldMove = leftHand.canMoveDuring;
+                            break;
+                        case false:
+                            rightHand.Use();
+                            leftHandAttack = true;
+                            shouldMove = rightHand.canMoveDuring;
+                            break;
+                    }
+                } else {
+                    laserCounter = 0;
+                    AIState = RotnotAIState.Laser;
+                    chargingLaser = true;
+                    laserTimer = laserCharge;
+                    laserChargeSound.Play();
+                    leftLaserParticles.Play();
+                    rightLaserParticles.Play();
                 }
             }
         }
@@ -203,16 +238,56 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (player == null) return;
 
             if (shouldMove) {
+                rb.velocity = -transform.up * speed;
                 float idealAngle = Util.AngleToPlayer(transform, player);
 
                 rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
                 headObject.transform.rotation = Quaternion.Euler(0, 0, idealAngle);
+            } else {
+                rb.velocity = Vector2.zero;
+                rb.angularVelocity = 0;
+            }
+        }
+
+        public void Laser() {
+            if (player == null) return;
+
+            rb.velocity = -transform.up * speed;
+
+            float idealAngle = Util.AngleToPlayer(transform, player);
+
+            headObject.transform.rotation = Quaternion.Euler(0, 0, idealAngle);
+            rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
+
+            laserTimer -= Time.deltaTime;
+            
+            if (chargingLaser && laserTimer < 0.0f) {
+                leftLaserGameObject.SetActive(true);
+                rightLaserGameObject.SetActive(true);
+                laserTimer = laserTime;
+                usingLaser = true;
+                chargingLaser = false;
+                laserSound.Play();
+            } else if (usingLaser) {
+                if (laserTimer < 0.0f) {
+                    leftLaserGameObject.SetActive(false);
+                    rightLaserGameObject.SetActive(false);
+                    laserSound.Stop();
+                    usingLaser = false;
+                    AIState = RotnotAIState.Follow;
+                    nextAttackTime = attackDelayTime;
+                } else {
+                    float angle = 45.0f * Mathf.Sin(laserTimer / laserTime * 2 * Mathf.PI);
+                    leftLaserHolder.transform.localRotation = Quaternion.Euler(0, 0, angle);
+                    rightLaserHolder.transform.localRotation = Quaternion.Euler(0, 0, -angle);
+                }
             }
         }
         #endregion
 
         #region IK
-        public void LeftHandIK(float times) {
+        public void LeftHandIK(float times)
+        {
             float min = 35f;
             float max = 65f;
 
@@ -220,6 +295,9 @@ namespace ASimpleRoguelike.Entity.Bosses {
             float forearmAngle = Mathf.Lerp(-max, max, 0.5f + times * 0.5f);
 
             //print("Time: " + times);
+            //print("Angle Arm: " + angleArm);
+            //print("Angle Forearm: " + forearmAngle);
+            //print("Angle Arm Modified: " + (45 + angleArm));
 
             leftArmObject.transform.localRotation = Quaternion.Euler(0, 0, 45 + angleArm);
             leftForearmObject.transform.localRotation = Quaternion.Euler(0, 0, forearmAngle);
@@ -476,16 +554,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         #region Static Rotnot Type Functions
         public static int RotnotMaxHealth(RotnotType type) {
-            return type switch
-            {
-                RotnotType.Ferric => 3000,
+            return type switch {
+                RotnotType.Ferric => 4500,
                 _ => 1000,
             };
         }
 
         public static int RotnotXP(RotnotType type) {
-            return type switch
-            {
+            return type switch {
                 RotnotType.Ferric => 250,
                 _ => 150,
             };
@@ -497,6 +573,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
     public enum RotnotAIState {
         Follow,
         Attack,
+        Laser,
         Die
     }
 

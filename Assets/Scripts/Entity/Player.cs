@@ -7,6 +7,7 @@ using System.Linq;
 using ASimpleRoguelike.Movement;
 using ASimpleRoguelike.StatusEffects;
 using ASimpleRoguelike.Perk;
+using ASimpleRoguelike.Inventory;
 
 namespace ASimpleRoguelike {
     public class Player : Entity.Entity {
@@ -31,9 +32,9 @@ namespace ASimpleRoguelike {
         public GameObject rushIndicator;
         public GameObject rushMover;
 
-        public void RushSpeed(int amount) {movementController.RushSpeed(amount); alternateMovementController.RushSpeed(amount);}
+        public void RushSpeed(int amount) {if (spendXP > 0) {movementController.RushSpeed(amount); alternateMovementController.RushSpeed(amount); XPIncrement(-1);}}
         #endregion
-        public void Speed(float amount) {movementController.Speed(amount); alternateMovementController.Speed(amount);}
+        public void Speed(float amount) {if (spendXP > 0) {movementController.Speed(amount); alternateMovementController.Speed(amount); projectileSpeed.Change(amount * 5.0f); XPIncrement(-1);}}
 
         public void SetSpeed(float speed) {movementController.speed.Set(speed); alternateMovementController.speed.Set(speed);}
         public void SetRushSpeed(int rushSpeed) {movementController.rushSpeed.Set(rushSpeed); alternateMovementController.rushSpeed.Set(rushSpeed);}
@@ -106,6 +107,8 @@ namespace ASimpleRoguelike {
         public AudioSource lamentSound;
         #endregion
 
+        public ParticleSystem levelUpParticles;
+
         public event Action OnDie;
 
         public float delayTimer = 1f;
@@ -123,6 +126,8 @@ namespace ASimpleRoguelike {
         public static int maxBarHealth = 400;
         public static int maxBarStamina = 400;
         public static int maxBarXP = 1720;
+
+        public float staminaTimer = 0.0f;
 
         public int level = 1;
         public int maxXP = 100;
@@ -147,6 +152,8 @@ namespace ASimpleRoguelike {
         public IntStat projectilePiercing;
         public IntStat projectileCount;
 
+        public PointTowards bossPointer;
+
         public void CalculateFireRate() {
             fireRateUsed = fireRateDefault - (0.01f * fireRate.value);
         }
@@ -158,7 +165,7 @@ namespace ASimpleRoguelike {
         }
 
         public void ProjectileDamage(int amount) {if (spendXP > 0) { projectileDamage.Change(amount); swordObject.GetComponent<HarmingArea>().damage += amount; XPIncrement(-1);}}
-        public void ProjectileSpeed(float amount) {if (spendXP > 0) { projectileSpeed.Change(amount); XPIncrement(-1); }}
+        public void ProjectileSpeed(float amount) {/*if (spendXP > 0) { projectileSpeed.Change(amount); XPIncrement(-1); }*/}
         public void ProjectileDuration(float amount) {if (spendXP > 0) { projectileDuration.Change(amount); XPIncrement(-1); }}
         public void ProjectileSpread(float amount) {if (spendXP > 0) { projectileSpread.Change(amount); XPIncrement(-1); }}
         public void ProjectilePiercing(int amount) {if (spendXP > 0) { projectilePiercing.Change(amount); XPIncrement(-1); }}
@@ -186,8 +193,7 @@ namespace ASimpleRoguelike {
             this.alternateMovementController.PostStart();
         }
 
-        private void Start()
-        {
+        private void Start() {
             rb = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
             health.OnHealthChanged += UpdateHealth;
@@ -245,6 +251,12 @@ namespace ASimpleRoguelike {
                 currentWeapon = WeaponType.Sword;
             } else {
                 currentWeapon = WeaponType.MagicOne;
+            }
+
+            if (GlobalGameData.fingerSlot != null && GlobalGameData.fingerSlot == Item.items[4]) {
+                perkManager.SelectedPerk(PerkData.perks.First((perkData) => { 
+                    return perkData.name == "Life Steal"; 
+                }));
             }
 
             ApplyCorrectUpgrades();
@@ -373,6 +385,8 @@ namespace ASimpleRoguelike {
                 movementController.HandleMovement(rb);
             }
 
+            StaminaTime();
+
             switch (currentWeapon) {
                 case WeaponType.MagicOne:
                     HandleShooting();
@@ -385,6 +399,8 @@ namespace ASimpleRoguelike {
                     //HandleStab();
                     break;
             }
+
+            HandleRightClick();
 
             UpdateHook?.Invoke();
         }
@@ -399,6 +415,7 @@ namespace ASimpleRoguelike {
                 XPIncrement(1);
 
                 levelUpSound.Play();
+                levelUpParticles.Play();
 
                 switch(level) {
                     case 2:
@@ -416,6 +433,10 @@ namespace ASimpleRoguelike {
             float percent = (float)currentXP / maxXP;
 
             xpMask.sizeDelta = new Vector2(percent * maxBarXP, xpMask.sizeDelta.y);
+        }
+
+        private void HandleRightClick() {
+
         }
 
         private void HandleShooting() {
@@ -469,9 +490,9 @@ namespace ASimpleRoguelike {
                         Vector2 direction = (Vector2)mousePosition - (Vector2)transform.position;
                         direction.Normalize();
                         
-                        for (int i = 0; i < 5; i++) {
+                        for (int i = 0; i < 3; i++) {
                             // Calculate the angle for each projectile with spread
-                            float spread = Mathf.Lerp(-projectileSpread.value, projectileSpread.value, (float)i / (projectileCount.value - 1));
+                            float spread = (projectileCount.value > 1) ? Mathf.Lerp(-projectileSpread.value, projectileSpread.value, (float)i / (projectileCount.value - 1)) : 0f;
                             float angleWithSpread = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + spread;
 
                             // Instantiate the projectile
@@ -488,7 +509,7 @@ namespace ASimpleRoguelike {
                             clone.GetComponent<Rigidbody2D>().velocity = spreadDirection * projectileSpeed.value;
 
                             // Initialize projectile properties
-                            clone.GetComponent<Projectile>().InitStuff(1.5f, projectileDamage.value, 3.5f, 3);
+                            clone.GetComponent<Projectile>().InitStuff(projectileSpeed.value, projectileDamage.value, 1 + 0.5f * projectileDuration.value, projectilePiercing.value);
                         }
                     }
 
@@ -508,13 +529,14 @@ namespace ASimpleRoguelike {
         }
 
         public void StaminaTime() {
-            if (!Input.GetKey(KeyCode.LeftShift)) stamina.ChangeStamina(1);
-            StartCoroutine(StaminaCoroutine());
-        }
+            staminaTimer -= Time.deltaTime;
 
-        private IEnumerator StaminaCoroutine() {
-            yield return new WaitForSeconds(1f / staminaRegenDelay.value);
-            StaminaTime();
+            if (staminaTimer <= 0) {
+                staminaTimer = 1.0f / staminaRegenDelay.value;
+                if (!Input.GetKey(KeyCode.LeftShift)) { 
+                    stamina.ChangeStamina(1); 
+                }
+            }
         }
 
         public void BoostSpeed(float amount, float duration) {

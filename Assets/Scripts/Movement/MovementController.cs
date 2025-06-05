@@ -9,7 +9,7 @@ namespace ASimpleRoguelike.Movement {
         
         public AudioSource moveSound;
         
-        public void Speed(float amount) {if (player.spendXP > 0) { speed.Change(amount); player.XPIncrement(-1); }}
+        public void Speed(float amount) {speed.Change(amount);}
         
         public FloatStat speed;
         public IntStat rushSpeed;
@@ -26,12 +26,16 @@ namespace ASimpleRoguelike.Movement {
             russianSpeed = 1.0f * (2.5f + (0.25f * rushSpeed.value));
         }
 
-        public void RushSpeed(int amount) {if (player.spendXP > 0) { rushSpeed.Change(amount); CalculateRushSpeed(); player.XPIncrement(-1);}}
+        public void RushSpeed(int amount) {rushSpeed.Change(amount); CalculateRushSpeed();}
         #endregion
         
         public void PreStart() {
             speed.Change(0);
             rushSpeed.Change(0);
+
+            if (GlobalGameData.neckSlot == null || GlobalGameData.neckSlot.name != "DiscordantPendant") {
+                rushSpeed.GameObject.SetActive(false);
+            }
         }
 
         public void PostStart() {

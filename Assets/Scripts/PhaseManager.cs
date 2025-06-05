@@ -35,16 +35,19 @@ namespace ASimpleRoguelike {
             currentPhase += phases;
             GlobalGameData.UnlockItems(globalGameData, items);
             GlobalGameData.UnlockEquinoxes(globalGameData, equinoxes);
-            GlobalGameData.AddPauseReason("Map");
-            Cursor.visible = true;
-            map.SetActive(true);
-            mapDisplay.AddFlow();
+            if (currentPhase > 0) {
+                GlobalGameData.AddPauseReason("Map");
+                Cursor.visible = true;
+                map.SetActive(true);
+                mapDisplay.AddFlow();
+            }
         }
 
         public void StartMap(MapScene mapScene) {
             Vector3 position = player.transform.position;
             Quaternion rotation = Quaternion.identity;
             currentMapScene = mapScene;
+            ClearMap();
             sceneObject = Instantiate(currentMapScene.scene, position, rotation);
             sceneObject.GetComponent<MapRoot>().Init(globalGameData);
             currentMapScene.OnStart(globalGameData);

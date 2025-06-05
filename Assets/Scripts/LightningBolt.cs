@@ -42,7 +42,7 @@ namespace ASimpleRoguelike {
                 float offset = (Random.value - 0.5f) * jaggedness * direction.magnitude;
                 point += perpendicular * offset;
 
-                lineRenderer.SetPosition(i, point);
+                lineRenderer.SetPosition(i, new Vector3(point.x, point.y, -2));
             }
 
             lineRenderer.SetPosition(segmentCount, endPoint);

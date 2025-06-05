@@ -12,12 +12,13 @@ namespace ASimpleRoguelike.Map {
         public GameObject iconObject;
         public Node<IconElement> icons;
         public GameObject content;
-        public List<int> flow = new() {0};
+        public List<int> flow = new() {};
         public List<MapScene> displayedMaps = new();
         public List<MapScene> completed = new();
         public GameObject map;
 
         public float Height() {
+            print(icons.Depth());
             return icons.Depth() * 120.0f;
         }
 
@@ -33,12 +34,6 @@ namespace ASimpleRoguelike.Map {
 
         public void AddFlow() {
             List<MapScene> maps = new();
-
-            WeakReference<Node<IconElement>> current = new(icons);
-
-            for (int i = 1; i < flow.Count; i++) {
-                current.SetTarget(current.TryGetTarget(out Node<IconElement> target) ? target.children[flow[i]] : null);
-            }
 
             for (int i = 0; i < 3; i++) {
                 MapScene thing = GetRandomValidMap(phaseManager.GetPhase(), maps);
@@ -57,17 +52,15 @@ namespace ASimpleRoguelike.Map {
             }
 
             float height = Height();
-            float start = maps.Count == 1 ? 0 : (20 - maps.Count * 120) * 0.5f;
+            float start = (maps.Count - 1) * -60;
             float push = 120.0f;
 
             for (int i = 0; i < maps.Count(); i++) {
                 GameObject thing = Instantiate(iconObject, content.transform);
-                thing.GetComponent<RectTransform>().anchoredPosition.Set(start + push * i, height);
+                thing.GetComponent<RectTransform>().anchoredPosition = new(start + push * i, height);
                 Node<IconElement> node = new() { data = thing.GetComponent<IconElement>() };
                 node.data.Init(maps[i], phaseManager);
-                if (current.TryGetTarget(out Node<IconElement> target)) {
-                    target.children.Append(node);
-                }
+                icons.Append(flow, node);
             }
 
             displayedMaps = icons.AllValues().ConvertAll(X => X.map);
@@ -107,6 +100,22 @@ namespace ASimpleRoguelike.Map {
     public class Node<T> {
         public T data = default;
         public List<Node<T>> children = new();
+
+        public void Append(List<int> path, Node<T> add) {
+            foreach (int thang in path) {
+                Debug.Log("Ta: " + thang);
+            }
+            Debug.Log(add);
+            if (path.Count == 0) {
+                Debug.Log("Count 0");
+                children.Add(add);
+            } else if (children.Count > path[0]) {
+                Debug.Log("Child Count");
+                children[path[0]].Append(path.Where((num, ar) => { return ar != 0; }).ToList(), add);
+            } else {
+                Debug.Log("No child"); 
+            }
+        }
 
         public int Depth() {
             int count = 1;

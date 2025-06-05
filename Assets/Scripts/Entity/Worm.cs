@@ -24,8 +24,7 @@ namespace ASimpleRoguelike.Entity {
             float distanceToLeader = directionToLeader.magnitude;
             if (distanceToLeader > distance * 0.95f) {
                 directionToLeader = directionToLeader.normalized * (distanceToLeader - distance);
-            }
-            else if (distanceToLeader < distance * 0.95f) {
+            } else if (distanceToLeader < distance * 0.95f) {
                 directionToLeader = -directionToLeader.normalized * (distanceToLeader - distance);
             }
             transform.position += (Vector3)directionToLeader;

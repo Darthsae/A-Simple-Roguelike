@@ -19,6 +19,8 @@ MonoBehaviour:
   minPhase: 2
   maxPhase: 4
   prereqs: []
+  debris: []
+  backgrounds: 01000000
   spawnables:
   - ToSpawn: {fileID: 7495422176079405579, guid: dcb3ef4c7ed7ca7409e078b05e0e17e0, type: 3}
     Weight: 0.5

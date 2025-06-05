@@ -26,7 +26,7 @@ namespace ASimpleRoguelike.Inventory {
                 float y = i / xAmount * (slotHeight + padding) + padding;
                 Debug.Log($"Slot {i}: x: {x}, y: {y}");
                 slots[i] = Instantiate(slotTemplate, transform).GetComponent<Slot>();
-                slots[i].Init(this, x - offsetX, -y);
+                slots[i].Init(this, x - offsetX, 880-y);
             }
 
             slotTemplate.SetActive(false);

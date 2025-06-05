@@ -37,10 +37,16 @@ namespace ASimpleRoguelike{
         public MusicTrack[] musicTracks;
         [Tooltip("Current Music Track")]
         public int currentMusicTrack = 0;
+        [Tooltip("The list of stuff")]
+        public GameObject[] screenObjects;
+        [Tooltip("Current Screen Object")]
+        public int currentScreenObject = 0;
 
         public GameObject waterShader;
 
         public bool snap = false;
+
+        public GlobalGameData globalGameData;
 
         public void SetWaterShader(bool active) {
             waterShader.SetActive(active);
@@ -202,6 +208,7 @@ namespace ASimpleRoguelike{
             //Debug.Log(bossNotification.bossName + " was killed!");
             bossHealthBar.SetActive(false);
             StartMusic(newTrack, null);
+            globalGameData.player.bossPointer.gameObject.SetActive(false);
         }
     }
 

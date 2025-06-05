@@ -180,11 +180,16 @@ MonoBehaviour:
   health: {fileID: 6126410714810419977}
   hurtSound: {fileID: 0}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
+  statusEffectDisplay: {fileID: 0}
   invulnerabilityDuration: 0.5
+  nextInvulnerabilityTime: 0
+  marked: 0
+  movementBlockers: []
+  canMove: 1
   AIType: 0
   rotationOffset: 0
   xp: 10
-  speed: 1.25
+  speed: 1.6
   modulateSpeedByDistance:
     serializedVersion: 2
     m_Curve:

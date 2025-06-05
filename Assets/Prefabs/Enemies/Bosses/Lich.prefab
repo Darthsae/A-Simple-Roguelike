@@ -305,6 +305,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &3296123578756079382
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +443,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &3718712760497048951
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +581,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &4299238487110204421
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +719,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &4397429184027659661
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +857,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &5189046947389130777
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +995,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &5668595994504340092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1133,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &6166278718443296709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1150,7 @@ GameObject:
   - component: {fileID: -8960293624811534754}
   - component: {fileID: 5581003561330345315}
   - component: {fileID: -5377908574658314091}
+  - component: {fileID: 4400560126584203988}
   m_Layer: 0
   m_Name: Lich
   m_TagString: Enemy
@@ -1247,6 +1255,7 @@ MonoBehaviour:
   health: {fileID: 2176082635944571587}
   hurtSound: {fileID: 0}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
+  statusEffectDisplay: {fileID: 0}
   invulnerabilityDuration: 0.5
   nextInvulnerabilityTime: 0
   xp: 10
@@ -1331,10 +1340,10 @@ MonoBehaviour:
   events:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5581003561330345315}
-        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
-        m_MethodName: StartCutscene
-        m_Mode: 5
+      - m_Target: {fileID: 4400560126584203988}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Perk.PerkEnforcement, Assembly-CSharp
+        m_MethodName: Run
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1342,30 +1351,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Nyalanth Cutscene
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: -5377908574658314091}
-        m_TargetAssemblyTypeName: ASimpleRoguelike.AdvancePhase, Assembly-CSharp
-        m_MethodName: AdvanceScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5581003561330345315}
-        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
-        m_MethodName: BossKilled
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Post Lich
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &-5377908574658314091
 MonoBehaviour:
@@ -1388,6 +1373,73 @@ MonoBehaviour:
     maxPhase: 2147483647
     data: {fileID: 11400000, guid: 6c49d28edeff6d44a9b46bdf571696ba, type: 2}
   equinoxes: []
+--- !u!114 &4400560126584203988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6166278718443296709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56a9af85f82ef841a7f620fc55bb28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 0}
+  perks:
+  - {fileID: 11400000, guid: 72e21b88e0fd63e4184347c4346f259b, type: 2}
+  postRun:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5581003561330345315}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: StartCutscene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Nyalanth Cutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -5377908574658314091}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.AdvancePhase, Assembly-CSharp
+        m_MethodName: AdvanceScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Nyalanth Cutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5581003561330345315}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.EventOnDie, Assembly-CSharp
+        m_MethodName: BossKilled
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Post Lich
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7933999549186279011}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Entity.Bosses.LichController,
+          Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Post Lich
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7067708566442937862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1671,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &9037331572662459941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1809,7 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}
 --- !u!1 &9173147265099484110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,3 +1947,4 @@ MonoBehaviour:
   hurtPlayer: 1
   hurtEnemy: 0
   effectDatas: []
+  onHitEffect: {fileID: 0}

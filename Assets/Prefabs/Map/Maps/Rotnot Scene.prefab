@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRoot: {fileID: 8113998165433577251}
-  spawnTime: 360
+  spawnTime: 600
   prefabToSpawn: {fileID: 4019426549990878681, guid: def720152e4d31a408828c8275799dcb, type: 3}
   area: {x: 25, y: 25}
   inheritRotation: 0

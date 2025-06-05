@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace ASimpleRoguelike {
     public class RotateSelf : MonoBehaviour {
+        public bool normalAxis = true;
+
         [Tooltip("Degrees per second")]
         public float rotateSpeed = 10f;
 
@@ -10,7 +12,7 @@ namespace ASimpleRoguelike {
         
         void Update() {
             if (GlobalGameData.isPaused && isPausable) return;
-            transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
+            transform.Rotate(normalAxis ? Vector3.forward : Vector3.right, rotateSpeed * Time.deltaTime);
         }
     }
 }

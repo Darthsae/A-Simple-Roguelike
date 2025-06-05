@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b95f35abe111f46bc3ed668755f9b9, type: 3}
   m_Name: Grave Pact
   m_EditorClassIdentifier: 
-  prereqs: []
+  prereqs:
+  - perk: {fileID: 11400000}
+    level: 1
   sprite: {fileID: 21300000, guid: 3fceedb7e03e30744bee1f5a41bf90bc, type: 3}
   description: Form a dark bond with the dead, allowing you to revive a fallen enemy
     as an undead minion that fights for you.

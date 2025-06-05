@@ -30,13 +30,17 @@ namespace ASimpleRoguelike.StatusEffects {
             }
 
             if (timer < 0) {
-                Object.Destroy(spawned);
-                if (icon != null) {
-                    icon.Finished();
-                }
+                Delete();
                 return true;
             }
             return false;
+        }
+
+        public void Delete() {
+            Object.Destroy(spawned);
+            if (icon != null) {
+                icon.Finished();
+            }
         }
     }
 }

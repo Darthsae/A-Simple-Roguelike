@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using ASimpleRoguelike.Entity;
 using ASimpleRoguelike.Perk;
+using ASimpleRoguelike.Map;
 
 namespace ASimpleRoguelike {
     public class GlobalGameData : MonoBehaviour {
@@ -70,7 +71,6 @@ namespace ASimpleRoguelike {
                 item == lowerLegSlot || 
                 item == footSlot || 
                 item == toeSlot;
-            
         }
         #endregion
 
@@ -92,7 +92,15 @@ namespace ASimpleRoguelike {
         public static bool[] unlockedEquinoxes;
         public static bool unlockedItem;
         public static bool[] unlockedItems;
-        
+
+        public GameObject[] backgrounds;
+
+        public void SetBackgrounds(List<Background> backgroundsToUse) {
+            for (int i = 0; i < backgrounds.Length; i++) {
+                backgrounds[i].SetActive(backgroundsToUse.Contains((Background)i));
+            }
+        }
+
         public static void UnlockEquinox(GlobalGameData globalGameData, DataPrereq<EquinoxData> equinox) {
             if (!equinox.Evaluate(globalGameData)) {
                 return;
@@ -135,25 +143,19 @@ namespace ASimpleRoguelike {
         }
 
         public static void AddPauseReason(string reason) {
-            if (!isPaused) {
-                isPaused = true;
-            }
-
             pauseReasons.Add(reason);
+            isPaused = true;
         }
 
         public static void RemovePauseReason(string reason) {
             pauseReasons.Remove(reason);
-
-            if (pauseReasons.Count == 0) {
-                isPaused = false;
-            }
+            isPaused = pauseReasons.Count != 0;
         }
         #endregion
 
         public static void NewData() {
             #region Equinoxes
-            unlockedEquinox = false;
+            unlockedEquinox = true;
             unlockedEquinoxes = new bool[Equinox.Equinox.EquinoxCount];
 
             for (int i = 0; i < unlockedEquinoxes.Length; i++) {
@@ -166,7 +168,7 @@ namespace ASimpleRoguelike {
             unlockedItems = new bool[Item.ItemCount];
 
             for (int i = 0; i < unlockedItems.Length; i++) {
-                unlockedItems[i] = true;
+                unlockedItems[i] = false;
                 //Debug.Log($"Unlocked item: {Item.items[i].name}");
             }
             #endregion
@@ -195,13 +197,13 @@ namespace ASimpleRoguelike {
         public static void LoadData() {
             #region Equinoxes
             for (int i = 0; i < unlockedEquinoxes.Length; i++) {
-                unlockedEquinoxes[i] = false;
+                unlockedEquinoxes[i] = true;
             }
             #endregion
 
             #region Items
             for (int i = 0; i < unlockedItems.Length; i++) {
-                unlockedItems[i] = false;
+                unlockedItems[i] = true;
                 //Debug.Log($"Locked item: {Item.items[i].name}");
             }
             #endregion
@@ -219,8 +221,7 @@ namespace ASimpleRoguelike {
 
             try {
                 FileDataHandler.LoadData();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Debug.LogError("Error loading data: " + e.Message);
                 NewData();
             }
@@ -229,8 +230,7 @@ namespace ASimpleRoguelike {
         public static void SaveData() {
             try {
                 FileDataHandler.SaveData();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Debug.LogError("Error saving data: " + e.Message);
             }
         }
@@ -296,8 +296,7 @@ namespace ASimpleRoguelike {
                     #region Settings
                     reader.ReadArray(ref GlobalGameData.audioMixerVolumes, GlobalGameData.audioMixerGroups.Count);
                     for (int i = 0; i < GlobalGameData.audioMixerVolumes.Length; i++) {
-                        if (GlobalGameData.audioMixerVolumes[i] == 0)
-                        {
+                        if (GlobalGameData.audioMixerVolumes[i] == 0) {
                             GlobalGameData.audioMixer.SetFloat(GlobalGameData.audioMixerGroups[i], -100);
                             return;
                         }
@@ -350,8 +349,7 @@ namespace ASimpleRoguelike {
                     EquinoxHandler.currentEquinox = reader.ReadInt32();
                     #endregion
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Debug.LogError("Error reading data directory: " + e.Message);
             }
         }
@@ -433,8 +431,7 @@ namespace ASimpleRoguelike {
 
                 writer.Write(EquinoxHandler.currentEquinox);
                 #endregion
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Debug.LogError("Error creating data directory: " + e.Message);
             }
         }
@@ -456,8 +453,7 @@ namespace ASimpleRoguelike {
                 stream = new(fullPath, FileMode.Create);
                 writer = new(stream);
                 open = true;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Debug.LogError("Error creating data directory: " + e.Message);
             }
         }

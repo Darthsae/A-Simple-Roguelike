@@ -21,9 +21,7 @@ namespace ASimpleRoguelike.Entity {
         protected float nextInvulnerabilityTime = 0f;
         #endregion
 
-        public virtual void UpdateOther() {
-            
-        }
+        public virtual void UpdateOther() {}
 
         public void Update() {
             UpdateOther();
@@ -53,6 +51,15 @@ namespace ASimpleRoguelike.Entity {
         }
 
         public void AddStatusEffect(StatusEffectData effect) {
+            int ine = effects.FindIndex(X => X.statusEffect.name == effect.name);
+            if (ine != -1) {
+                if (effects[ine].timer < effect.time) {
+                    effects[ine].Delete();
+                    effects.RemoveAt(ine);
+                } else {
+                    return;
+                }
+            }
             effects.Add(new StatusEffect(effect));
             effects.Last().Apply(this);
             if (statusEffectDisplay != null) {

@@ -13,6 +13,10 @@ namespace ASimpleRoguelike {
             health.OnHealthZero += () => events?.Invoke();
             mapRoot = FindFirstObjectByType<MapRoot>();
         }
+
+        public void ToggleWater(bool water) {
+            mapRoot.ToggleWater(water);
+        }
         
         public void StartCutscene(int cutsceneIndex) {
             mapRoot.StartCutscene(cutsceneIndex);

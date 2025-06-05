@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ASimpleRoguelike.Entity;
+using UnityEngine.Events;
 
 namespace ASimpleRoguelike.Perk {
     [System.Serializable]
@@ -17,6 +18,8 @@ namespace ASimpleRoguelike.Perk {
         void AddPerk() {
             BeginPerkChoice();
         }
+
+        public UnityEvent tempEvent;
 
         public List<StringToInt> perkNumbers = new();
 
@@ -52,22 +55,16 @@ namespace ASimpleRoguelike.Perk {
         public List<string> onKills;
 
         public void OpenPerkDisplayUI() {
-            foreach (PerkWithLevel perk in unlockedPerks) {
-                Debug.Log(perk.perk.name + " " + perk.level);
-            }
-
-            perkDisplayUI.SetActive(true);
+            perkChoiceUI.SetActive(true);
             Cursor.visible = true;
         }
 
         public void ClosePerkDisplayUI() {
-            perkDisplayUI.SetActive(false);
+            perkChoiceUI.SetActive(false);
             Cursor.visible = false;
         }
 
         public void BeginPerkChoice() {
-            Cursor.visible = true;
-            
             if (!GlobalGameData.pauseReasons.Contains("Perk Choice Menu")) {
                 GlobalGameData.AddPauseReason("Perk Choice Menu");
             }
@@ -90,7 +87,41 @@ namespace ASimpleRoguelike.Perk {
                 GlobalGameData.RemovePauseReason("Perk Choice Menu");
                 ClosePerkDisplayUI();
             } else {
-                perkChoiceUI.SetActive(true);
+                OpenPerkDisplayUI();
+            }
+        }
+
+        public void ForcedPerkChoice(List<PerkData> perkers) {
+            print("Enforcement");
+            if (!GlobalGameData.pauseReasons.Contains("Perk Choice Menu")) {
+                GlobalGameData.AddPauseReason("Perk Choice Menu");
+            }
+            List<PerkData> perks = new();
+            int temper = 0;
+            for (int i = 0; i < perkCards.Count; i++) {
+                PerkData perkOption = PerkData.GetRandomValidFromListPerk(perkers, perks);
+                print("Testing a perk.");
+
+                if (perkOption == null) break;
+                print("Perk was valid.");
+
+                temper++;
+            
+                perkCards[i].SetData(perkOption, GetPerkCount(perkOption) + 1);
+                perkCards[i].gameObject.SetActive(true);
+
+                perks.Add(perkOption);
+            }
+
+            print("Temper: " + temper);
+
+            if (temper == 0) {
+                print("No menu.");
+                GlobalGameData.RemovePauseReason("Perk Choice Menu");
+                ClosePerkDisplayUI();
+            } else {
+                print("Yes menu.");
+                OpenPerkDisplayUI();
             }
         }
 
@@ -101,6 +132,11 @@ namespace ASimpleRoguelike.Perk {
 
         public void SelectedPerk(PerkData perkData1) {
             perkChoiceUI.SetActive(false);
+
+            if (tempEvent != null) {
+                tempEvent.Invoke();
+                tempEvent.RemoveAllListeners();
+            }
 
             PerkData.perks.TryGetValue(perkData1, out PerkData perkData);
 

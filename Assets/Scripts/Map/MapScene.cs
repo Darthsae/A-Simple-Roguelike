@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ namespace ASimpleRoguelike.Map {
         public int minPhase = 0;
         public int maxPhase = 2;
         public List<MapScene> prereqs = new();
+        public List<DebrisData> debris = new();
+        [Header("Map Scene Background")]
+        public List<Background> backgrounds = new();
 
         [Header("Spawner Settings")]
         public List<SpawnHolder> spawnables = new();
@@ -37,6 +41,21 @@ namespace ASimpleRoguelike.Map {
                 spawner.spawnRate = spawnRate;
                 spawner.maxSpawn = maxSpawn;
             }
+
+            globalGameData.SetBackgrounds(backgrounds);
         }
+    }
+
+    [Serializable]
+    public struct DebrisData {
+        public GameObject gameObject;
+        public float density;
+    }
+
+    [Serializable]
+    public enum Background {
+        Desert,
+        Graveyard,
+        Ocean
     }
 }

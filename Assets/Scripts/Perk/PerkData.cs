@@ -78,6 +78,35 @@ namespace ASimpleRoguelike.Perk {
 
             return null;
         }
+
+        public static PerkData GetRandomValidFromListPerk(List<PerkData> choicePerks, List<PerkData> displayedPerks) {
+            float totalWeight = 0.0f;
+
+            List<PerkData> perkables = new();
+
+            foreach (var perk in choicePerks) {
+                if (!displayedPerks.Contains(perk)) {
+                    perkables.Add(perk);
+                    totalWeight += perk.weight;
+                }
+            }
+
+            if (totalWeight == 0.0f) {
+                return null;
+            }
+
+            float random = Random.Range(0.0f, totalWeight);
+
+            foreach (var perk in perkables) {
+                if (random < perk.weight) {
+                    return perks.TryGetValue(perk, out PerkData perkData) ? perkData : null;
+                } else {
+                    random -= perk.weight;
+                }
+            }
+
+            return null;
+        }
     }
 
     [System.Serializable]

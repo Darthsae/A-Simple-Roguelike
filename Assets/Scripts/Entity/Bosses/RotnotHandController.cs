@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Entity.Bosses {
-    public class RotnotHandController : MonoBehaviour {
+    public class RotnotHandController : Entity {
+        public Rigidbody2D rigidbodyToUse;
         public RotnotController rotnotController;
         public Animation animationToPlay;
         public RotnotHand type;
@@ -27,18 +27,50 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         private bool inUse = false;
 
-        public void Use() {
-            inUse = true;
-            if (animationToPlay != null) animationToPlay.Play();
-            StartCoroutine(UseCoroutine());
+        private bool broken = false;
+        public SpriteRenderer spriteWeapon;
+        public Sprite brokenWeaponSprite;
+        public SpriteRenderer spriteArm;
+        public Sprite brokenArmSprite;
+        public SpriteRenderer spriteForearm;
+        public Sprite brokenForearmSprite;
+        public SpriteRenderer spriteHand;
+        public Sprite brokenHandSprite;
+
+        void Start() {
+            health.OnHealthZero += Die;
+            rb = rigidbodyToUse;
         }
 
-        void Update() {
-            if (GlobalGameData.isPaused) return;
+        private void Die() {
+            broken = true;
+            spriteWeapon.sprite = brokenWeaponSprite;
+            spriteArm.sprite = brokenArmSprite;
+            spriteForearm.sprite = brokenForearmSprite;
+            spriteHand.sprite = brokenHandSprite;
+        }
+
+        public void Use() {
+            inUse = true;
+            if (animationToPlay != null) {
+                animationToPlay.Play();
+            }
+        }
+
+        public override void UpdateAI() {
+            base.UpdateAI();
 
             if (!inUse) return;
 
             timeInUse += Time.deltaTime;
+            
+            if (timeInUse >= time || broken) {
+                inUse = false;
+                saver = 0f;
+                timeInUse = 0f;
+                PostUse?.Invoke();
+                return;
+            }
 
             switch (type) {
                 case RotnotHand.Clipper:
@@ -55,42 +87,58 @@ namespace ASimpleRoguelike.Entity.Bosses {
                     break;
             }
             
-            if (shoots) {
-                if (saver < 0f) {
-                    saver = fireTime;
+            if (!shoots) {
+                return;
+            }
+            
+            saver -= Time.deltaTime;
+            
+            if (saver < 0f) {
+                saver = fireTime;
 
-                    Vector2 direction = (Vector2)firePoint.transform.position - (Vector2)transform.position;
-                    direction.Normalize();
+                Vector2 direction = (Vector2)firePoint.transform.position - (Vector2)transform.position;
+                direction.Normalize();
 
-                    // Calculate the angle for each projectile with spread
-                    float directionAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                // Calculate the angle for each projectile with spread
+                float directionAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-                    // Instantiate the projectile
-                    GameObject clone = Instantiate(projectile, firePoint.transform.position, Quaternion.identity);
-                    clone.transform.parent = null;
+                // Instantiate the projectile
+                GameObject clone = Instantiate(projectile, firePoint.transform.position, Quaternion.identity);
+                clone.transform.parent = null;
 
-                    // Set position and rotation
-                    clone.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(new Vector3(0, 0, directionAngle)));
+                // Set position and rotation
+                clone.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(new Vector3(0, 0, directionAngle)));
 
-                    // Set the projectile velocity
-                    clone.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+                // Set the projectile velocity
+                clone.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
 
-                    // Initialize projectile properties
-                    clone.GetComponent<Projectile>().InitStuff(projectileSpeed, projectileDamage, projectileDuration, projectilePiercing, Owner.Enemy);
-                    clone.GetComponent<Projectile>().SetScale(projectileScale);
-                }
-                else {
-                    saver -= Time.deltaTime;
-                }
+                // Initialize projectile properties
+                clone.GetComponent<Projectile>().InitStuff(projectileSpeed, projectileDamage, projectileDuration, projectilePiercing, Owner.Enemy);
+                clone.GetComponent<Projectile>().SetScale(projectileScale);
             }
         }
 
-        private IEnumerator UseCoroutine() {
-            yield return new WaitForSeconds(time);
-            inUse = false;
-            saver = 0f;
-            timeInUse = 0f;
-            PostUse?.Invoke();
+        void OnTriggerEnter2D(Collider2D other) {
+            if (GlobalGameData.isPaused) return;
+            
+            CallDamage(other);
+        }
+        
+        public void CallDamage(Collider2D other) {
+            if (Time.time < nextInvulnerabilityTime) {
+                return;
+            }
+
+            if (other.gameObject.CompareTag("Projectile") && other.gameObject.TryGetComponent<Projectile>(out var projectile) && projectile.owner == Owner.Player) {
+                projectile.Hit();
+                health.ChangeHealth((int)-projectile.damage);
+
+                nextInvulnerabilityTime = Time.time + invulnerabilityDuration;
+
+                if (hurtSound != null) {
+                    hurtSound.Play();
+                }
+            }
         }
     }
 }

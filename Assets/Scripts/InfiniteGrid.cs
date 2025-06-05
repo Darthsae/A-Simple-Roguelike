@@ -18,8 +18,7 @@ public class InfiniteGrid : MonoBehaviour {
         DrawGrid();
     }
 
-    private void DrawGrid()
-    {
+    private void DrawGrid() {
         Vector3 camPosition = mainCamera.transform.position;
         float camHeight = mainCamera.orthographicSize * 2f;
         float camWidth = camHeight * mainCamera.aspect;
@@ -34,14 +33,12 @@ public class InfiniteGrid : MonoBehaviour {
         GL.Begin(GL.LINES);
         GL.Color(lineColor);
 
-        for (float x = xStart; x < xEnd; x += cellSize)
-        {
+        for (float x = xStart; x < xEnd; x += cellSize) {
             GL.Vertex(new Vector3(x, yStart, 0));
             GL.Vertex(new Vector3(x, yEnd, 0));
         }
 
-        for (float y = yStart; y < yEnd; y += cellSize)
-        {
+        for (float y = yStart; y < yEnd; y += cellSize) {
             GL.Vertex(new Vector3(xStart, y, 0));
             GL.Vertex(new Vector3(xEnd, y, 0));
         }

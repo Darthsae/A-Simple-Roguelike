@@ -4978,6 +4978,7 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas:
   - {fileID: 11400000, guid: 902e5004abba511429ceb75a1d5543cb, type: 2}
+  onHitEffect: {fileID: 0}
 --- !u!1 &3104143281326945894
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,14 +5336,16 @@ MonoBehaviour:
   health: {fileID: 6126410714810419977}
   hurtSound: {fileID: 0}
   faction: {fileID: 11400000, guid: 5a064f0236160f041a2d91a72b7d49d7, type: 2}
+  statusEffectDisplay: {fileID: 0}
   invulnerabilityDuration: 0.5
   nextInvulnerabilityTime: 0
+  marked: 0
   movementBlockers: []
   canMove: 1
   AIType: 0
   rotationOffset: 90
-  xp: 15
-  speed: 0.6
+  xp: 25
+  speed: 0.75
   modulateSpeedByDistance:
     serializedVersion: 2
     m_Curve:
@@ -5356,13 +5359,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 7.2325773
+      value: 1.7092106
+      inSlope: 0.0024976125
+      outSlope: 0.0024976125
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.20833336
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

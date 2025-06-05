@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRoot: {fileID: 1020129005825074921}
-  spawnTime: 360
+  spawnTime: 600
   prefabToSpawn: {fileID: 6521505503241579647, guid: 3b0225ffc5b488d4d9bcae8daf721953, type: 3}
   area: {x: 25, y: 25}
   inheritRotation: 0
@@ -88,6 +88,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Boss Cutscene
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1020129005825074921}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: ToggleWater
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Boss Cutscene
+          m_BoolArgument: 1
         m_CallState: 2
   PreApply:
     m_PersistentCalls:

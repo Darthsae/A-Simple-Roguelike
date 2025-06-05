@@ -115,7 +115,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             time += 0.05f;
 
-            Vector3 targetPos = player.position + new Vector3(MathF.Cos(time / 40f), MathF.Sin(time / 40f)) * 8.5f;
+            Vector3 targetPos = player.position + new Vector3(MathF.Cos(time / 25f), MathF.Sin(time / 25f)) * 8.5f  + new Vector3(MathF.Cos(time / 15f), MathF.Sin(time / 15f)) * 2.5f;
 
             float idealAngle = Util.AngleToPlayer(transform, player);
 
@@ -125,8 +125,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             if (nextAttackTime > 0) {
                 nextAttackTime -= Time.deltaTime;
-            }
-            else {
+            } else {
                 internalTimer++;
                 if (internalTimer >= shootBeforeCharge) {
                     AIState = NyalanthAIState.Charge;
@@ -149,8 +148,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             if (nextAttackTime > 0) {
                 nextAttackTime -= Time.deltaTime;
-            } 
-            else {
+            } else {
                 nextAttackTime = attackDelayTime;
 
                 AIState = (health.health >= health.maxHealth * 0.5) ? NyalanthAIState.Follow : NyalanthAIState.Slam;
@@ -179,16 +177,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
                                 chargeSound.Play();
                             }
                             isCharging = true;
-                        } 
-                        else {
+                        } else {
                             nextAttackTime = attackDelayTime;
                             currentChargeTime = 0;
                             charged = 0;
                             AIState = NyalanthAIState.Follow;
                         }
                     }
-                }
-                else {
+                } else {
                     rb.velocity = (Vector2)(chargeSpeed * Time.deltaTime * -transform.up);
 
                     currentChargeTime += Time.deltaTime;
@@ -251,16 +247,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         #region Static Nyalanth Type Functions
         public static int NyalanthMaxHealth(NyalanthType type) {
-            return type switch
-            {
-                NyalanthType.Lapis => 7000,
+            return type switch {
+                NyalanthType.Lapis => 7500,
                 _ => 1000,
             };
         }
 
         public static int NyalanthXP(NyalanthType type) {
-            return type switch
-            {
+            return type switch {
                 NyalanthType.Lapis => 250,
                 _ => 150,
             };

@@ -56,6 +56,10 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public int maxBulletHellCounter = 24;
         public int bulletHellCounter = 0;
         #endregion
+
+        #region Calculated
+        float increment;
+        #endregion
         
         #region Sprite Info
         public SpriteRenderer bodySprite;
@@ -72,23 +76,25 @@ namespace ASimpleRoguelike.Entity.Bosses {
         #endregion
 
         void Start() {
+            increment = 180f / homingProjectileCount;
             rb = GetComponent<Rigidbody2D>();
             player = GameObject.FindGameObjectWithTag("Player").transform; // Assuming the player has the "Player" tag
-            
+
             AIState = LichAIState.Follow;
 
             type = LichType.Aserik;
 
             health.SetMaxHealth(LichMaxHealth(type));
-            health.OnHealthZero += Die;
+            //health.OnHealthZero += Die;
 
             damageCircle.SetActive(false);
             summoningCircle.SetActive(false);
-        
+
             xp = LichXP(type);
 
-            if (roarSound != null)
+            if (roarSound != null) {
                 roarSound.Play();
+            }
         }
 
         public override void UpdateAI() {
@@ -153,42 +159,42 @@ namespace ASimpleRoguelike.Entity.Bosses {
         }
 
         public void Attack() {
-            if (player != null) {
-                if (attackTimer >= maxHomingTimer) {
-                    if (counter < maxHomingCounter) {
-                        AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Teleport : LichAIState.Damage;
-                        attackTimer = 0f;
-                        teleportTimer = 0f;
-                        counter++;
-                    } else {
-                        AIState = LichAIState.Summon;
-                        attackTimer = 0f;
-                        counter = 0;
-                    }
+            if (player == null) {
+                return;
+            }
+            if (attackTimer >= maxHomingTimer) {
+                if (counter < maxHomingCounter) {
+                    AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Teleport : LichAIState.Damage;
+                    attackTimer = 0f;
+                    teleportTimer = 0f;
+                    counter++;
                 } else {
-                    if (attackTimer == 0) {
-                        // Do attack logic here
-                        float increment = 180f / homingProjectileCount;
-
-                        for (float i = 180f; i < 360f; i += increment) {
-                            GameObject projectile = Instantiate(homingProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i)));
-                            projectile.transform.parent = null;
-                            projectile.GetComponent<Projectile>().InitStuff(10, 15, 15, 1, Owner.Enemy, ProjectileType.Homing, player);
-                            projectile.GetComponent<Projectile>().homingSpeed = 180f;
-                        }
-                    }
-
-                    Move();
-
-                    attackTimer += Time.deltaTime;
+                    AIState = LichAIState.Summon;
+                    attackTimer = 0f;
+                    counter = 0;
                 }
+            } else {
+                if (attackTimer == 0) {
+                    for (float i = 0f; i < 180f; i += increment) {
+                        GameObject projectile = Instantiate(homingProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i)));
+                        projectile.transform.parent = null;
+                        projectile.GetComponent<Projectile>().InitStuff(15, 15, 15, 1, Owner.Enemy, ProjectileType.Homing, player);
+                        projectile.GetComponent<Projectile>().homingSpeed = 460f;
+                    }
+                }
+
+                Move();
+
+                attackTimer += Time.deltaTime;
             }
         }
         
 
         public void Teleport() {
             rb.velocity = Vector2.zero;
-            if (player == null) return;
+            if (player == null) {
+                return;
+            }
 
             if (teleportTimer >= maxTeleportTimer) {
                 AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Attack : LichAIState.Damage;
@@ -277,16 +283,18 @@ namespace ASimpleRoguelike.Entity.Bosses {
         }
         #endregion
 
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            if (GlobalGameData.isPaused) return;
+        void OnTriggerEnter2D(Collider2D other) {
+            if (GlobalGameData.isPaused) {
+                return;
+            }
             
             CallDamage(other);
         }
 
-        void OnCollisionEnter2D(Collision2D other)
-        {
-            if (GlobalGameData.isPaused) return;
+        void OnCollisionEnter2D(Collision2D other) {
+            if (GlobalGameData.isPaused) {
+                return;
+            }
             
             if (other.gameObject.TryGetComponent<Player>(out var player)) {
                 player.DirectDamage((int)attackDamage);
@@ -315,16 +323,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
         #region Static Lich Type Functions
         public static int LichMaxHealth(LichType type) {
-            return type switch
-            {
-                LichType.Aserik => 36000,
+            return type switch {
+                LichType.Aserik => 26000,
                 _ => 1000,
             };
         }
 
         public static int LichXP(LichType type) {
-            return type switch
-            {
+            return type switch {
                 LichType.Aserik => 1000,
                 _ => 150,
             };

@@ -39,6 +39,8 @@ namespace ASimpleRoguelike {
             enemy.GetComponent<Boss>().player = mapRoot.globalGameData.player.transform;
             mapRoot.globalGameData.cameraController.bossNotification = enemy.GetComponent<BossNotification>();
             mapRoot.globalGameData.cameraController.SetBoss();
+            mapRoot.globalGameData.player.bossPointer.gameObject.SetActive(true);
+            mapRoot.globalGameData.player.bossPointer.target = enemy.transform;
         }
     }
 }

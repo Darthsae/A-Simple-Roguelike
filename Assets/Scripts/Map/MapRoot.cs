@@ -1,4 +1,5 @@
 using ASimpleRoguelike.Entity;
+using ASimpleRoguelike.Perk;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Map {
@@ -7,6 +8,10 @@ namespace ASimpleRoguelike.Map {
 
         public void Init(GlobalGameData globalGameData) {
             this.globalGameData = globalGameData;
+        }
+
+        public void ToggleWater(bool water) {
+            globalGameData.cameraController.SetWaterShader(water);
         }
         
         public void StartCutscene(int cutsceneIndex) {
@@ -35,6 +40,10 @@ namespace ASimpleRoguelike.Map {
 
         public void ForceKillPlayer() {
             globalGameData.player.health.ForceKill();
+        }
+
+        public PerkManager GetPerkManager() {
+            return globalGameData.player.perkManager;
         }
 
         public void ClearEnemies() {
