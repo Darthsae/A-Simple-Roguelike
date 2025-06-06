@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3855975251796491816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096378210801220370}
+  m_Layer: 3
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096378210801220370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3855975251796491816}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6173282417795885940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7495422176079405579
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +46,8 @@ GameObject:
   - component: {fileID: 6966791018414831834}
   - component: {fileID: 8078556624955680103}
   - component: {fileID: 68541911529639014}
+  - component: {fileID: 8520234485133095322}
+  - component: {fileID: 7676595281219646440}
   m_Layer: 3
   m_Name: Basic Enemy
   m_TagString: Enemy
@@ -34,7 +67,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1096378210801220370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &725325793552050308
@@ -280,3 +314,56 @@ MonoBehaviour:
     time: 0.15
   image: {fileID: 725325793552050308}
   index: -1
+--- !u!114 &8520234485133095322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495422176079405579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2b8916d6e6f6a488b10988fd989489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - list:
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: -1077863740, guid: b7918642896eb9b4a883f9ea321368f0, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: 145407593, guid: b7918642896eb9b4a883f9ea321368f0, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: 215365409, guid: b7918642896eb9b4a883f9ea321368f0, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: -1507965017, guid: b7918642896eb9b4a883f9ea321368f0, type: 3}
+      time: 0.15
+  - list:
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: -941381675, guid: cce6dbb819da9d440b7db38587200a6b, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: -448147923, guid: cce6dbb819da9d440b7db38587200a6b, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: -356083097, guid: cce6dbb819da9d440b7db38587200a6b, type: 3}
+      time: 0.15
+    - scale: {x: 1, y: 1}
+      sprite: {fileID: 1249842245, guid: cce6dbb819da9d440b7db38587200a6b, type: 3}
+      time: 0.15
+--- !u!114 &7676595281219646440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495422176079405579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c0dbad75808bf48b5e5ad4caa92507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 8019911226796000117, guid: 46ca728bfc70e6b49b4ec66f929c016e, type: 3}
+  inheritRotation: 0

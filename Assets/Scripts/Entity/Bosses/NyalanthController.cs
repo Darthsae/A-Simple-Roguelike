@@ -117,7 +117,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             Vector3 targetPos = player.position + new Vector3(MathF.Cos(time / 25f), MathF.Sin(time / 25f)) * 8.5f  + new Vector3(MathF.Cos(time / 15f), MathF.Sin(time / 15f)) * 2.5f;
 
-            float idealAngle = Util.AngleToPlayer(transform, player);
+            float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
             rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
 
@@ -141,7 +141,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (player == null) return;
 
             if (shouldMove) {
-                float idealAngle = Util.AngleToPlayer(transform, player);
+                float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
                 rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
             }
@@ -160,7 +160,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             if (shouldMove) { 
                 if (!isCharging) {
-                    float idealAngle = Util.AngleToPlayer(transform, player);
+                    float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
                     if (currentChargeTime <= chargeAttackTime * chargeCurve.Evaluate((float) health.health / health.maxHealth) * 0.8f) {
                         rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, 15f);

@@ -137,6 +137,7 @@
     <Compile Include="Assets\Scripts\Equinox\EquinoxSetup.cs" />
     <Compile Include="Assets\Scripts\Entity\WormHandler.cs" />
     <Compile Include="Assets\Scripts\AnimatibleImage.cs" />
+    <Compile Include="Assets\Scripts\DamagedAnimatibleSprite.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\SpawnAfterTime.cs" />
     <Compile Include="Assets\Scripts\Equinox\EquinoxHandler.cs" />

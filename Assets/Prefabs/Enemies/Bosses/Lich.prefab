@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1640079300594154588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3306846560409066535}
+  - component: {fileID: 5437096903458048858}
+  m_Layer: 0
+  m_Name: Circles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3306846560409066535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640079300594154588}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2282158789748693142}
+  - {fileID: 8279989736434416640}
+  - {fileID: 9204371334760634788}
+  - {fileID: 8225474972454945623}
+  - {fileID: 6896938680315654095}
+  - {fileID: 6699584037145893535}
+  - {fileID: 3958172218015715051}
+  - {fileID: 1480637306418846037}
+  m_Father: {fileID: 7296625205236479346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5437096903458048858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640079300594154588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &1651060500706811228
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +235,7 @@ GameObject:
   - component: {fileID: 5325745490401743757}
   - component: {fileID: 7773028534015857570}
   - component: {fileID: 4165845712203265686}
+  - component: {fileID: 5149329837204638970}
   m_Layer: 0
   m_Name: Damage Circle (2)
   m_TagString: Untagged
@@ -200,7 +256,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5325745490401743757
 SpriteRenderer:
@@ -306,6 +362,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &5149329837204638970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2496348085978088867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &3296123578756079382
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +389,7 @@ GameObject:
   - component: {fileID: 7970969633594721100}
   - component: {fileID: 1277722256893593924}
   - component: {fileID: 7012508381143244029}
+  - component: {fileID: 7005656880723916364}
   m_Layer: 0
   m_Name: Damage Circle (4)
   m_TagString: Untagged
@@ -334,11 +406,11 @@ Transform:
   m_GameObject: {fileID: 3296123578756079382}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: -0, z: 0}
+  m_LocalPosition: {x: -0.75, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7970969633594721100
 SpriteRenderer:
@@ -444,6 +516,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &7005656880723916364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296123578756079382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &3718712760497048951
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +543,7 @@ GameObject:
   - component: {fileID: 9048014762584208268}
   - component: {fileID: 6421699151897126}
   - component: {fileID: 3288422274516458121}
+  - component: {fileID: 7563336460321074723}
   m_Layer: 0
   m_Name: Damage Circle (6)
   m_TagString: Untagged
@@ -476,7 +564,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9048014762584208268
 SpriteRenderer:
@@ -582,6 +670,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &7563336460321074723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718712760497048951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &4299238487110204421
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +697,7 @@ GameObject:
   - component: {fileID: 353933617780522060}
   - component: {fileID: 5210752043482463188}
   - component: {fileID: 8910757745995632592}
+  - component: {fileID: 5044149148143575835}
   m_Layer: 0
   m_Name: Damage Circle (1)
   m_TagString: Untagged
@@ -610,11 +714,11 @@ Transform:
   m_GameObject: {fileID: 4299238487110204421}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: -0, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &353933617780522060
 SpriteRenderer:
@@ -720,6 +824,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &5044149148143575835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299238487110204421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &4397429184027659661
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +851,7 @@ GameObject:
   - component: {fileID: 2237352353133871509}
   - component: {fileID: 7252022228932088930}
   - component: {fileID: 2354818990437004172}
+  - component: {fileID: 5072925238691056566}
   m_Layer: 0
   m_Name: Damage Circle (7)
   m_TagString: Untagged
@@ -752,7 +872,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2237352353133871509
 SpriteRenderer:
@@ -858,6 +978,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &5072925238691056566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4397429184027659661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &5189046947389130777
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +1005,7 @@ GameObject:
   - component: {fileID: 8978680478273471832}
   - component: {fileID: 157553789670054411}
   - component: {fileID: 7749855130676715330}
+  - component: {fileID: 3896143620533168926}
   m_Layer: 0
   m_Name: Damage Circle (5)
   m_TagString: Untagged
@@ -890,7 +1026,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8978680478273471832
 SpriteRenderer:
@@ -996,6 +1132,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &3896143620533168926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189046947389130777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &5668595994504340092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1159,7 @@ GameObject:
   - component: {fileID: 5840862851738996814}
   - component: {fileID: 8251211095730716458}
   - component: {fileID: 8191014608046953976}
+  - component: {fileID: 2725998696094516622}
   m_Layer: 0
   m_Name: Damage Circle (3)
   m_TagString: Untagged
@@ -1028,7 +1180,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5840862851738996814
 SpriteRenderer:
@@ -1134,6 +1286,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &2725998696094516622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668595994504340092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &6166278718443296709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1431,8 @@ MonoBehaviour:
   speed: 2.5
   turningSpeed: 180
   rotationOffset: 0
-  circleDistance: 12
+  circleSpeed: 12
+  circleDistance: 6
   brainDead: 0
   summoningCircle: {fileID: 1758602893434457225}
   damageCircle: {fileID: 7664714916139990763}
@@ -1272,8 +1440,8 @@ MonoBehaviour:
   homingProjectileCount: 4
   maxBulletHellProjectileCount: 72
   fleshLumpCount: 2
-  homingProjectile: {fileID: 6278541077442559048, guid: ae53939c04cab8342abad40afd7730f8, type: 3}
-  bulletHellProjectile: {fileID: 0}
+  homingProjectile: {fileID: 6278541077442559048, guid: 50bc49717ce738d44a4d740ae98ca3d1, type: 3}
+  bulletHellProjectile: {fileID: 6278541077442559048, guid: ae53939c04cab8342abad40afd7730f8, type: 3}
   fleshLump: {fileID: 7495422176079405579, guid: dcb3ef4c7ed7ca7409e078b05e0e17e0, type: 3}
   dracolich: {fileID: 0}
   maxTeleportTimer: 2.5
@@ -1285,12 +1453,12 @@ MonoBehaviour:
   circleTimer: 0
   maxDamageTimer: 4
   damageTimer: 0
-  maxBulletHellTimer: 0.1
+  maxBulletHellTimer: 0.3
   bulletHellTimer: 0
   maxHomingCounter: 3
   maxSummonCounter: 1
   counter: 0
-  maxBulletHellCounter: 24
+  maxBulletHellCounter: 16
   bulletHellCounter: 0
   bodySprite: {fileID: 2522895384570135293}
   roarSound: {fileID: 0}
@@ -1536,6 +1704,7 @@ GameObject:
   - component: {fileID: 1676596426035465652}
   - component: {fileID: 5206317010081945870}
   - component: {fileID: 2568620690424075851}
+  - component: {fileID: 5588829306213195294}
   m_Layer: 0
   m_Name: Damage Circle
   m_TagString: Untagged
@@ -1557,14 +1726,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3032583651017573283}
-  - {fileID: 2282158789748693142}
-  - {fileID: 8279989736434416640}
-  - {fileID: 9204371334760634788}
-  - {fileID: 8225474972454945623}
-  - {fileID: 6896938680315654095}
-  - {fileID: 6699584037145893535}
-  - {fileID: 3958172218015715051}
-  - {fileID: 1480637306418846037}
+  - {fileID: 3306846560409066535}
   - {fileID: 6706442780759021373}
   m_Father: {fileID: 2771864027381183871}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1672,6 +1834,33 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!50 &5588829306213195294
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664714916139990763}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &9037331572662459941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1873,7 @@ GameObject:
   - component: {fileID: 1405958078343611855}
   - component: {fileID: 1219610142734351062}
   - component: {fileID: 1015919511489528856}
+  - component: {fileID: 3561350546878539804}
   m_Layer: 0
   m_Name: Damage Circle (8)
   m_TagString: Untagged
@@ -1704,7 +1894,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7296625205236479346}
+  m_Father: {fileID: 3306846560409066535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1405958078343611855
 SpriteRenderer:
@@ -1810,6 +2000,21 @@ MonoBehaviour:
   hurtEnemy: 0
   effectDatas: []
   onHitEffect: {fileID: 0}
+--- !u!114 &3561350546878539804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037331572662459941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: 180
+  isPausable: 1
 --- !u!1 &9173147265099484110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +2025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3032583651017573283}
   - component: {fileID: 8491436510007969355}
+  - component: {fileID: 2957414584423419717}
   - component: {fileID: 3379984570960499242}
   - component: {fileID: 8853412101624745704}
   m_Layer: 0
@@ -1896,6 +2102,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2957414584423419717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173147265099484110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef011bd996c5ba42a38b44256ebe57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalAxis: 1
+  rotateSpeed: -180
+  isPausable: 1
 --- !u!58 &3379984570960499242
 CircleCollider2D:
   m_ObjectHideFlags: 0

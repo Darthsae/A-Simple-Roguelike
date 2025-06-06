@@ -8,7 +8,8 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public float speed = 2.5f;
         public float turningSpeed = 180f;
         public float rotationOffset = 0f;
-        public float circleDistance = 12f;
+        public float circleSpeed = 12f;
+        public float circleDistance = 6f;
 
         public bool brainDead = false;
         #endregion
@@ -22,7 +23,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public float attackDamage = 15f;
 
         public int homingProjectileCount = 4;
-        public int maxBulletHellProjectileCount = 72;
+        public int maxBulletHellProjectileCount = 16;
         public int fleshLumpCount = 2;
 
         public GameObject homingProjectile;
@@ -45,7 +46,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public float maxDamageTimer = 4f;
         public float damageTimer = 0f;
 
-        public float maxBulletHellTimer = 0.1f;
+        public float maxBulletHellTimer = 0.5f;
         public float bulletHellTimer = 0f;
         #endregion
 
@@ -53,7 +54,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         public int maxHomingCounter = 3;
         public int maxSummonCounter = 1;
         public int counter = 0;
-        public int maxBulletHellCounter = 24;
+        public int maxBulletHellCounter = 18;
         public int bulletHellCounter = 0;
         #endregion
 
@@ -125,7 +126,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
         }
 
         public void LookAt() {
-            float idealAngle = Util.AngleToPlayer(transform, player);
+            float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
             rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, 15f);
         }
 
@@ -134,14 +135,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
         }
 
         public void Move() {
+            float distanceToPlayer = (player.position - transform.position).magnitude;
             Vector2 directionToPlayer = (player.position - transform.position).normalized;
-            Vector2 perpendicularDirection = new Vector2(-directionToPlayer.y, directionToPlayer.x) * circleDistance; // Perpendicular to the direction to the player
+            Vector2 perpendicularDirection = new Vector2(-directionToPlayer.y, directionToPlayer.x) * circleSpeed; // Perpendicular to the direction to the player
 
             // Move around the player in a circular motion
-            rb.velocity =  speed * 1.5f * (directionToPlayer + perpendicularDirection).normalized;
+            rb.velocity =  speed * 1.5f * (directionToPlayer * (distanceToPlayer - circleDistance) + perpendicularDirection).normalized;
 
-            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-            rb.rotation = angle + rotationOffset; // Adjust based on the enemy's default orientation
+            LookAt(); // Adjust based on the enemy's default orientation
         }
 
         #region AI States
@@ -164,7 +165,14 @@ namespace ASimpleRoguelike.Entity.Bosses {
             }
             if (attackTimer >= maxHomingTimer) {
                 if (counter < maxHomingCounter) {
-                    AIState = health.health >= health.maxHealth * 0.5f ? LichAIState.Teleport : LichAIState.Damage;
+                    float distance = Vector3.Distance(transform.position, player.position);
+                    if (health.health >= health.maxHealth * 0.5f) {
+                        AIState = LichAIState.Teleport;
+                    } else if (distance <= damageCircle.transform.localScale.x) {
+                        AIState = LichAIState.Damage;
+                    } else {
+                        AIState = LichAIState.BulletHell;
+                    }
                     attackTimer = 0f;
                     teleportTimer = 0f;
                     counter++;
@@ -179,7 +187,8 @@ namespace ASimpleRoguelike.Entity.Bosses {
                         GameObject projectile = Instantiate(homingProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i)));
                         projectile.transform.parent = null;
                         projectile.GetComponent<Projectile>().InitStuff(15, 15, 15, 1, Owner.Enemy, ProjectileType.Homing, player);
-                        projectile.GetComponent<Projectile>().homingSpeed = 460f;
+                        projectile.GetComponent<Projectile>().homingSpeed = 270f;
+                        projectile.GetComponent<Projectile>().minSpeed = 0.15f;
                     }
                 }
 
@@ -202,7 +211,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             } else {
                 if (teleportTimer == 0) {
                     float angle = UnityEngine.Random.Range(0f, 360f);
-                    Vector3 position = 12 * new Vector3(Mathf.Sin(angle), Mathf.Cos(angle));
+                    Vector3 position = circleDistance * new Vector3(Mathf.Sin(angle), Mathf.Cos(angle));
 
                     transform.position = player.position + position;
                 }
@@ -263,6 +272,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
             if (bulletHellTimer >= maxBulletHellTimer) {
                 if (bulletHellCounter >= maxBulletHellCounter) {
                     AIState = LichAIState.Teleport;
+                    bulletHellCounter = 0;
                 } else {
                     bulletHellCounter++;
                 }
@@ -271,11 +281,12 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 if (bulletHellTimer == 0) {
                     // Do attack logic here
                     float increment = 360f / maxBulletHellProjectileCount;
+                    float bulletHellOffset = 360f / maxBulletHellCounter;
 
-                    for (float i = 0f; i < 360f; i += increment) {
-                        GameObject projectile = Instantiate(bulletHellProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i + 15f * bulletHellCounter)));
+                    for (float i = 0; i < 360f; i += increment) {
+                        GameObject projectile = Instantiate(bulletHellProjectile, transform.position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, i + 2.5f * bulletHellCounter)));
                         projectile.transform.parent = null;
-                        projectile.GetComponent<Projectile>().InitStuff(25, 15, 15, 1, Owner.Enemy, ProjectileType.Normal, player);
+                        projectile.GetComponent<Projectile>().InitStuff(10f, 15, 3, 1, Owner.Enemy, ProjectileType.Normal, player);
                     }
                 }
                 bulletHellTimer += Time.deltaTime;
@@ -345,7 +356,8 @@ namespace ASimpleRoguelike.Entity.Bosses {
         Teleport,
         Summon,
         Damage,
-        BulletHell
+        BulletHell,
+        LightningPillars
     }
 
     [System.Serializable]

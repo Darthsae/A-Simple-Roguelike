@@ -319,11 +319,18 @@ namespace ASimpleRoguelike.Entity {
             return (player.position - transform.position).normalized;
         }
 
-        public static float AngleToPlayer(Transform transform, Transform player) {
+        public static float AngleToPlayerWithOffset(Transform transform, Transform player) {
             if (player == null) return 0;
             Vector2 direction = DirectionToPlayer(transform, player);
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
         }
+
+        public static float AngleToPlayer(Transform transform, Transform player) {
+            if (player == null) return 0;
+            Vector2 direction = DirectionToPlayer(transform, player);
+            return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
+        
 
         public static float DistanceToPlayer(Transform transform, Transform player) {
             if (player == null) return 0;

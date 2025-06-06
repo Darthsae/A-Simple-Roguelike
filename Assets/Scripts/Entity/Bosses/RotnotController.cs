@@ -199,7 +199,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             rb.velocity = -transform.up * speed;
 
-            float idealAngle = Util.AngleToPlayer(transform, player);
+            float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
             headObject.transform.rotation = Quaternion.Euler(0, 0, idealAngle);
             rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
@@ -239,7 +239,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             if (shouldMove) {
                 rb.velocity = -transform.up * speed;
-                float idealAngle = Util.AngleToPlayer(transform, player);
+                float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
                 rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);
                 headObject.transform.rotation = Quaternion.Euler(0, 0, idealAngle);
@@ -254,7 +254,7 @@ namespace ASimpleRoguelike.Entity.Bosses {
 
             rb.velocity = -transform.up * speed;
 
-            float idealAngle = Util.AngleToPlayer(transform, player);
+            float idealAngle = Util.AngleToPlayerWithOffset(transform, player);
 
             headObject.transform.rotation = Quaternion.Euler(0, 0, idealAngle);
             rb.rotation = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, idealAngle, turningSpeed * Time.deltaTime);

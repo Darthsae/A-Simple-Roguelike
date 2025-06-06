@@ -14,10 +14,14 @@ namespace ASimpleRoguelike {
             StartCoroutine(ChangeSprite());
         }
 
+        public void ApplyCurrent() {
+            image.sprite = sprites[index].sprite;
+        }
+
         IEnumerator ChangeSprite() {
             while (true) {
                 index = (index + 1) % sprites.Count;
-                image.sprite = sprites[index].sprite;
+                ApplyCurrent();
                 yield return new WaitForSeconds(sprites[index].time);
             }
         }

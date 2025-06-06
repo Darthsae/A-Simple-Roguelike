@@ -15,13 +15,13 @@ namespace ASimpleRoguelike {
                 Vector3 mousePosition = Input.mousePosition;
 
                 // Set the position of the object to the mouse position
-                transform.position = mousePosition + (Vector3)offset;
+                transform.position = mousePosition + offset;
             } else {
                 // Get the mouse position in world space
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 // Set the position of the object to the mouse position
-                transform.position = mousePosition + (Vector3)offset;
+                transform.position = mousePosition + offset;
             }
         }
     }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 616855798550943625}
   - component: {fileID: 6966791018414831834}
   - component: {fileID: 8078556624955680103}
+  - component: {fileID: 6330816340159039490}
   m_Layer: 3
   m_Name: Speeder Enemy
   m_TagString: Enemy
@@ -254,3 +255,17 @@ MonoBehaviour:
   isChargering: 0
   timerer: 0
   zigAmount: 0.7
+--- !u!114 &6330816340159039490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495422176079405579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c0dbad75808bf48b5e5ad4caa92507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 8019911226796000117, guid: 46ca728bfc70e6b49b4ec66f929c016e, type: 3}
+  inheritRotation: 0
