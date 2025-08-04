@@ -65,10 +65,12 @@ namespace ASimpleRoguelike {
         #region Weapons
         public GameObject swordObject;
         public GameObject spearObject;
+        public GameObject scytheObject;
         public GameObject gunMouseObject;
         public GameObject magicOneMouseObject;
         public GameObject swordMouseObject;
         public GameObject spearMouseObject;
+        public GameObject scytheMouseObject;
         #endregion
 
         #region Indicator Objects
@@ -91,6 +93,7 @@ namespace ASimpleRoguelike {
 
         public GameObject generalUI;
         public GameObject settingsUI;
+        public GameObject dialogueUI;
 
         public Play switcher;
 
@@ -114,7 +117,6 @@ namespace ASimpleRoguelike {
         public float delayTimer = 1f;
         public float stamTimer = 0.0f;
         public float stamDelay = 0.5f;
-        
 
         #region Equinox
         private float equinoxTimer = 0.0f;
@@ -338,7 +340,7 @@ namespace ASimpleRoguelike {
 
         public override void UpdateOther() {
             // If clicked e toggle the level up menu
-            if (Input.GetKeyDown(KeyCode.E) && !commands.activeSelf) {
+            if (Input.GetKeyDown(KeyCode.E) && !commands.activeSelf && !dialogueUI.activeSelf) {
                 if (levelUp.activeSelf) { 
                     levelUp.SetActive(false); 
                     GlobalGameData.RemovePauseReason(levelUpMenu);
@@ -352,7 +354,7 @@ namespace ASimpleRoguelike {
                     }
                     Cursor.visible = true;
                 }
-            } else if (Input.GetKeyDown(KeyCode.Escape) && !commands.activeSelf) {
+            } else if (Input.GetKeyDown(KeyCode.Escape) && !commands.activeSelf && !dialogueUI.activeSelf) {
                 if (settingsUI.activeSelf) {
                     LeaveSettings();
                 } else {

@@ -19,7 +19,7 @@
     <RootNamespace></RootNamespace>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>NaughtyAttributes.Core</AssemblyName>
     <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
@@ -64,147 +64,53 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\EventOnEnter.cs" />
-    <Compile Include="Assets\Scripts\Rotation\RotateTowards.cs" />
-    <Compile Include="Assets\Scripts\Equinox\Equinox.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\RotnotController.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxUIHandler.cs" />
-    <Compile Include="Assets\Scripts\Inventory\StartInventory.cs" />
-    <Compile Include="Assets\Scripts\Map\IconElement.cs" />
-    <Compile Include="Assets\Scripts\ProjectileShooter.cs" />
-    <Compile Include="Assets\Scripts\Entity\PlayerMinion.cs" />
-    <Compile Include="Assets\Scripts\MenuExtra.cs" />
-    <Compile Include="Assets\Scripts\Map\MapScene.cs" />
-    <Compile Include="Assets\Scripts\Data\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\Detector.cs" />
-    <Compile Include="Assets\Scripts\PhaseManager.cs" />
-    <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\LichController.cs" />
-    <Compile Include="Assets\Scripts\Entity\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Status Effects\StatusEffectDisplay.cs" />
-    <Compile Include="Assets\Scripts\Movement\OldPlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\AdvancePhase.cs" />
-    <Compile Include="Assets\Scripts\Inventory\ItemSetup.cs" />
-    <Compile Include="Assets\Scripts\Rotation\RotateAround.cs" />
-    <Compile Include="Assets\Scripts\Dialogue\DialogueScene.cs" />
-    <Compile Include="Assets\Scripts\Rotation\ChainRotater.cs" />
-    <Compile Include="Assets\Scripts\Dialogue\DialoguePortrait.cs" />
-    <Compile Include="Assets\Scripts\KillAfterAttacks.cs" />
-    <Compile Include="Assets\Scripts\InfiniteGrid.cs" />
-    <Compile Include="Assets\Scripts\Commands\CommandHandler.cs" />
-    <Compile Include="Assets\Scripts\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Status Effects\StatusEffectIcon.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\UI\PackedDisplay.cs" />
-    <Compile Include="Assets\Scripts\Rotation\AutoRotation.cs" />
-    <Compile Include="Assets\Scripts\Entity\Entity.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
-    <Compile Include="Assets\Scripts\RingCollider.cs" />
-    <Compile Include="Assets\Scripts\Util\MethodQueue.cs" />
-    <Compile Include="Assets\Scripts\Movement\FacingMovementController.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxData.cs" />
-    <Compile Include="Assets\Scripts\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Parallax\ParallaxManager.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
-    <Compile Include="Assets\Scripts\Status Effects\StatusEffectData.cs" />
-    <Compile Include="Assets\Scripts\Entity\Player.cs" />
-    <Compile Include="Assets\Scripts\KillAfterTime.cs" />
-    <Compile Include="Assets\Scripts\SnapTo.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\Miniboss\DracolichController.cs" />
-    <Compile Include="Assets\Scripts\BossNotification.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\NyalanthController.cs" />
-    <Compile Include="Assets\Scripts\Quit.cs" />
-    <Compile Include="Assets\Scripts\Play.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxUIPanelHandler.cs" />
-    <Compile Include="Assets\Scripts\Status Effects\StatusEffect.cs" />
-    <Compile Include="Assets\Scripts\EventOnDie.cs" />
-    <Compile Include="Assets\Scripts\Movement\MoveChoice.cs" />
-    <Compile Include="Assets\Scripts\Data\SerializableDictionary.cs" />
-    <Compile Include="Assets\Scripts\Rotation\RotateConstraints.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkCardDisplay.cs" />
-    <Compile Include="Assets\Scripts\Rotation\PointTowards.cs" />
-    <Compile Include="Assets\Scripts\Pickup.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkManager.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxSelectionUI.cs" />
-    <Compile Include="Assets\Scripts\Entity\Worm.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkUIElement.cs" />
-    <Compile Include="Assets\Scripts\InstancedGlobal.cs" />
-    <Compile Include="Assets\Scripts\HarmingArea.cs" />
-    <Compile Include="Assets\Scripts\Inventory\DefaultUnlocks.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\RotnotHandController.cs" />
-    <Compile Include="Assets\Scripts\Inventory\ItemData.cs" />
-    <Compile Include="Assets\Scripts\FactionData.cs" />
-    <Compile Include="Assets\Scripts\TaggedObject.cs" />
-    <Compile Include="Assets\Scripts\DamageHandler.cs" />
-    <Compile Include="Assets\Scripts\Map\DebrisPlacer.cs" />
-    <Compile Include="Assets\Scripts\Stamina.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxSetup.cs" />
-    <Compile Include="Assets\Scripts\Entity\WormHandler.cs" />
-    <Compile Include="Assets\Scripts\AnimatibleImage.cs" />
-    <Compile Include="Assets\Scripts\Entity\Neutral.cs" />
-    <Compile Include="Assets\Scripts\DamagedAnimatibleSprite.cs" />
-    <Compile Include="Assets\Scripts\Health.cs" />
-    <Compile Include="Assets\Scripts\SpawnAfterTime.cs" />
-    <Compile Include="Assets\Scripts\Equinox\EquinoxHandler.cs" />
-    <Compile Include="Assets\Scripts\Map\MapSetup.cs" />
-    <Compile Include="Assets\Scripts\Movement\MovementController.cs" />
-    <Compile Include="Assets\Scripts\Parallax\AdvancedParallaxManager.cs" />
-    <Compile Include="Assets\Scripts\ConditionalShowUp.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkUIDisplay.cs" />
-    <Compile Include="Assets\Scripts\SpawnOnDie.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkEnforcement.cs" />
-    <Compile Include="Assets\Scripts\MouseLocked.cs" />
-    <Compile Include="Assets\Scripts\FactionSetup.cs" />
-    <Compile Include="Assets\Scripts\Growth.cs" />
-    <Compile Include="Assets\Scripts\Commands\Command.cs" />
-    <Compile Include="Assets\Scripts\LightningBolt.cs" />
-    <Compile Include="Assets\Scripts\Faction.cs" />
-    <Compile Include="Assets\Scripts\ScreenStuff.cs" />
-    <Compile Include="Assets\Scripts\Perk\PerkData.cs" />
-    <Compile Include="Assets\Scripts\TimerHandler.cs" />
-    <Compile Include="Assets\Scripts\Rotation\RotateSelf.cs" />
-    <Compile Include="Assets\Scripts\Rotation\RotateController.cs" />
-    <Compile Include="Assets\Scripts\Map\MapRoot.cs" />
-    <Compile Include="Assets\Scripts\ScreenLocked.cs" />
-    <Compile Include="Assets\Scripts\Map\IconData.cs" />
-    <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\AnimatibleSprite.cs" />
-    <Compile Include="Assets\Scripts\GlobalGameData.cs" />
-    <Compile Include="Assets\Scripts\Entity\Bosses\Boss.cs" />
-    <Compile Include="Assets\Scripts\ChainDamage.cs" />
-    <Compile Include="Assets\Scripts\Movement\OldFacingPlayerMovementController.cs" />
-    <Compile Include="Assets\Scripts\DamagedSprite.cs" />
-    <Compile Include="Assets\Scripts\Map\MapDisplay.cs" />
-    <Compile Include="Assets\Scripts\VolumeController.cs" />
-    <Compile Include="Assets\Scripts\HealthShield.cs" />
-    <Compile Include="Assets\Scripts\DestroyAfter.cs" />
-    <Compile Include="Assets\Scripts\Follow.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\Utility\EConditionOperator.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\ShowAssetPreviewAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\DropdownAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\DisableIfAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\SceneAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\EnableIfAttributeBase.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\FoldoutAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\ProgressBarAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\Expandable.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\MetaAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\ShowIfAttributeBase.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\InputAxisAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\EnumFlagsAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes_SpecialCase\ShowNativePropertyAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes_SpecialCase\ShowNonSerializedFieldAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\SortingLayerAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\HorizontalLineAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\ResizableTextAreaAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\ValidatorAttributes\MinValueAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\EnableIfAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\AnimatorParamAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\InfoBoxAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\LabelAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes_SpecialCase\SpecialCaseDrawerAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\DrawerAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\ValidatorAttributes\RequiredAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\ValidatorAttributes\ValidateInputAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\CurveRangeAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\ValidatorAttributes\ValidatorAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\ValidatorAttributes\MaxValueAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\IGroupAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\LayerAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\INaughtyAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\BoxGroupAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\ShowIfAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes_SpecialCase\ReorderableListAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\Utility\EColor.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\AllowNestingAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\MinMaxSliderAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\OnValueChangedAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\MetaAttributes\HideIfAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes_SpecialCase\ButtonAttribute.cs" />
+    <Compile Include="Assets\NaughtyAttributes\Scripts\Core\DrawerAttributes\TagAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\Shaders\EdgeShader.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\Shaders\NewUnlitShader.shader" />
-    <None Include="Assets\Shaders\MagicWaveShader.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\NaughtyAttributes\Scripts\Core\NaughtyAttributes.Core.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -539,12 +445,56 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UWP.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\PlaybackEngines\MetroSupport\UnityEditor.UWP.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.7.1\Lib\Editor\unityplastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.7.1\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.7.1\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.7.1\Lib\Editor\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1035,195 +985,16 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Path.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.SysrootPackage.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.SysrootPackage.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-      <HintPath>Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="NaughtyAttributes.Core.csproj" />
-    <ProjectReference Include="NaughtyAttributes.Editor.csproj" />
-    <ProjectReference Include="NaughtyAttributes.Test.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

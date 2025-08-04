@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e834e8beb5b1c8f4db1cd2ae5ee7d6fc, type: 3}
+  m_Name: Cart Silenced
+  m_EditorClassIdentifier: 
+  lines:
+  - speechSpeed: 4
+    speechText: W-What? W-Why would you?
+    portrait: {fileID: 11400000, guid: 2dbb515656313a14faa49f3f50af8660, type: 2}
+    context: None
+    responses:
+    - rid: 7804342427164606480
+    responseTime: 5
+    unskipable: 0
+    pauses: 1
+    pauseMusic: 0
+  response:
+    rid: 7804342427164606468
+  references:
+    version: 2
+    RefIds:
+    - rid: 7804342427164606468
+      type: {class: EndDialogueScene, ns: ASimpleRoguelike.Dialogue, asm: Assembly-CSharp}
+      data:
+        name: 
+    - rid: 7804342427164606480
+      type: {class: EndDialogueScene, ns: ASimpleRoguelike.Dialogue, asm: Assembly-CSharp}
+      data:
+        name: You are on Arbuan land.

@@ -1,3 +1,4 @@
+using ASimpleRoguelike.Dialogue;
 using ASimpleRoguelike.Entity;
 using ASimpleRoguelike.Perk;
 using UnityEngine;
@@ -14,6 +15,10 @@ namespace ASimpleRoguelike.Map {
             globalGameData.cameraController.SetWaterShader(water);
         }
         
+        public void StartDialogue(DialogueScene a_dialogueScene) {
+            DialogueManager.Instance.ChangeScene(a_dialogueScene);
+        }
+
         public void StartCutscene(int cutsceneIndex) {
             globalGameData.cameraController.StartCutscene(cutsceneIndex);
         }

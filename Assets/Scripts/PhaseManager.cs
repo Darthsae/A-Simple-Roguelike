@@ -11,7 +11,6 @@ namespace ASimpleRoguelike {
         private int currentPhase = 0;
         public int GetPhase() => currentPhase;
 
-        public Player player;
         public GlobalGameData globalGameData;
         public CameraController cameraController;
         public TimerHandler timerHandler;
@@ -44,7 +43,7 @@ namespace ASimpleRoguelike {
         }
 
         public void StartMap(MapScene mapScene) {
-            Vector3 position = player.transform.position;
+            Vector3 position = globalGameData.player.transform.position;
             Quaternion rotation = Quaternion.identity;
             currentMapScene = mapScene;
             ClearMap();

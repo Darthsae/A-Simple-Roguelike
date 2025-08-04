@@ -48,6 +48,8 @@ namespace ASimpleRoguelike{
 
         public GlobalGameData globalGameData;
 
+        public bool musicPaused = false;
+
         public void SetWaterShader(bool active) {
             waterShader.SetActive(active);
         }
@@ -123,17 +125,29 @@ namespace ASimpleRoguelike{
         #region Music
         public void StartMusic(int musicIndex, Action callback) {
             StartCoroutine(MusicCoroutine(musicIndex, callback));
+            musicPaused = false;
         }
 
         public void StartMusic(string musicName, Action callback) {
             for (int i = 0; i < musicTracks.Length; i++) {
                 if (musicTracks[i].name == musicName) {
                     StartCoroutine(MusicCoroutine(i, callback));
+                    musicPaused = false;
                     return;
                 }
             }
 
             Debug.LogError("Music not found: " + musicName);
+        }
+
+        public void PauseMusic() {
+            musicAudioSourceCurrent.Pause();
+            musicPaused = true;
+        }
+
+        public void UnPauseMusic() {
+            musicAudioSourceCurrent.UnPause();
+            musicPaused = false;
         }
 
         public IEnumerator MusicCoroutine(int musicIndex, Action callback) {
