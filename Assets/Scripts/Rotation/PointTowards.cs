@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ASimpleRoguelike {
@@ -23,7 +20,8 @@ namespace ASimpleRoguelike {
                 if ((mousePos - transform.position).magnitude > distance) {
                     fills[i].color = Color.white;
                 } else {
-                    fills[i].color = Color.white.WithAlpha(0);
+                    fills[i].color = Color.white;
+                    fills[i].color = new Color(fills[i].color.r, fills[i].color.g, fills[i].color.b, 0);
                 }
             }
         }
