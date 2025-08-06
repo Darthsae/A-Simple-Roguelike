@@ -136,6 +136,11 @@ namespace ASimpleRoguelike.Entity.Bosses {
                 shouldMove = true;
                 AIState = RotnotAIState.Follow;
             };
+
+            leftLaserGameObject.SetActive(false);
+            rightLaserGameObject.SetActive(false);
+            laserSound.Stop();
+            usingLaser = false;
         
             xp = RotnotXP(type);
         }

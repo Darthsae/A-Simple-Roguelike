@@ -2,9 +2,22 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using ASimpleRoguelike.StatusEffects;
+using ASimpleRoguelike.Util;
 
 namespace ASimpleRoguelike {
     public class Projectile : MonoBehaviour {
+        public static List<Projectile> projectiles = new();
+
+        public bool marked = false;
+
+        public static void DespawnAll() {
+            MethodQueue queue = new();
+            foreach (Projectile projectile in projectiles) {
+                queue.Enqueue(projectile.Despawn);
+            }
+            queue.InvokeAll();
+        }
+
         public int split = -1;
         public float speed = 10;
         public float damage = 1;
@@ -112,7 +125,10 @@ namespace ASimpleRoguelike {
             }
         }
 
-        
+        public void Despawn() {
+            Destroy(gameObject);
+        }
+
         void OnDrawGizmos() {
             switch (type) {
                 case ProjectileType.Homing:

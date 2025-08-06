@@ -8580,6 +8580,7 @@ MonoBehaviour:
   timer: {fileID: 1350081354}
   phaseManager: {fileID: 1082678373}
   cameraController: {fileID: 164094992}
+  dialogueManager: {fileID: 1082678374}
   backgrounds:
   - {fileID: 1538824260}
   - {fileID: 1743191379}

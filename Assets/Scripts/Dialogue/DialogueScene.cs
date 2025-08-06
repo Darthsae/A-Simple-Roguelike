@@ -39,14 +39,14 @@ namespace ASimpleRoguelike.Dialogue {
         public DialogueScene nextScene;
 
         public override void Call(GlobalGameData a_globalGameData) {
-            DialogueManager.Instance.ChangeScene(nextScene);
+            a_globalGameData.dialogueManager.ChangeScene(nextScene);
         }
     }
     
     [Serializable]
     public class EndDialogueScene : IDialogueOption {
         public override void Call(GlobalGameData a_globalGameData) {
-            DialogueManager.Instance.EndScene();
+            a_globalGameData.dialogueManager.EndScene();
         }
     }
 }

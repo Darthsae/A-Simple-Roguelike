@@ -15,10 +15,12 @@ namespace ASimpleRoguelike {
         }
 
         void OnTriggerEnter2D(Collider2D other) {
-            if (!triggered) {
-                events?.Invoke();
+            if (other.gameObject.TryGetComponent<Player>(out _)) {
+                if (!triggered) {
+                    events?.Invoke();
+                }
+                triggered = true;
             }
-            triggered = true;
         }
 
         public void ToggleWater(bool water) {

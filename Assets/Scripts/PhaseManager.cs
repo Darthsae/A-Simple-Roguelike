@@ -69,6 +69,7 @@ namespace ASimpleRoguelike {
 
         public void ClearMap() {
             Enemy.DespawnAll();
+            Projectile.DespawnAll();
             Destroy(sceneObject);
         }
 

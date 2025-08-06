@@ -23,7 +23,7 @@ namespace ASimpleRoguelike.Dialogue {
         public CursorLockMode cacheMouseLocked;
         public bool inside = false;
 
-        void Awake() {
+        void Start() {
             Instance = this;
         }
 
@@ -61,11 +61,12 @@ namespace ASimpleRoguelike.Dialogue {
             display.Clear();
             for (int i = 0; i < activeScene.lines[index].responses.Count; i++) {
                 int temp = index;
+                int temp2 = i;
                 IDialogueOption option = activeScene.lines[index].responses[i];
                 GameObject gameObject = Instantiate(template, content.transform);
                 display.AddItemNoCalculate(gameObject);
                 gameObject.GetComponentInChildren<TMP_Text>().SetText(activeScene.lines[index].responses[i].name);
-                gameObject.GetComponent<Button>().onClick.AddListener(() => { activeScene.lines[temp].responses[i].Call(globalGameData); });
+                gameObject.GetComponent<Button>().onClick.AddListener(() => { print("Temp: " + temp + ", Temp2: " + temp2); activeScene.lines[temp].responses[temp2].Call(globalGameData); });
             }
             display.Recalculate();
 
@@ -78,9 +79,11 @@ namespace ASimpleRoguelike.Dialogue {
             }
 
             if (dialogueLine.pauses) {
-                GlobalGameData.AddPauseReason("Dialogue");
+                if (!GlobalGameData.pauseReasons.Contains("Dialogue")) {
+                    GlobalGameData.AddPauseReason("Dialogue");
+                }
                 globalGameData.player.generalUI.SetActive(false);
-            } else if (GlobalGameData.pauseReasons.Contains("Dialogue")) {
+            } else {
                 GlobalGameData.RemovePauseReason("Dialogue");
                 globalGameData.player.generalUI.SetActive(true);
             }
@@ -132,10 +135,8 @@ namespace ASimpleRoguelike.Dialogue {
                 globalGameData.cameraController.UnPauseMusic();
             }
 
-            if (GlobalGameData.pauseReasons.Contains("Dialogue")) {
-                GlobalGameData.RemovePauseReason("Dialogue");
-                globalGameData.player.generalUI.SetActive(true);
-            }
+            GlobalGameData.RemovePauseReason("Dialogue");
+            globalGameData.player.generalUI.SetActive(true);
 
             globalGameData.player.dialogueUI.SetActive(false);
             inside = false;

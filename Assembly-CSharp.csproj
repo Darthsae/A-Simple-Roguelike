@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Parallax\ParallaxManager.cs" />
     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\AotStubs.cs" />
     <Compile Include="Assets\Scripts\Status Effects\StatusEffectData.cs" />
     <Compile Include="Assets\Scripts\Entity\Player.cs" />
     <Compile Include="Assets\Scripts\KillAfterTime.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Assets\Scripts\TimerHandler.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateSelf.cs" />
     <Compile Include="Assets\Scripts\Rotation\RotateController.cs" />
+    <Compile Include="Assets\Scripts\EventOnStart.cs" />
     <Compile Include="Assets\Scripts\Map\MapRoot.cs" />
     <Compile Include="Assets\Scripts\ScreenLocked.cs" />
     <Compile Include="Assets\Scripts\Map\IconData.cs" />

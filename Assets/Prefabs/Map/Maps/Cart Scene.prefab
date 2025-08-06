@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 541874983090044005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.91, y: 32.59, z: 0}
+  m_LocalPosition: {x: 0.66, y: 32.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -356,6 +356,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: SetSpawning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   triggered: 0
 --- !u!61 &4006001957691257210
@@ -759,6 +771,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: SetSpawning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   triggered: 0
 --- !u!61 &5486816037211751474
@@ -1557,6 +1581,7 @@ GameObject:
   - component: {fileID: 6325970634531500421}
   - component: {fileID: 8113998165433577251}
   - component: {fileID: 7275862665238068472}
+  - component: {fileID: -525611611654232005}
   m_Layer: 0
   m_Name: Cart Scene
   m_TagString: Untagged
@@ -1615,6 +1640,34 @@ MonoBehaviour:
   phases: 0
   items: []
   equinoxes: []
+--- !u!114 &-525611611654232005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925091997860078558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974e29a170564a849aa4948991b9c5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRoot: {fileID: 8113998165433577251}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8113998165433577251}
+        m_TargetAssemblyTypeName: ASimpleRoguelike.Map.MapRoot, Assembly-CSharp
+        m_MethodName: SetSpawning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4109403225147052332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,7 +3173,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5235541792426684596}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3138,7 +3191,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &5430943758939015149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5063,7 +5116,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8790657170515178540}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5081,7 +5134,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!70 &7854000721328939036
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

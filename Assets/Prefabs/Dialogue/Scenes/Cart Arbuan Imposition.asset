@@ -10,17 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e834e8beb5b1c8f4db1cd2ae5ee7d6fc, type: 3}
-  m_Name: Cart Arbaun Imposition
+  m_Name: Cart Arbuan Imposition
   m_EditorClassIdentifier: 
   lines:
   - speechSpeed: 4
-    speechText: Well, of course. This is Arbaun land after all. We needed to be careful
+    speechText: Well, of course. This is Arbuan land after all. We needed to be careful
       to avoid them. Actually, what is an traveler like you doing out o-
     portrait: {fileID: 11400000, guid: 2dbb515656313a14faa49f3f50af8660, type: 2}
     context: None
     responses:
     - rid: 7804342427164606479
     responseTime: 2
+    unskipable: 0
+    pauses: 1
+    pauseMusic: 0
+  - speechSpeed: 6
+    speechText: W-Wait... T-That hair...
+    portrait: {fileID: 11400000, guid: 2dbb515656313a14faa49f3f50af8660, type: 2}
+    context: None
+    responses: []
+    responseTime: 3
     unskipable: 0
     pauses: 1
     pauseMusic: 0

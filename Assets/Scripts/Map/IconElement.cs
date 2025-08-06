@@ -4,29 +4,35 @@ using UnityEngine.UI;
 
 namespace ASimpleRoguelike.Map {
     public class IconElement : MonoBehaviour, IPointerClickHandler {
-        public PhaseManager phaseManager;
+        public MapDisplay mapDisplay;
         public MapScene map;
         public IconData iconData;
         public Image frame;
         public Image icon;
 
         public bool used = false;
+        public bool unusable = false;
 
-        public void Init(MapScene mapScene, PhaseManager phaseManager) {
+        public void Init(MapScene mapScene, MapDisplay mapDisplay) {
             map = mapScene;
             iconData = map.icon;
             frame.sprite = iconData.frame;
             icon.sprite = iconData.icon;
-            this.phaseManager = phaseManager;
+            this.mapDisplay = mapDisplay;
         }
 
         public void OnPointerClick(PointerEventData eventData) {
-            if (!used) {
+            if (!used && !unusable) {
                 GlobalGameData.RemovePauseReason("Map");
-                phaseManager.StartMap(map);
-                Cursor.visible = false;
                 used = true;
+                mapDisplay.StartMap(map);
+                Cursor.visible = false;
             }
+        }
+
+        public void MakeUnusable() {
+            unusable = true;
+            icon.color = Color.red;
         }
     }
 }

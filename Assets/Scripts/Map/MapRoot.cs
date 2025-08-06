@@ -16,7 +16,7 @@ namespace ASimpleRoguelike.Map {
         }
         
         public void StartDialogue(DialogueScene a_dialogueScene) {
-            DialogueManager.Instance.ChangeScene(a_dialogueScene);
+            globalGameData.dialogueManager.ChangeScene(a_dialogueScene);
         }
 
         public void StartCutscene(int cutsceneIndex) {

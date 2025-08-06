@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using UnityEditor.UI;
 using UnityEngine;
 
 namespace ASimpleRoguelike.Map {
@@ -59,7 +60,7 @@ namespace ASimpleRoguelike.Map {
                 GameObject thing = Instantiate(iconObject, content.transform);
                 thing.GetComponent<RectTransform>().anchoredPosition = new(start + push * i, height);
                 Node<IconElement> node = new() { data = thing.GetComponent<IconElement>() };
-                node.data.Init(maps[i], phaseManager);
+                node.data.Init(maps[i], this);
                 icons.Append(flow, node);
             }
 
@@ -93,6 +94,16 @@ namespace ASimpleRoguelike.Map {
             }
 
             return null;
+        }
+
+        public void StartMap(MapScene map) {
+            phaseManager.StartMap(map);
+            foreach (IconElement element in icons.AllValues()) {
+                if (!element.used) {
+                    element.MakeUnusable();
+                    displayedMaps.Remove(element.map);
+                }
+            }
         }
     }
 

@@ -10,6 +10,7 @@ using UnityEngine.Audio;
 using ASimpleRoguelike.Entity;
 using ASimpleRoguelike.Perk;
 using ASimpleRoguelike.Map;
+using ASimpleRoguelike.Dialogue;
 
 namespace ASimpleRoguelike {
     public class GlobalGameData : MonoBehaviour {
@@ -27,6 +28,7 @@ namespace ASimpleRoguelike {
         public TimerHandler timer;
         public PhaseManager phaseManager;
         public CameraController cameraController;
+        public DialogueManager dialogueManager;
 
         public static List<string> pauseReasons = new();
 

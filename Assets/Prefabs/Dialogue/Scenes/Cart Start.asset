@@ -15,7 +15,7 @@ MonoBehaviour:
   lines:
   - speechSpeed: 2
     speechText: Ah, traveler! Over here! Our cart has broken down, could you please
-      help u-
+      help us!
     portrait: {fileID: 11400000, guid: 2dbb515656313a14faa49f3f50af8660, type: 2}
     context: None
     responses:
@@ -26,7 +26,7 @@ MonoBehaviour:
     pauseMusic: 0
   - speechSpeed: 2
     speechText: You see me and my daughter were traveling through here to avoid the
-      Arbaun.
+      Arbuan.
     portrait: {fileID: 11400000, guid: 2dbb515656313a14faa49f3f50af8660, type: 2}
     context: None
     responses:
